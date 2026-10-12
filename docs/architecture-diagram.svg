@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900" font-family="Segoe UI, Arial, sans-serif">
+  <!-- background -->
+  <rect width="1280" height="900" fill="#0f1626"/>
+
+  <!-- title -->
+  <text x="640" y="46" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">Capability 4 — Assurance &amp; Red-Teaming</text>
+  <text x="640" y="76" text-anchor="middle" font-size="17" fill="#8fb4ff">End goal: a repeatable “SAFE TO RELEASE?” decision for our AI, with evidence</text>
+
+  <!-- ================= AI UNDER TEST ================= -->
+  <rect x="40" y="120" width="220" height="150" rx="12" fill="#15223c" stroke="#3f6fd1" stroke-width="2"/>
+  <text x="150" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">AI UNDER TEST</text>
+  <rect x="60" y="166" width="180" height="38" rx="8" fill="#1d2d4d" stroke="#2f4976"/>
+  <text x="150" y="190" text-anchor="middle" font-size="14" fill="#cfe0ff">BoK  (RAG Q&amp;A)   tier T2</text>
+  <rect x="60" y="212" width="180" height="38" rx="8" fill="#1d2d4d" stroke="#2f4976"/>
+  <text x="150" y="236" text-anchor="middle" font-size="14" fill="#cfe0ff">Agent (tools)    tier T1</text>
+
+  <!-- ================= INPUTS ================= -->
+  <rect x="330" y="110" width="250" height="175" rx="12" fill="#15223c" stroke="#3f6fd1" stroke-width="2"/>
+  <text x="455" y="138" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">INPUTS</text>
+  <text x="350" y="168" font-size="13.5" fill="#cfe0ff">• Golden dataset</text>
+  <text x="364" y="188" font-size="12.5" fill="#8aa0c8">(questions + known answers)</text>
+  <text x="350" y="214" font-size="13.5" fill="#cfe0ff">• Sealed set (secret, anti-cheat)</text>
+  <text x="350" y="240" font-size="13.5" fill="#cfe0ff">• Policy file (the rules)</text>
+  <text x="350" y="266" font-size="12.5" fill="#8aa0c8">held by the assurance team</text>
+
+  <!-- ================= HARNESS ================= -->
+  <rect x="650" y="100" width="330" height="200" rx="12" fill="#162a22" stroke="#3bbd7e" stroke-width="2"/>
+  <text x="815" y="128" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">THE HARNESS  (conductor)</text>
+  <text x="670" y="156" font-size="13.5" fill="#bfe7d2">for each question:</text>
+  <text x="684" y="182" font-size="13.5" fill="#eaffe8">1. run the AI</text>
+  <rect x="670" y="196" width="290" height="42" rx="8" fill="#13351f" stroke="#2f7d52"/>
+  <text x="684" y="214" font-size="13.5" font-weight="700" fill="#8ff0b4">2. DETERMINISTIC checks D01–D11</text>
+  <text x="684" y="231" font-size="12" fill="#7fd6a0">fixed rules  ·  HARD gate</text>
+  <rect x="670" y="244" width="290" height="42" rx="8" fill="#2b2838" stroke="#8a6ad6"/>
+  <text x="684" y="262" font-size="13.5" font-weight="700" fill="#c9b6ff">3. LLM JUDGES</text>
+  <text x="684" y="279" font-size="12" fill="#b09ae0">quality scores  ·  SOFT signal</text>
+
+  <!-- ================= MLFLOW ================= -->
+  <rect x="330" y="360" width="650" height="110" rx="12" fill="#132a3f" stroke="#2aa6d6" stroke-width="2.5"/>
+  <text x="655" y="392" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">MLflow — SYSTEM OF RECORD</text>
+  <text x="655" y="418" text-anchor="middle" font-size="14" fill="#bfe6f5">stores: traces · runs · metrics · datasets · baseline</text>
+  <text x="655" y="444" text-anchor="middle" font-size="13" fill="#7fc4e0">the webpage you saw at http://localhost:5000</text>
+
+  <!-- ================= GATE ================= -->
+  <rect x="330" y="520" width="650" height="150" rx="12" fill="#2e2436" stroke="#d98cff" stroke-width="2"/>
+  <text x="655" y="550" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">THE GATE  (decision)</text>
+  <text x="655" y="574" text-anchor="middle" font-size="13" fill="#e4c8ff">compares to BASELINE using statistics, then decides:</text>
+
+  <rect x="356" y="590" width="290" height="30" rx="6" fill="#3a1f22" stroke="#e06666"/>
+  <text x="372" y="610" font-size="13.5" fill="#ffb3b3">deterministic check failed  →  ❌ BLOCK</text>
+  <rect x="356" y="626" width="290" height="30" rx="6" fill="#3a331f" stroke="#e0c066"/>
+  <text x="372" y="646" font-size="13.5" fill="#ffe6a3">judge score dropped a lot  →  ⚠ REVIEW</text>
+  <rect x="664" y="590" width="290" height="30" rx="6" fill="#1f3a28" stroke="#66e08a"/>
+  <text x="680" y="610" font-size="13.5" fill="#aef0c4">all good  →  ✅ PASS</text>
+  <rect x="664" y="626" width="290" height="30" rx="6" fill="#3a1f22" stroke="#e06666"/>
+  <text x="680" y="646" font-size="13.5" fill="#ffb3b3">broken / unknown  →  ❌ FAIL (fail closed)</text>
+
+  <!-- ================= REPORT ================= -->
+  <rect x="330" y="720" width="650" height="120" rx="12" fill="#2a2a16" stroke="#d6c23b" stroke-width="2"/>
+  <text x="655" y="750" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">THE REPORT</text>
+  <text x="655" y="778" text-anchor="middle" font-size="14" fill="#f0ecc0">JUnit XML → CI pipeline blocks / allows the release</text>
+  <text x="655" y="802" text-anchor="middle" font-size="14" fill="#f0ecc0">Markdown / PDF → humans: results · severity · evidence</text>
+  <text x="655" y="826" text-anchor="middle" font-size="14" font-weight="700" fill="#ffe066">RELEASE RECOMMENDATION</text>
+
+  <!-- ================= RED TEAM (right column) ================= -->
+  <rect x="1020" y="360" width="220" height="310" rx="12" fill="#331c1c" stroke="#e07a5f" stroke-width="2"/>
+  <text x="1130" y="390" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">RED-TEAMING</text>
+  <text x="1130" y="414" text-anchor="middle" font-size="12.5" fill="#f3c2b3">attack the UNEXPECTED</text>
+  <text x="1040" y="446" font-size="13" fill="#f6d2c6">• 50 attack cases (Nov)</text>
+  <text x="1040" y="474" font-size="13" fill="#f6d2c6">• prompt injection</text>
+  <text x="1040" y="500" font-size="13" fill="#f6d2c6">• data / PII leakage</text>
+  <text x="1040" y="526" font-size="13" fill="#f6d2c6">• jailbreaks</text>
+  <text x="1040" y="552" font-size="13" fill="#f6d2c6">• tool misuse</text>
+  <text x="1040" y="586" font-size="13" fill="#f6d2c6">severity scored:</text>
+  <text x="1054" y="610" font-size="12.5" fill="#ffb3b3">Critical → High → Med → Low</text>
+  <text x="1040" y="644" font-size="12.5" fill="#f3c2b3">feeds the same gate</text>
+
+  <!-- ================= ARROWS ================= -->
+  <defs>
+    <marker id="arr" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#9fb6e0"/>
+    </marker>
+  </defs>
+  <!-- AI -> Inputs -->
+  <line x1="260" y1="195" x2="326" y2="195" stroke="#9fb6e0" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Inputs -> Harness -->
+  <line x1="580" y1="190" x2="646" y2="190" stroke="#9fb6e0" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- AI emits traces down to MLflow (curved left) -->
+  <path d="M150,270 L150,415 L326,415" fill="none" stroke="#6f88b8" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#arr)"/>
+  <text x="120" y="345" font-size="12" fill="#8aa0c8" transform="rotate(-90 120 345)">emits traces</text>
+  <!-- Harness -> MLflow -->
+  <line x1="815" y1="300" x2="815" y2="356" stroke="#9fb6e0" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="828" y="332" font-size="12" fill="#8aa0c8">results</text>
+  <!-- MLflow -> Gate -->
+  <line x1="655" y1="470" x2="655" y2="516" stroke="#9fb6e0" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Gate -> Report -->
+  <line x1="655" y1="670" x2="655" y2="716" stroke="#9fb6e0" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Red team -> Gate -->
+  <path d="M1020,500 L1000,500 L1000,560 L984,560" fill="none" stroke="#e07a5f" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- footer legend -->
+  <rect x="40" y="320" width="250" height="150" rx="10" fill="#141b2e" stroke="#2a3758"/>
+  <text x="60" y="346" font-size="14" font-weight="700" fill="#ffffff">Key design rule</text>
+  <text x="60" y="372" font-size="12.5" fill="#8ff0b4">Deterministic = HARD gate</text>
+  <text x="74" y="390" font-size="11.5" fill="#7fd6a0">same every time · free · blocks</text>
+  <text x="60" y="416" font-size="12.5" fill="#c9b6ff">Judges = SOFT signal</text>
+  <text x="74" y="434" font-size="11.5" fill="#b09ae0">drift · cost · only warn</text>
+  <text x="60" y="458" font-size="11.5" fill="#9fb6e0">A judge blocks only if stats prove it.</text>
+
+  <!-- bottom strip: assurance vs red team -->
+  <text x="150" y="640" text-anchor="middle" font-size="13" font-weight="700" fill="#8ff0b4">ASSURANCE</text>
+  <text x="150" y="660" text-anchor="middle" font-size="11.5" fill="#7fd6a0">test the EXPECTED</text>
+  <text x="150" y="700" text-anchor="middle" font-size="13" font-weight="700" fill="#f3c2b3">RED-TEAM</text>
+  <text x="150" y="720" text-anchor="middle" font-size="11.5" fill="#e8a08a">attack the UNEXPECTED</text>
+  <text x="150" y="760" text-anchor="middle" font-size="11.5" fill="#9fb6e0">both → record → gate → report</text>
+</svg>

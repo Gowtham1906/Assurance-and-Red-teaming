@@ -1,0 +1,66 @@
+# MLflow dev tracking server — Capability 4 (W1-3)
+#
+# Pinned versions (plan §4/§5): mlflow 3.16.1, Apache-2.0.
+# Backend store: PostgreSQL (NOT SQLite).
+# Artifact store: LOCAL filesystem on a Docker volume, served through MLflow with
+# PROXIED access (--serve-artifacts), so clients never touch the store directly.
+#
+# WHY NO MinIO: MinIO withdrew its images from Docker Hub (~Sep 2026) and the
+# quay.io mirror now requires auth for every tag, so `minio/minio` is no longer
+# anonymously pullable. For a single-dev box, local proxied artifacts are simpler
+# and need no external image. For SHARED/real infra, add an S3-compatible blob
+# store behind the proxy (see README "Scaling to blob storage").
+#
+# SECURITY: dev box, PRIVATE network only. Ports bind to 127.0.0.1 — nothing is
+# exposed on the LAN/Internet. For shared/real use, put mlflow behind a TLS
+# reverse proxy + SSO (see README). Never expose the raw server.
+
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: mlflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # No host port published — MLflow reaches Postgres over the internal Docker
+    # network. (Avoids clashing with a local Postgres on 5432, and is more secure.)
+    # To inspect the DB from the host, temporarily add:  ports: ["127.0.0.1:5433:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.16.1
+    container_name: mlflow-server
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # Local artifact store on a named volume. MLflow serves these via the
+      # proxy; clients never read/write this path directly.
+      - mlflow-artifacts:/mlartifacts
+    # --artifacts-destination (local path) + --serve-artifacts = proxied access.
+    command: >
+      /bin/sh -c "
+      pip install --no-cache-dir psycopg2-binary &&
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      --artifacts-destination file:///mlartifacts
+      --serve-artifacts
+      "
+    # Loopback only. In a real deployment, a TLS proxy + SSO sits in front.
+    ports:
+      - "127.0.0.1:5000:5000"
+
+volumes:
+  postgres-data:
+  mlflow-artifacts:

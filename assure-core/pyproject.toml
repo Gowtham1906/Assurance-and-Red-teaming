@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "assure-core"
+version = "0.1.0"
+description = "Deterministic assurance checks (D01-D11), statistics, and report building for Capability 4. No MLflow dependency."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Codincity Data & AI Practice" }]
+
+# NOTE (plan §5): assure-core has NO MLflow dependency so checks run in plain
+# pytest. The MLflow adapter lives OUTSIDE this package (Week 3).
+dependencies = [
+    "pydantic>=2.7",   # D01 schema validation
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "hypothesis>=6.100",   # property tests for regex/span logic (plan §6)
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/assure_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
