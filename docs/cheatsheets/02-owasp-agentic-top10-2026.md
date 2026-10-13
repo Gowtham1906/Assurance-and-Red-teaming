@@ -15,6 +15,10 @@ list targets those agent-specific failure modes.
 
 ## Provisional risks (CONFIRM AGAINST PDF)
 
+The official list is **ASI01–ASI10**. Only the IDs our red-team cases actually
+use are shown below (plan §9). The remaining IDs will be added **with their real
+names from the official PDF** when needed — we don't list empty placeholders.
+
 | ID | Theme (provisional) | Plain meaning | Our relevant checks |
 |----|--------------------|----------------|---------------------|
 | **ASI01** | Agent prompt/goal manipulation | Injected instructions redirect the agent's goal | D11 canary, D05 tool allowlist |
@@ -24,8 +28,8 @@ list targets those agent-specific failure modes.
 | **ASI06** | Memory / context poisoning | Poisoned context or memory steers later steps | D11, indirect-injection cases |
 | **ASI08** | Resource / cost exhaustion | Agent loops or over-consumes | D06 limits |
 
-> Only the ASI IDs referenced by the plan's §9 case table are shown. The full
-> ASI01–ASI10 set and exact official names must be filled from the PDF.
+> Shows the six ASI IDs referenced by the plan's §9 case table. The full
+> ASI01–ASI10 names must be taken from the official OWASP Agentic PDF before use.
 
 ---
 
