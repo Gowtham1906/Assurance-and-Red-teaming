@@ -16,7 +16,7 @@ import mlflow
 
 # Point at the local MLflow server and use OUR experiment name.
 mlflow.set_tracking_uri("http://localhost:5000")
-mlflow.set_experiment("Gowtham-Exp")
+mlflow.set_experiment("Gowtham-Exp_test")
 
 # --- the two simple checks (True = SAFE) ---
 EMAIL = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
