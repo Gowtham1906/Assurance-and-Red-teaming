@@ -83,7 +83,7 @@ link.
 
 ## Status
 
-**Week 1:** specs + signatures fixed; all check functions raise
-`NotImplementedError`. **Week 2 (W2-1):** implement each with the four test
-classes above (positive, negative, mutation, property). Done-when for W2-1:
-every check fails on a deliberately corrupted output.
+**Week 1:** specs + signatures fixed; stubs raised `NotImplementedError`.
+**Week 2 (W2-1): DONE** — all 11 checks implemented with positive, negative and
+mutation tests. Done-when met: `test_every_hard_check_fails_on_corruption` proves
+every check fails on a deliberately corrupted output. Full suite: 76 tests pass.

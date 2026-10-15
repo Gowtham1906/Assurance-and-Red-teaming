@@ -50,11 +50,18 @@ class CheckResult:
         return self.status is Status.PASS
 
 
-def passed_result(check_id: str, **evidence: Any) -> CheckResult:
-    return CheckResult(check_id=check_id, status=Status.PASS, evidence=evidence)
-
-
-def failed_result(check_id: str, message: str, **evidence: Any) -> CheckResult:
+def passed_result(
+    check_id: str, gate: GateType = GateType.HARD, **evidence: Any
+) -> CheckResult:
     return CheckResult(
-        check_id=check_id, status=Status.FAIL, message=message, evidence=evidence
+        check_id=check_id, status=Status.PASS, gate=gate, evidence=evidence
+    )
+
+
+def failed_result(
+    check_id: str, message: str, gate: GateType = GateType.HARD, **evidence: Any
+) -> CheckResult:
+    return CheckResult(
+        check_id=check_id, status=Status.FAIL, gate=gate, message=message,
+        evidence=evidence,
     )

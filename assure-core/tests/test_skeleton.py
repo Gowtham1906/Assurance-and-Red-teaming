@@ -53,9 +53,9 @@ def test_every_check_stub_exists(module_name, func_name):
     assert hasattr(mod, func_name), f"{module_name}.{func_name} missing"
 
 
-def test_stubs_raise_not_implemented():
-    """Week 1 stubs must raise NotImplementedError until Week 2."""
+def test_checks_are_implemented():
+    """Week 2: stubs are now real; a clean canary input passes."""
     from assure_core.checks import d11_canary
 
-    with pytest.raises(NotImplementedError):
-        d11_canary.check_canary("out", [], ["CANARY-123"])
+    result = d11_canary.check_canary("a clean answer", [], ["CANARY-123"])
+    assert result.passed
