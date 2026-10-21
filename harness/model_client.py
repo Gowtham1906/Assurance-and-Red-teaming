@@ -5,7 +5,7 @@ and OpenAI share the same OpenAI-compatible client, so only the base_url, key,
 and model name differ. No mocks: ``generate`` makes a live API call.
 
 .env keys (set one set):
-    GROQ_API_KEY   + optional GROQ_MODEL   (default llama-3.3-70b-versatile)
+    GROQ_API_KEY   + optional GROQ_MODEL   (default openai/gpt-oss-20b)
     OPENAI_API_KEY + optional OPENAI_MODEL (default gpt-4o-mini)
 """
 
@@ -25,7 +25,7 @@ def _resolve() -> tuple[str, str, str | None]:
     """Return (api_key, model, base_url) based on which key is configured."""
     groq = os.getenv("GROQ_API_KEY")
     if groq and not groq.startswith("gsk-your"):
-        return groq, os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"), _GROQ_BASE
+        return groq, os.getenv("GROQ_MODEL", "openai/gpt-oss-20b"), _GROQ_BASE
 
     openai_key = os.getenv("OPENAI_API_KEY")
     if openai_key and not openai_key.startswith("sk-your-real-key"):
