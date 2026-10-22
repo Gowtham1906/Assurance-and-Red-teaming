@@ -3,7 +3,7 @@
 **One-pager for Capability 4.** MLflow is our **system of record**: traces, datasets, runs, prompt registry, UI.
 **Source:** https://github.com/mlflow/mlflow · docs at https://mlflow.org/docs/latest/
 **Verification status:** Version **verified**: mlflow **3.16.1 (16 Sep 2026), Apache-2.0** (plan §4/§5). API names below are ⚠️ **from training knowledge — re-check the 3.16 docs** (plan §5/§16).
-**Second reader:** `____________` · **Date:** `__________`
+**Second reader:** Gowtham · **Date:** 2026-10-22
 
 ---
 

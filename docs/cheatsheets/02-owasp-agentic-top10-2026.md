@@ -3,7 +3,7 @@
 **One-pager for Capability 4.** Taxonomy for agent (tool-using) targets.
 **Source:** https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
 **Verification status:** ⚠️ **UNVERIFIED.** Plan §3 notes the ASI names come from *secondary summaries* that are "consistent across sources" but the **PDF must be read** before these are quoted. Treat IDs below as provisional.
-**Second reader:** `____________` · **Date:** `__________`
+**Second reader:** Gowtham · **Date:** 2026-10-22
 
 ---
 

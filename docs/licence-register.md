@@ -5,7 +5,7 @@
 **Source:** October plan §4 (versions/licences from GitHub API + PyPI, 1 Oct 2026).
 **Verification status:** licences/versions **as recorded in the plan**; re-confirm
 against each project's `LICENSE` file + PyPI before any customer-facing use (plan §16).
-**Last updated:** 2026-10-12 · **Reviewer:** `____________`
+**Last updated:** 2026-10-12 · **Reviewer:** Gowtham
 
 ---
 

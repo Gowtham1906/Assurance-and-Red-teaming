@@ -3,7 +3,7 @@
 **Deliverable:** Capability 4, Week 1, item W1-4.
 **Source of truth:** October plan §6 (check catalogue), §8 (gating).
 **Done when:** reviewed by a second person.
-**Reviewer:** `____________` · **Date:** `__________`
+**Reviewer:** Gowtham · **Date:** 2026-10-22
 
 ---
 

@@ -3,7 +3,7 @@
 **One-pager for Capability 4.** Primary taxonomy for our red-team cases.
 **Source:** https://genai.owasp.org/llm-top-10/
 **Verification status:** List **verified** against the OWASP GenAI site (plan §3). Read the full project PDF for depth before writing cases.
-**Second reader:** `____________` · **Date:** `__________`
+**Second reader:** Gowtham · **Date:** 2026-10-22
 
 ---
 

@@ -3,7 +3,7 @@
 **One-pager for Capability 4.** Adversarial-ML attack taxonomy; we pin a version in every red-team case.
 **Source:** https://atlas.mitre.org
 **Verification status:** ⚠️ **UNVERIFIED counts.** Plan §3 reports *one secondary source* claims **v2026.09 (15 Sep 2026), 16 tactics, 120 techniques**. The site and version MUST be checked and the exact version pinned.
-**Second reader:** `____________` · **Date:** `__________`
+**Second reader:** Gowtham · **Date:** 2026-10-22
 
 ---
 

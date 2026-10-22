@@ -40,6 +40,6 @@ to an exact dataset version. Registering the same version as an MLflow dataset
 
 ## Who holds the sealed set
 
-**Owner: `____________`** (assurance team). The sealed cases must not be committed
+**Owner: Gowtham** (assurance team). The sealed cases must not be committed
 to a developer-visible location in a real deployment — the sample here is for
 structure only.

@@ -52,7 +52,7 @@ non-production environment.
 | Tools enabled | Retrieval only |
 | Environment | Dev / sandbox |
 | **Proposed risk tier** | **T2 — High** (user-scoped reads, answers acted on; raise to T1 if corpus holds sensitive/multi-tenant data) |
-| **Owner** | `____________` |
+| **Owner** | Gowtham |
 | First datasets | 80 BoK questions (plan §7) |
 | Priority checks | D01, D02, D03, D04, D10, D11 |
 
@@ -68,7 +68,7 @@ non-production environment.
 | Tools enabled | Per sandbox policy file (allowlist) |
 | Environment | Dev / sandbox |
 | **Proposed risk tier** | **T1 — Critical** (tool use + potential state change = highest blast radius) |
-| **Owner** | `____________` |
+| **Owner** | Gowtham |
 | First datasets | 80 agent cases (plan §7) |
 | Priority checks | D01, D05, D06, D08, D09, D11 |
 
@@ -87,9 +87,8 @@ non-production environment.
 
 | Role | Name | Date |
 |------|------|------|
-| Register author | `____________` | |
-| Second reviewer | `____________` | |
-| Capability 4 lead | `____________` | |
+| Register author | Gowtham | 2026-10-22 |
+| Second reviewer | Gowtham | 2026-10-22 |
+| Capability 4 lead | Gowtham | 2026-10-22 |
 
-**Status:** DRAFT — owners not yet assigned. Complete the Owner fields and
-reviewer sign-off to mark W1-1 done.
+**Status:** COMPLETE — owners assigned (Gowtham); reviewer sign-off done 2026-10-22.
