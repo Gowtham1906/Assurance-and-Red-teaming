@@ -53,16 +53,17 @@ def generate(prompt: str, system: str | None = None, temperature: float = 0.0) -
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    # Retry on rate-limit (429) with backoff, so free-tier TPM limits don't
-    # abort a long run. Parses the suggested wait from the error when present.
+    # Retry on rate-limit (429) AND transient connection/API errors with backoff,
+    # so free-tier TPM limits or network blips don't abort a long run.
     import re as _re
     import time as _time
-    from openai import RateLimitError
+    from openai import APIConnectionError, APIError, RateLimitError
 
     for attempt in range(6):
         try:
             resp = client.chat.completions.create(
                 model=model, messages=messages, temperature=temperature,
+                timeout=60,
             )
             return resp.choices[0].message.content or ""
         except RateLimitError as exc:
@@ -71,6 +72,10 @@ def generate(prompt: str, system: str | None = None, temperature: float = 0.0) -
             if attempt == 5:
                 raise
             _time.sleep(wait)
+        except (APIConnectionError, APIError) as exc:
+            if attempt == 5:
+                raise
+            _time.sleep(2.0 * (attempt + 1))  # backoff on transient network errors
     return ""  # unreachable
 
 
