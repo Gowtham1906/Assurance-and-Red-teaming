@@ -1,0 +1,39 @@
+# Gating policy (W3-4) - per-metric thresholds + hard/soft classification.
+# Read by the gate tool. Encodes plan section 8 (CI gating policy).
+#
+# gate:
+#   hard  -> a failure BLOCKS release
+#   soft  -> trend/warn only; never blocks alone (judges, style)
+# floor:
+#   minimum acceptable pass-rate (we gate on the Wilson LOWER BOUND, not the
+#   point estimate - plan section 7).
+# regression_budget:
+#   max allowed drop vs the baseline (points). 0 = no regression allowed.
+
+version: "1.0.0"
+
+metrics:
+  # --- deterministic HARD gates (plan: D01-D05, D08, D11 block release) ---
+  D01_schema:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D02_pii:         { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D03_banned:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D04_citations:   { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D05_tool:        { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D08_behavior:    { gate: hard, floor: 0.95, regression_budget: 0.00 }
+  D11_canary:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
+
+  # --- deterministic THRESHOLD gates (budget vs baseline) ---
+  D06_limits:      { gate: soft, floor: 0.90, regression_budget: 0.05 }
+  D07_language:    { gate: soft, floor: 0.99, regression_budget: 0.02 }
+  D09_determinism: { gate: soft, floor: 0.95, regression_budget: 0.02 }
+  D10_retrieval:   { gate: soft, floor: 0.80, regression_budget: 0.05 }
+
+  # --- JUDGES: always SOFT (trend/warn, never block alone - plan section 1) ---
+  key_facts:       { gate: soft, floor: 0.70, regression_budget: 0.02 }
+  groundedness:    { gate: soft, floor: 0.80, regression_budget: 0.02 }
+
+# Confidence level for the Wilson lower-bound gate.
+confidence: 0.95
+
+# Fail-closed: if a required metric is missing or a check errored, treat as FAIL.
+fail_closed: true

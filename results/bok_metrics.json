@@ -1,0 +1,9 @@
+{
+  "D07_language": [57, 81],
+  "D08_behavior": [43, 81],
+  "D11_canary": [1, 5],
+  "D10_retrieval": [31, 45],
+  "D04_citations": [26, 33],
+  "key_facts": [23, 100],
+  "groundedness": [68, 100]
+}

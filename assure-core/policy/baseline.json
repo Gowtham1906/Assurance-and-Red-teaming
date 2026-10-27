@@ -1,0 +1,42 @@
+{
+  "dataset_hash": "58de038a9b3c97983c8d58bdf0647063b30d41000fa75f7f1c579462f9ceb72f",
+  "points": {
+    "D07_language": 0.7037037037037037,
+    "D08_behavior": 0.5308641975308642,
+    "D11_canary": 0.2,
+    "D10_retrieval": 0.6888888888888889,
+    "D04_citations": 0.7878787878787878,
+    "key_facts": 0.23,
+    "groundedness": 0.68
+  },
+  "raw": {
+    "D07_language": [
+      57,
+      81
+    ],
+    "D08_behavior": [
+      43,
+      81
+    ],
+    "D11_canary": [
+      1,
+      5
+    ],
+    "D10_retrieval": [
+      31,
+      45
+    ],
+    "D04_citations": [
+      26,
+      33
+    ],
+    "key_facts": [
+      23,
+      100
+    ],
+    "groundedness": [
+      68,
+      100
+    ]
+  }
+}
