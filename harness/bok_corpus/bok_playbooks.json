@@ -1,0 +1,925 @@
+[
+  {
+    "playbook_id": "oee_below_target",
+    "trigger_kpi_ids": [
+      "oee"
+    ],
+    "symptom_description": "OEE is below the client's configured threshold.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "TPM Six Big Losses (breakdowns, setup/adjustment, idling/minor stops, reduced speed, startup defects, process defects)",
+    "diagnostic_steps": [
+      "Check whether Availability, Performance, and Quality are stored as separate columns before promising a factor-level decomposition \u2014 today's oee_pct column may be pre-calculated without the three components broken out (see the oee KPI card's formula note).",
+      "If decomposable: identify which of the three factors has moved most versus its own trailing baseline.",
+      "For an Availability-driven gap: pull the stoppage reason-code breakdown for the same period and classify against the six big losses.",
+      "For a Performance-driven gap: check changeover_time and hourly_shift_output for the same equipment/line \u2014 but see that KPI's data-quality note on the hardcoded 64-unit target before trusting the percentage at face value.",
+      "For a Quality-driven gap: cross-reference eol_defect_rate and scrap_rate for the same period."
+    ],
+    "root_cause_tags": [
+      "unplanned_downtime",
+      "minor_stops",
+      "speed_loss",
+      "startup_defects"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "unplanned_downtime",
+        "action": "Route to maintenance log review for the specific equipment_id; cross-check maintenance_alerts for the same equipment in the prior period for an early warning that was missed."
+      },
+      {
+        "root_cause_tag": "minor_stops",
+        "action": "Review changeover_time trend for the same line; consider a SMED-style internal/external setup-step review if changeover time itself is the driver."
+      },
+      {
+        "root_cause_tag": "startup_defects",
+        "action": "Check eol_defect_rate specifically in the first units after a changeover, since startup losses are a distinct TPM loss category from steady-state quality issues."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "TPM literature (Nakajima)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Nakajima, S. \u2014 Introduction to TPM (widely cited framework)",
+        "license_note": "Public concept, no reproduction of text",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "scrap_or_copq_spike",
+    "trigger_kpi_ids": [
+      "copq",
+      "scrap_rate",
+      "top5_scrap_reason_cost"
+    ],
+    "symptom_description": "A scrap, rework, or COPQ metric has spiked relative to its baseline.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "Fishbone / 5M (Machine, Method, Material, Man, Measurement) + 5-Why",
+    "diagnostic_steps": [
+      "Pull the Top 5 Scrap Reason Codes for the affected period \u2014 remember avg_unit_cost falls back to a hardcoded $45.50/unit if mfg_cost_usd or units_produced is missing, so confirm those columns are populated before trusting the cost figure.",
+      "Run a 5-Why pass against the top reason code, structured across the 5M categories, before changing any process parameter.",
+      "Check whether the spike is isolated to one shift, one machine, or one material lot before assuming a systemic process issue.",
+      "Cross-check CAPA Closure Time \u2014 a rising closure time alongside a scrap spike suggests a repeat cause that wasn't actually closed out last time."
+    ],
+    "root_cause_tags": [
+      "process_variation",
+      "tooling_wear",
+      "material_variation",
+      "operator_error",
+      "incoming_material_quality"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "material_variation",
+        "action": "Cross-check the affected lot/batch against incoming-material inspection records before adjusting the process."
+      },
+      {
+        "root_cause_tag": "tooling_wear",
+        "action": "Check tooling/mold cycle-count against its maintenance schedule for the affected equipment_id."
+      },
+      {
+        "root_cause_tag": "operator_error",
+        "action": "Check whether the spike correlates with a specific shift or a recent operator/training change before treating it as a process problem."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "changeover_time_creeping_up",
+    "trigger_kpi_ids": [
+      "changeover_time",
+      "schedule_attainment",
+      "delayed_work_orders"
+    ],
+    "symptom_description": "Average changeover time is trending upward, pressuring schedule attainment or contributing to delayed work orders.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "SMED (internal vs. external setup steps)",
+    "diagnostic_steps": [
+      "Confirm the trend is genuinely rising (not a single outlier run) using the client's own historical changeover_time series.",
+      "Identify whether the same tooling/mold or the same line is disproportionately represented in the recent changeovers.",
+      "Distinguish setup steps that require the machine to be stopped (internal) from those that don't (external) for the affected changeover type.",
+      "Check delayed_work_orders for the same line to see whether changeover time is already translating into missed dates, not just a slower average."
+    ],
+    "root_cause_tags": [
+      "setup_sequencing",
+      "tooling_availability",
+      "operator_training"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "setup_sequencing",
+        "action": "Identify any external-setup steps currently being done while the machine is stopped, and move them to run in parallel with the prior production run instead."
+      },
+      {
+        "root_cause_tag": "tooling_availability",
+        "action": "Check whether the changeover is waiting on tooling/mold retrieval or preparation time, which is a logistics fix, not a process fix."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "SMED methodology (Shigeo Shingo)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Shingo, S. \u2014 A Revolution in Manufacturing: The SMED System",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "schedule_attainment_below_target",
+    "trigger_kpi_ids": [
+      "schedule_attainment",
+      "delayed_work_orders",
+      "manufacturing_cycle_time"
+    ],
+    "symptom_description": "Schedule attainment / plan adherence is below target, or delayed work orders are rising.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "Theory of Constraints (identify the binding constraint before acting)",
+    "diagnostic_steps": [
+      "Check capacity_utilization for the affected line \u2014 sustained utilization near 100% removes the buffer needed to absorb any variability without a schedule slip.",
+      "Check manufacturing_cycle_time trend \u2014 a rising cycle time with flat throughput shows up here before it shows up as a WIP Valuation increase.",
+      "Check maintenance_alerts and delayed_work_orders for the same period to distinguish an equipment-driven slip from a planning/material-driven one."
+    ],
+    "root_cause_tags": [
+      "unplanned_downtime",
+      "setup_sequencing",
+      "material_availability",
+      "demand_variability"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "material_availability",
+        "action": "Check purchase/supplier data for the same window before assuming a manufacturing-side cause \u2014 this is a cross-domain check, not just an internal one."
+      },
+      {
+        "root_cause_tag": "unplanned_downtime",
+        "action": "Cross-reference maintenance_alerts for the affected equipment in the prior period for an early warning that preceded the slip."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "conversion_cost_rising",
+    "trigger_kpi_ids": [
+      "conversion_cost",
+      "wip_valuation"
+    ],
+    "symptom_description": "Conversion cost / cost per unit is rising.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "Cost driver decomposition (volume vs. input cost vs. efficiency)",
+    "diagnostic_steps": [
+      "Check oee for the same period \u2014 if OEE is flat while conversion cost rises, the driver is more likely input/material cost than process efficiency.",
+      "Check total_production_yield (units produced) \u2014 a conversion-cost rise with falling volume can be a fixed-cost absorption effect, not a true efficiency loss.",
+      "Check wip_valuation \u2014 a build-up in WIP can mean cost is being carried rather than converted, inflating the per-unit figure for the period measured."
+    ],
+    "root_cause_tags": [
+      "input_cost_change",
+      "process_variation",
+      "yield_loss"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "input_cost_change",
+        "action": "Cross-check purchase/procurement data for material price movement in the same window before attributing the rise to a manufacturing-side cause."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "inventory_integrity_degrading",
+    "trigger_kpi_ids": [
+      "inventory_record_accuracy",
+      "cycle_count_variance",
+      "wip_valuation"
+    ],
+    "symptom_description": "Inventory Record Accuracy is falling or Cycle Count Variance is rising.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "Transaction-discipline root cause (not a physical-count problem first)",
+    "diagnostic_steps": [
+      "Check cycle_count_variance trend first \u2014 it is the leading indicator; IRA is the lagging confirmation of the same underlying problem.",
+      "Identify whether the variance concentrates in specific SKUs, locations, or shifts before assuming a system-wide issue.",
+      "Check whether a system/connector change coincided with the start of the trend (relevant once Epic 1's connector framework is live) \u2014 a mapping change can silently break transaction posting."
+    ],
+    "root_cause_tags": [
+      "transaction_discipline",
+      "system_integration_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "transaction_discipline",
+        "action": "Audit recent transaction volume by user/shift for the affected SKU/location before assuming a systemic data problem."
+      },
+      {
+        "root_cause_tag": "system_integration_gap",
+        "action": "Check for a recent connector or mapping change (Epic 1) that could be posting transactions incorrectly."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "maintenance_alerts_rising",
+    "trigger_kpi_ids": [
+      "maintenance_alerts",
+      "capa_closure_time"
+    ],
+    "symptom_description": "Predictive maintenance alerts are trending upward for a piece of equipment.",
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "root_cause_framework": "TPM \u2014 treat rising alerts as the earliest warning stage, before an unplanned breakdown",
+    "diagnostic_steps": [
+      "Check whether the alert count is concentrated on one equipment_id or spread across a line \u2014 concentrated points at a specific asset's wear/maintenance schedule.",
+      "Cross-check capa_closure_time for any open corrective action on the same equipment \u2014 a slow-closing CAPA alongside rising alerts is a compounding risk, not two separate issues."
+    ],
+    "root_cause_tags": [
+      "equipment_wear",
+      "maintenance_schedule_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "equipment_wear",
+        "action": "Escalate to a scheduled maintenance window for the specific equipment_id before it becomes an unplanned breakdown affecting OEE's Availability factor."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "TPM literature (Nakajima)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Nakajima, S. \u2014 Introduction to TPM (widely cited framework)",
+        "license_note": "Public concept, no reproduction of text",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "pharma_batch_deviation_investigation",
+    "trigger_kpi_ids": [
+      "control_limit_deviations",
+      "capa_closure_rate",
+      "first_pass_yield_by_stage"
+    ],
+    "symptom_description": "An in-process control-limit deviation or batch-record discrepancy has been flagged in a pharmaceutical production run.",
+    "applicable_sub_industries": [
+      "pharmaceutical"
+    ],
+    "root_cause_framework": "FDA cGMP deviation investigation (21 CFR 211.192) \u2014 every deviation requires a documented investigation and disposition before the batch can be released, regardless of whether the deviation is ultimately judged to have affected product quality.",
+    "diagnostic_steps": [
+      "Confirm the deviation has an open investigation record before anything else \u2014 in a cGMP environment, an undocumented deviation is itself a finding, independent of root cause.",
+      "Check whether the deviation is isolated to one batch/lot or recurring across multiple lots on the same line \u2014 a recurring deviation escalates from a batch-disposition question to a process-capability (Cpk) question.",
+      "Cross-reference first_pass_yield_by_stage for the same batch to see whether the deviation correlates with a specific process stage, not just a specific time.",
+      "Check capa_closure_rate history for this line \u2014 a pattern of slow CAPA closure alongside recurring deviations suggests a systemic quality-system gap, not an isolated event."
+    ],
+    "root_cause_tags": [
+      "process_shift",
+      "operator_error",
+      "equipment_drift",
+      "raw_material_variation"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "process_shift",
+        "action": "Hold the affected batch pending QA disposition; do not release on the strength of a favorable end-of-line test alone \u2014 cGMP requires the investigation to close first."
+      },
+      {
+        "root_cause_tag": "raw_material_variation",
+        "action": "Cross-check the incoming-material certificate of analysis for the lot in use against historical batches that did not deviate."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "FDA 21 CFR 211.192 (cGMP deviation investigation requirement)",
+        "source_type": "public_gov_source",
+        "citation_or_url": "eCFR Title 21, Part 211.192",
+        "license_note": "Public US federal regulation, structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "process_safety_audit_finding_petroleum",
+    "trigger_kpi_ids": [
+      "major_audit_nonconformances",
+      "capa_closure_time"
+    ],
+    "symptom_description": "A process-safety or mechanical-integrity audit finding has been raised at a petroleum/chemical facility.",
+    "applicable_sub_industries": [
+      "petroleum_chemical"
+    ],
+    "root_cause_framework": "OSHA Process Safety Management (29 CFR 1910.119) \u2014 findings are triaged by whether they touch a Highly Hazardous Chemical process, which changes the required closure timeline and escalation path versus a general quality nonconformance.",
+    "diagnostic_steps": [
+      "Classify whether the finding is process-safety-critical (touches a covered process under PSM) or a general quality/housekeeping finding \u2014 these follow different closure-time expectations and cannot be averaged together in a single CAPA metric.",
+      "For a process-safety-critical finding, check whether an interim safeguard (e.g. increased monitoring, operating-limit tightening) has been put in place while the permanent CAPA is still open \u2014 PSM findings are not left unmitigated pending closure.",
+      "Cross-check whether this is a recurring finding type across audit cycles \u2014 a repeat finding indicates the prior CAPA's corrective action did not address the actual root cause."
+    ],
+    "root_cause_tags": [
+      "process_safety_gap",
+      "mechanical_integrity_gap",
+      "procedure_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "mechanical_integrity_gap",
+        "action": "Escalate to the mechanical-integrity inspection schedule for the specific asset; check whether the inspection interval itself needs tightening, not just this instance of the finding."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "OSHA Process Safety Management (29 CFR 1910.119)",
+        "source_type": "public_gov_source",
+        "citation_or_url": "OSHA.gov, Process Safety Management",
+        "license_note": "Public US federal regulation, structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "consumer_return_pattern_review",
+    "trigger_kpi_ids": [
+      "customer_return_rate",
+      "copq"
+    ],
+    "symptom_description": "Customer Return Rate has moved in a consumer-products context, where returns are a routine retail-channel occurrence rather than an automatic quality-escape signal.",
+    "applicable_sub_industries": [
+      "consumer_products"
+    ],
+    "root_cause_framework": "ISO 10377 post-market surveillance \u2014 the emphasis is on detecting a PATTERN across returns/complaints, not reacting to any single return, since some baseline return rate is expected in this channel.",
+    "diagnostic_steps": [
+      "Segment returns by stated reason code (defect vs. buyer's-remorse vs. wrong-item-ordered) before treating the whole return-rate movement as a quality signal \u2014 only the defect-coded segment is actually a COPQ/quality question.",
+      "Check whether the movement is concentrated in one SKU/batch or spread across the product line \u2014 a single-SKU spike points to a production or packaging issue; a spread-out increase points to a channel or seasonal effect instead.",
+      "Cross-reference copq for the same period to see whether rework/return-processing cost is moving with the return rate or independently of it."
+    ],
+    "root_cause_tags": [
+      "packaging_defect",
+      "labeling_confusion",
+      "channel_return_pattern"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "packaging_defect",
+        "action": "Pull the defect-coded return subset specifically and cross-check against the Pareto/scrap-reason data for the same production window."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "ISO 10377 (Consumer Product Safety: Guidelines for Suppliers)",
+        "source_type": "established_methodology",
+        "citation_or_url": "ISO 10377 structural summary",
+        "license_note": "Public concept summary, no reproduction of licensed standard text",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "planned_vs_corrective_maintenance_drift_industrial",
+    "trigger_kpi_ids": [
+      "maintenance_alerts",
+      "delayed_work_orders"
+    ],
+    "symptom_description": "Maintenance activity for an industrial-products asset is skewing toward corrective (reactive) rather than planned (preventive) work.",
+    "applicable_sub_industries": [
+      "industrial_products"
+    ],
+    "root_cause_framework": "ISO 55000 Asset Management \u2014 a rising corrective-to-planned ratio is treated as a leading indicator of asset-management maturity slipping, not just a maintenance-scheduling inconvenience, since industrial-products equipment is typically higher-cost and longer-lived than high-volume consumer-manufacturing equipment.",
+    "diagnostic_steps": [
+      "Check whether delayed_work_orders is concentrated on preventive-maintenance work orders specifically, versus production work orders \u2014 a PM backlog is what actually drives the shift toward reactive maintenance.",
+      "Cross-reference maintenance_alerts for the same asset class to see whether alerts are being raised but not converted into scheduled PM work orders in time."
+    ],
+    "root_cause_tags": [
+      "pm_backlog",
+      "resourcing_gap",
+      "asset_prioritization_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "pm_backlog",
+        "action": "Review the PM scheduling backlog by asset criticality \u2014 prioritize closing the backlog on the highest-criticality assets first, not oldest-open-first, per ISO 55000's risk-based asset-management principle."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "ISO 55000 (Asset Management)",
+        "source_type": "established_methodology",
+        "citation_or_url": "ISO 55000 structural summary",
+        "license_note": "Public concept summary, no reproduction of licensed standard text",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "automotive_safety_critical_deviation",
+    "trigger_kpi_ids": [
+      "control_limit_deviations",
+      "eol_defect_rate"
+    ],
+    "symptom_description": "An SPC out-of-control point or end-of-line defect has occurred on a characteristic flagged safety-critical or key-product-characteristic (KPC) on an automotive line.",
+    "applicable_sub_industries": [
+      "automotive"
+    ],
+    "root_cause_framework": "8D Problem Solving \u2014 the standard OEM-mandated corrective-action methodology (Ford/GM/Stellantis and most Tier 1 supplier agreements require an 8D, not a generic CAPA form, for a safety-critical or customer-facing quality escape).",
+    "diagnostic_steps": [
+      "Confirm containment (D3) has happened FIRST \u2014 in an 8D, containing suspect parts in the field/in-transit/in-plant takes priority over root-cause analysis, unlike a general manufacturing CAPA where investigation typically comes first.",
+      "Check whether the characteristic is tagged safety-critical/KPC in the control plan \u2014 this determines whether the customer (OEM) must be notified before containment is even complete, not after.",
+      "Cross-reference the AIAG Core Tools control plan and the most recent PPAP for this part number \u2014 a safety-critical deviation often traces back to a process parameter that drifted outside what PPAP originally validated.",
+      "Verify Cpk against the OEM's required threshold for this characteristic (commonly >= 1.67 for safety-critical, not the generic 1.33) before declaring the process back in control."
+    ],
+    "root_cause_tags": [
+      "process_shift",
+      "tooling_wear",
+      "measurement_system_error"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "process_shift",
+        "action": "Stop shipment of suspect parts pending 8D containment (D3) sign-off; do not wait for root cause (D4) before containing."
+      },
+      {
+        "root_cause_tag": "measurement_system_error",
+        "action": "Re-verify the gauge/measurement system (MSA) before trusting the Cpk number itself \u2014 a safety-critical Cpk near the OEM threshold is exactly where measurement error matters most."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "AIAG Core Tools (APQP/PPAP/FMEA/MSA/SPC) + common OEM 8D requirement",
+        "source_type": "established_methodology",
+        "citation_or_url": "AIAG Core Tools structural summary",
+        "license_note": "Public concept summary, no reproduction of licensed AIAG manuals",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "electronics_solder_defect_classification",
+    "trigger_kpi_ids": [
+      "eol_defect_rate",
+      "eol_defect_count",
+      "scrap_rate"
+    ],
+    "symptom_description": "End-of-line defects or scrap have risen on an electronics assembly line (populated board/PCBA).",
+    "applicable_sub_industries": [
+      "electronics"
+    ],
+    "root_cause_framework": "IPC-A-610 defect classification \u2014 defects are triaged by Class (1/2/3, reflecting end-use reliability requirement) and by defect type (solder joint, component placement, moisture-sensitive-device handling) before a generic scrap-reason Pareto is useful, since a Class 3 (high-reliability) defect and a cosmetic Class 1 defect are not the same severity even at the same count.",
+    "diagnostic_steps": [
+      "Classify the defect against IPC-A-610's acceptance criteria for the board's assigned Class before adding it to a generic scrap-reason bucket \u2014 a Class 3 board held to Class 1 criteria will under-report real defect severity.",
+      "Check reflow-oven temperature profile logs for the affected run if the defect is solder-joint-related (cold joint, tombstoning, bridging) \u2014 this is the most common root cause IPC-A-610 practitioners check first.",
+      "For component-related defects, verify Moisture Sensitive Device (MSD) floor-life/bake-out records for the lot \u2014 a common, easily-missed cause of intermittent defects that a simple scrap-reason code won't surface."
+    ],
+    "root_cause_tags": [
+      "reflow_profile_drift",
+      "msd_handling_gap",
+      "component_placement_error"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "reflow_profile_drift",
+        "action": "Pull the reflow oven's thermal profile for the affected run and compare against the qualified profile for this board \u2014 a drifted profile is the single most common root cause of a solder-joint defect spike."
+      },
+      {
+        "root_cause_tag": "msd_handling_gap",
+        "action": "Check floor-life tracking for moisture-sensitive components used in the affected run; re-bake and re-verify before assuming a placement-equipment issue."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "IPC-A-610 (Acceptability of Electronic Assemblies)",
+        "source_type": "established_methodology",
+        "citation_or_url": "IPC-A-610 structural summary",
+        "license_note": "Public concept summary, no reproduction of licensed IPC standard text",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "injection_molding_changeover_variation",
+    "trigger_kpi_ids": [
+      "changeover_time",
+      "scrap_rate",
+      "copq"
+    ],
+    "symptom_description": "Changeover time or post-changeover scrap/COPQ has risen on an injection molding line.",
+    "applicable_sub_industries": [
+      "injection_molding_plastics"
+    ],
+    "root_cause_framework": "Scientific/Decoupled Molding \u2014 isolates variation to one of the three molding phases (fill, pack, hold) before adjusting multiple process parameters at once, which is the most common way a changeover 'fix' actually introduces new variation instead of removing it.",
+    "diagnostic_steps": [
+      "Check whether the variation shows up during fill, pack, or hold phase specifically (via cavity pressure/transfer-position data if available) before changing screw speed, pressure, AND temperature simultaneously \u2014 changing one variable at a time is the core Scientific Molding discipline this playbook is named for.",
+      "Cross-reference dimension_measurement_mm against the run's LSL/USL immediately after a changeover specifically \u2014 startup variation right after a mold/material change is a distinct signal from steady-state drift later in the run.",
+      "Confirm the fill-to-pack transfer point wasn't changed as part of the changeover itself \u2014 an inconsistent transfer point is one of the most common causes of part-to-part variation this methodology specifically targets."
+    ],
+    "root_cause_tags": [
+      "transfer_point_drift",
+      "material_lot_variation",
+      "mold_temperature_drift"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "transfer_point_drift",
+        "action": "Verify the fill-to-pack transfer position/pressure against the qualified process setup sheet for this mold before adjusting anything else."
+      },
+      {
+        "root_cause_tag": "material_lot_variation",
+        "action": "Check the incoming resin lot's melt-flow-index certificate against the lot the process was originally qualified against."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "Scientific Molding / Decoupled Molding (RJG Inc. methodology)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely-adopted injection-molding process methodology, structural summary",
+        "license_note": "Public concept summary \u2014 RJG's specific training materials are proprietary/licensed; this describes the publicly-known principles only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "automotive_supplier_ppm_escalation",
+    "trigger_kpi_ids": [
+      "scrap_rate",
+      "eol_defect_rate",
+      "capa_closure_time"
+    ],
+    "symptom_description": "Incoming-material or supplier-attributed defects are pushing a part number's PPM (parts-per-million defect rate) toward or past an OEM supplier-scorecard threshold.",
+    "applicable_sub_industries": [
+      "automotive"
+    ],
+    "root_cause_framework": "AIAG Incoming Inspection / OEM Supplier PPM Scorecard (Ford Q1, GM BIQS) \u2014 escalation is scorecard-driven with contractual consequences, not just an internal quality metric.",
+    "diagnostic_steps": [
+      "Confirm whether the defect is attributable to the supplier (incoming material/component) or introduced in-house before escalating to the supplier \u2014 check the incoming-inspection record for the specific lot first.",
+      "Check whether this is a recurring supplier/part-number combination across multiple periods \u2014 a single-lot event and a recurring pattern trigger different OEM-facing escalation paths.",
+      "Cross-reference capa_closure_time for any open supplier corrective action on the same part number \u2014 a slow-closing supplier CAPA alongside a fresh PPM event compounds the scorecard impact."
+    ],
+    "root_cause_tags": [
+      "supplier_incoming_quality",
+      "supplier_capa_delay",
+      "part_print_deviation"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "supplier_incoming_quality",
+        "action": "Issue a supplier corrective action request (SCAR) referencing the specific lot and defect mode; hold remaining lot inventory pending disposition rather than consuming it into production."
+      },
+      {
+        "root_cause_tag": "supplier_capa_delay",
+        "action": "Escalate within the supplier-scorecard governance process \u2014 a slow-closing supplier CAPA is itself a scorecard factor independent of the original defect."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "AIAG Core Tools + OEM Supplier Quality Manuals (Ford Q1, GM BIQS)",
+        "source_type": "established_methodology",
+        "citation_or_url": "AIAG/OEM supplier-quality program structural summary",
+        "license_note": "Public concept summary \u2014 specific OEM scorecard manuals are licensed/proprietary to each OEM's supplier program",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "electronics_esd_msd_latent_defect",
+    "trigger_kpi_ids": [
+      "eol_defect_rate",
+      "eol_defect_count"
+    ],
+    "symptom_description": "End-of-line or field defects on an electronics assembly show an intermittent or delayed-failure pattern inconsistent with a straightforward solder/placement defect.",
+    "applicable_sub_industries": [
+      "electronics"
+    ],
+    "root_cause_framework": "ESD Association ANSI/ESD S20.20 (electrostatic discharge control) + IPC/JEDEC J-STD-020 (moisture/reflow sensitivity classification) \u2014 targets latent damage that passes initial inspection but fails later, distinct from the immediately-visible defects IPC-A-610 classification catches.",
+    "diagnostic_steps": [
+      "Check whether the failure pattern is immediate (catches at EOL inspection) or delayed/field \u2014 a delayed pattern points toward latent ESD or moisture-induced damage rather than a visible solder/placement defect.",
+      "Review ESD control-plan compliance (grounding, ionization, handling procedure adherence) for the affected work area and shift before assuming a component-quality issue.",
+      "Cross-check MSD floor-life/bake-out records again specifically for LATENT damage signatures (e.g. delamination, popcorning under thermal stress) \u2014 this is a different failure mode than the immediate placement defect the solder-defect playbook already checks."
+    ],
+    "root_cause_tags": [
+      "esd_control_gap",
+      "msd_latent_damage",
+      "handling_procedure_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "esd_control_gap",
+        "action": "Audit ESD control-plan compliance for the affected workstation/shift; re-verify grounding and ionization equipment calibration before resuming production of ESD-sensitive components."
+      },
+      {
+        "root_cause_tag": "msd_latent_damage",
+        "action": "Cross-check the affected lot's floor-life exposure against J-STD-020 classification limits; quarantine remaining stock from the same lot pending re-bake verification."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "ANSI/ESD S20.20 + IPC/JEDEC J-STD-020",
+        "source_type": "industry_standard_body",
+        "citation_or_url": "ESD Association / IPC-JEDEC structural summary",
+        "license_note": "Full standards are licensed publications; this is a structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "injection_molding_warpage_shrinkage_drift",
+    "trigger_kpi_ids": [
+      "control_limit_deviations",
+      "scrap_rate"
+    ],
+    "symptom_description": "Dimensional measurements are drifting out of control limits, or warpage/shrinkage-related scrap is rising, on an injection molding line.",
+    "applicable_sub_industries": [
+      "injection_molding_plastics"
+    ],
+    "root_cause_framework": "Scientific Molding dimensional-stability analysis \u2014 isolates whether drift originates from mold cooling uniformity, material shrinkage characteristics, or packing-phase pressure/time, since each requires a different corrective lever.",
+    "diagnostic_steps": [
+      "Confirm the drift is dimensional (warpage/shrinkage) and not a cosmetic or strength defect before applying this playbook \u2014 different root-cause families apply to each.",
+      "Check mold cooling-channel temperature uniformity for the affected cavity/mold \u2014 uneven cooling is one of the most common warpage root causes and is distinct from a fill/pack/hold process-parameter issue.",
+      "Verify the incoming resin lot's shrinkage-rate specification (per ASTM D3641-qualified test data) against the lot the process was originally set up against \u2014 a material-lot shrinkage difference can mimic a process problem.",
+      "Check whether packing-phase pressure/time has drifted from the qualified setup sheet \u2014 under-packing is a common, distinct-from-cooling cause of shrinkage-related dimensional drift."
+    ],
+    "root_cause_tags": [
+      "mold_cooling_nonuniformity",
+      "material_shrinkage_variation",
+      "pack_pressure_drift"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "mold_cooling_nonuniformity",
+        "action": "Check cooling-channel flow rate and temperature uniformity across the mold; a partially blocked cooling channel is a common, easily-missed warpage cause."
+      },
+      {
+        "root_cause_tag": "material_shrinkage_variation",
+        "action": "Verify the current resin lot's shrinkage-rate data against the qualification lot before adjusting any process parameter."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "Scientific Molding dimensional-stability principles (RJG Inc. methodology) + ASTM D3641",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely-adopted injection-molding process methodology, structural summary",
+        "license_note": "Public concept summary \u2014 proprietary training materials not reproduced",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "petroleum_leading_lagging_psm_indicator_review",
+    "trigger_kpi_ids": [
+      "maintenance_alerts",
+      "major_audit_nonconformances"
+    ],
+    "symptom_description": "A process-safety indicator review is due, or a Tier 3/4 leading indicator (near-miss, demand on a safety system, maintenance backlog on a safety-critical asset) has moved before any Tier 1/2 actual loss-of-containment event has occurred.",
+    "applicable_sub_industries": [
+      "petroleum_chemical"
+    ],
+    "root_cause_framework": "API RP 754's four-tier indicator pyramid \u2014 the explicit point of tracking Tier 3/4 leading indicators is to act BEFORE a Tier 1/2 event, so a moving leading indicator is itself the finding, not a precursor to wait out.",
+    "diagnostic_steps": [
+      "Classify the moved indicator by tier (Tier 1-2 = actual event, Tier 3-4 = near-miss/operating-discipline) before deciding urgency \u2014 a Tier 3/4 movement gets a management-of-change review, not a shrug.",
+      "Check whether maintenance_alerts concentration on safety-critical-tagged equipment specifically (versus general equipment) is driving the leading-indicator movement.",
+      "Cross-reference major_audit_nonconformances for the same asset/unit to see whether this is a first occurrence or part of a pattern the last audit cycle already flagged."
+    ],
+    "root_cause_tags": [
+      "safety_system_demand",
+      "mechanical_integrity_gap",
+      "operating_discipline_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "operating_discipline_gap",
+        "action": "Review the specific operating procedure/permit-to-work step associated with the leading-indicator event; a Tier 3/4 movement is API RP 754's explicit signal to intervene at the procedure level before it becomes a Tier 1/2 event."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "API RP 754 (Process Safety Performance Indicators)",
+        "source_type": "industry_standard_body",
+        "citation_or_url": "API RP 754 structural summary",
+        "license_note": "Full recommended practice is a licensed API publication; this is a structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "pharma_oos_lab_result_investigation",
+    "trigger_kpi_ids": [
+      "control_limit_deviations",
+      "first_pass_yield_by_stage"
+    ],
+    "symptom_description": "A quality-control laboratory test result has come back out-of-specification (OOS) for a pharmaceutical batch or in-process sample.",
+    "applicable_sub_industries": [
+      "pharmaceutical"
+    ],
+    "root_cause_framework": "FDA's 1999 OOS Guidance (\"Investigating Out-of-Specification (OOS) Test Results for Pharmaceutical Production\") + ICH Q7 lab-controls expectations \u2014 a two-phase investigation (Phase 1: laboratory error investigation; Phase 2: full manufacturing/process investigation) is required before an OOS result can be invalidated, and it CANNOT be invalidated on retesting alone.",
+    "diagnostic_steps": [
+      "Phase 1 first, always: investigate for a laboratory error (technique, equipment calibration, sample handling) BEFORE any retest \u2014 retesting without a documented Phase 1 investigation is a common, citable FDA finding on its own.",
+      "If Phase 1 finds no assignable lab cause, escalate to Phase 2 (manufacturing/process investigation) \u2014 do not average an OOS result with subsequent passing retests to reach a passing conclusion; that practice is explicitly disallowed by the guidance.",
+      "Cross-reference first_pass_yield_by_stage for the same batch/stage to see whether the OOS result correlates with a specific process stage, supporting a Phase 2 manufacturing cause."
+    ],
+    "root_cause_tags": [
+      "lab_technique_error",
+      "equipment_calibration_gap",
+      "process_shift"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "lab_technique_error",
+        "action": "Document the Phase 1 laboratory investigation fully (analyst, equipment, reagents, technique) before any retest is authorized \u2014 this documentation is what an auditor checks first."
+      },
+      {
+        "root_cause_tag": "process_shift",
+        "action": "If Phase 2 is triggered, hold the batch pending the full manufacturing investigation outcome; do not release on a favorable retest alone."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "FDA Guidance for Industry: Investigating OOS Test Results for Pharmaceutical Production (2006, updated from 1999 draft)",
+        "source_type": "public_gov_source",
+        "citation_or_url": "FDA.gov guidance document",
+        "license_note": "Public US federal guidance document, structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "established",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "consumer_recall_readiness_traceability_review",
+    "trigger_kpi_ids": [
+      "customer_return_rate",
+      "capa_closure_rate"
+    ],
+    "symptom_description": "A return-pattern review (see the consumer-products return-pattern playbook) has identified a genuine defect-coded cluster large or severe enough to raise the question of whether a recall or corrective-action notice is warranted.",
+    "applicable_sub_industries": [
+      "consumer_products"
+    ],
+    "root_cause_framework": "CPSC 16 CFR Part 1115 (Substantial Product Hazard Reports) + ISO 10377 traceability guidance \u2014 the binding regulatory question (is this reportable to CPSC within the statutory window) sits on top of the voluntary quality-pattern question the return-pattern playbook already answers.",
+    "diagnostic_steps": [
+      "Determine whether the defect-coded cluster meets 16 CFR Part 1115's substantial-hazard reporting criteria (a legal/compliance determination, not a quality-team-only call) \u2014 this has a statutory reporting clock once triggered, unlike a routine quality review.",
+      "Verify lot/batch traceability depth for the affected SKU \u2014 confirm which specific production lots/date ranges the defect-coded returns actually trace back to before scoping any corrective action.",
+      "Cross-reference capa_closure_rate for this SKU's quality history \u2014 a pattern of open, slow-closing CAPAs on the same SKU strengthens the case for treating this as systemic rather than an isolated cluster."
+    ],
+    "root_cause_tags": [
+      "traceability_gap",
+      "reportable_hazard_pattern",
+      "packaging_defect"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "reportable_hazard_pattern",
+        "action": "Route to legal/compliance for a 16 CFR Part 1115 reportability determination immediately \u2014 this decision has a statutory clock and should not wait on the full root-cause investigation to complete."
+      },
+      {
+        "root_cause_tag": "traceability_gap",
+        "action": "Verify lot-code traceability actually resolves to the affected production window before scoping which inventory/customers are in the corrective-action population."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "16 CFR Part 1115 (CPSC Substantial Product Hazard Reports) + ISO 10377",
+        "source_type": "public_gov_source",
+        "citation_or_url": "eCFR Title 16, Part 1115 + ISO 10377 structural summary",
+        "license_note": "16 CFR is public US federal regulation; ISO 10377 full text is a licensed publication \u2014 structural summary only for the latter",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  },
+  {
+    "playbook_id": "industrial_warranty_field_failure_loop",
+    "trigger_kpi_ids": [
+      "customer_return_rate",
+      "maintenance_alerts"
+    ],
+    "symptom_description": "Warranty claims or field-failure reports are rising for an industrial-products asset already in service at a customer site.",
+    "applicable_sub_industries": [
+      "industrial_products"
+    ],
+    "root_cause_framework": "ISO 55001 asset-management feedback-loop requirement + Reliability-Centered Maintenance (RCM) failure-mode feedback \u2014 a field failure on higher-cost, longer-lived equipment is expected to feed back into both the manufacturer's design/process improvement AND the customer's own maintenance-planning assumptions, not just close as an isolated warranty transaction.",
+    "diagnostic_steps": [
+      "Classify the field failure by failure mode (design, manufacturing, installation, or customer-side maintenance/misuse) before attributing cost or corrective action \u2014 RCM treats these as requiring different corrective paths.",
+      "Check whether this asset class shows a maintenance_alerts pattern internally (during production/test) that foreshadowed the field failure mode \u2014 a matched internal signal strengthens a manufacturing/design root cause versus a customer-side one.",
+      "Review whether the failure rate is consistent with the asset's designed service life at this point in its lifecycle, or is an early/unexpected failure \u2014 ISO 55001's lifecycle view treats these very differently."
+    ],
+    "root_cause_tags": [
+      "design_failure_mode",
+      "manufacturing_escape",
+      "field_maintenance_gap"
+    ],
+    "recommended_actions": [
+      {
+        "root_cause_tag": "manufacturing_escape",
+        "action": "Cross-reference the failed unit's production-period quality data (scrap_rate, control_limit_deviations) to check whether an internal signal was already present and missed at the time of production."
+      },
+      {
+        "root_cause_tag": "design_failure_mode",
+        "action": "Feed the failure mode back into the design/engineering change process per ISO 55001's continual-improvement requirement \u2014 a warranty closure alone does not satisfy the asset-management feedback-loop expectation."
+      }
+    ],
+    "provenance": [
+      {
+        "source_name": "ISO 55001 + Reliability-Centered Maintenance (RCM) methodology",
+        "source_type": "established_methodology",
+        "citation_or_url": "ISO 55001 structural summary + RCM (Moubray) structural summary",
+        "license_note": "ISO 55001 full text is a licensed publication; RCM concepts are public \u2014 structural summary only",
+        "figure_verified": true
+      }
+    ],
+    "confidence": "single_source",
+    "last_reviewed": null
+  }
+]

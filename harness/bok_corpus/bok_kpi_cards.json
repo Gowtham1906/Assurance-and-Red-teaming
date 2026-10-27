@@ -1,0 +1,1256 @@
+[
+  {
+    "kpi_id": "capacity_utilization",
+    "kpi_name": "Capacity Utilization Rate",
+    "aliases": [
+      "Capacity Utilization",
+      "Utilization Rate"
+    ],
+    "catalog_metric_names": [
+      "Capacity Utilization Rate",
+      "utilization"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "The percentage of available production capacity actually used over a period.",
+    "formula": "KruxOn's actual formula: mean(utilization_pct) across the period (branch 1, 'utilization'/'capacity' match). No numerator/denominator recomputation \u2014 the source column is a pre-calculated percentage.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Higher utilization generally indicates better capacity absorption, but utilization sustained too close to 100% is itself a Lean/TOC (Theory of Constraints) warning sign \u2014 it removes the buffer needed to absorb variability without a schedule slip. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "oee",
+      "schedule_attainment"
+    ],
+    "common_root_cause_tags": [
+      "demand_variability",
+      "line_balancing",
+      "unplanned_downtime"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 1",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "capa_closure_time",
+    "kpi_name": "CAPA Closure Time",
+    "aliases": [
+      "Corrective Action Closure Time"
+    ],
+    "catalog_metric_names": [
+      "CAPA Closure Time",
+      "Corrective Action"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Average number of days to close a Corrective and Preventive Action (CAPA) once opened.",
+    "formula": "KruxOn's actual formula: mean(capa_closure_days) (branch 2, 'capa'/'corrective action' match).",
+    "unit": "days",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "A leading indicator of quality-system discipline rather than product quality itself \u2014 a rising closure time often precedes a rise in repeat defects, since root causes aren't being fixed before the next occurrence. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "copq",
+      "scrap_rate"
+    ],
+    "common_root_cause_tags": [
+      "quality_system_discipline",
+      "resourcing"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 2",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "AIAG/ISO 9001 CAPA process concept",
+        "source_type": "industry_standard_body",
+        "citation_or_url": "ISO 9001 Clause 10.2 (Nonconformity and Corrective Action)",
+        "license_note": "Standard text is licensed; this is a structural reference only",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {
+      "pharmaceutical": "FDA 21 CFR 211's CAPA-timeliness expectation makes this a compliance metric, not just an operational-discipline one \u2014 a slow-closing CAPA is itself an audit-findable gap, independent of whether the underlying defect recurs.",
+      "automotive": "OEM 8D cadence sets the closure clock, not an internal target \u2014 Containment (D3) has its own faster deadline than full root-cause closure (D4-D8), so a single 'closure time' figure can mask a fast-contained, slow-closed case.",
+      "petroleum_chemical": "OSHA PSM/API audit cadence applies, and a process-safety-critical finding follows a different, often faster, closure-time expectation than a general quality nonconformance \u2014 see the process-safety-audit playbook's triage step before reading one closure-time figure across both finding types."
+    }
+  },
+  {
+    "kpi_id": "top5_scrap_reason_cost",
+    "kpi_name": "Top 5 Scrap Reason Codes (Cost Impact)",
+    "aliases": [
+      "Top Scrap Reasons",
+      "Scrap Codes"
+    ],
+    "catalog_metric_names": [
+      "Top 5 Scrap Reason Codes"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "The financial cost impact of the five most frequent scrap reason codes by unit volume.",
+    "formula": "KruxOn's actual formula: sum(scrap_units grouped by scrap_reason, top 5 by volume) x avg_unit_cost, where avg_unit_cost = mfg_cost_usd / units_produced when both columns exist, else a hardcoded fallback of $45.50/unit (branch 3). NOTE: the $45.50 fallback is a literal safety default in the code, not a real cost figure \u2014 any value shown when mfg_cost_usd or units_produced is missing is using this placeholder, not actual client cost data.",
+    "unit": "currency",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Pareto analysis (the 80/20 principle) is the standard reason this metric is tracked as a top-5 rather than a full list \u2014 a small number of reason codes typically account for most of the cost impact.",
+    "related_kpi_ids": [
+      "scrap_rate",
+      "copq"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "tooling_wear",
+      "material_variation"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 3",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "eol_defect_rate",
+    "kpi_name": "End-of-Line (EOL) Defect Rate",
+    "aliases": [
+      "EOL Defect Rate",
+      "Defect Rate"
+    ],
+    "catalog_metric_names": [
+      "EOL Defect Rate",
+      "Defect Count"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Percentage of units failing final end-of-line inspection.",
+    "formula": "(eol_defect_units / units_produced) x 100, computed in calc_quality.py.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Six Sigma literature treats end-of-line defect rate as a lagging quality indicator that should be read alongside in-process First Pass Yield, not in isolation. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "first_pass_yield",
+      "copq",
+      "customer_return_rate"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "incoming_material_quality",
+      "measurement_error"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 4",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "FIXED (Code Finding #19): the previous 0.85% safety-clamp floor has been removed \u2014 a genuinely zero-defect period now correctly displays as 0%. The separate 'End-of-Line Defect Count' catalog metric (the absolute count, not the rate) now has its own formula in calc_quality.py rather than colliding with this one under the same 'eol' keyword.",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "customer_return_rate",
+    "kpi_name": "Customer Return Rate",
+    "aliases": [
+      "Return Rate"
+    ],
+    "catalog_metric_names": [
+      "Customer Return Rate"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "consumer_products"
+    ],
+    "definition": "The percentage of shipped units returned by customers for quality-related reasons.",
+    "formula": "(customer_returns / units_shipped) x 100, computed in calc_quality.py.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Treated in Cost of Quality literature as an external-failure-cost indicator \u2014 by the time it moves, the underlying process issue has typically already been visible in FPY or COPQ for one or more prior periods. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "copq",
+      "first_pass_yield",
+      "eol_defect_rate"
+    ],
+    "common_root_cause_tags": [
+      "incoming_material_quality",
+      "process_variation",
+      "packaging_handling"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 5",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "ASQ Cost of Quality framework",
+        "source_type": "established_methodology",
+        "citation_or_url": "American Society for Quality",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "FIXED (Code Findings #18-19): the undocumented '* 45' multiplier and the 0.32% safety-clamp floor have both been removed \u2014 this is now a plain, trustworthy percentage.",
+    "sub_industry_notes": {
+      "consumer_products": "Retail-channel returns are a routine, expected cost of doing business here (ISO 10377) \u2014 segment by reason code before treating the whole movement as a quality signal (see the consumer-products return-pattern playbook); the tolerance band is genuinely wider than in B2B sectors.",
+      "automotive": "A return here carries recall/warranty severity and OEM visibility that a consumer-channel return doesn't \u2014 treat any upward movement as a candidate 8D trigger, not a routine trend line.",
+      "pharmaceutical": "A product return can be an adverse-event or regulatory signal, not just a quality-escape indicator \u2014 route through the cGMP deviation-investigation process rather than a standard returns review.",
+      "industrial_products": "Typically a B2B warranty-claim process rather than a retail return flow \u2014 expect much lower volume with much higher per-incident investigation depth than the consumer-products interpretation of this metric."
+    }
+  },
+  {
+    "kpi_id": "scrap_rate",
+    "kpi_name": "Scrap Rate / Scrap Units",
+    "aliases": [
+      "Scrap Units",
+      "Scrap %"
+    ],
+    "catalog_metric_names": [
+      "Scrap Rate",
+      "Scrap Units"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Units or percentage of production output scrapped rather than shipped or reworked.",
+    "formula": "KruxOn's actual formula: sum(scrap_units); expressed as a percentage of units_produced when the benchmark string contains '%' or the metric name contains 'rate', otherwise reported as a raw count (branch 6).",
+    "unit": "% or count",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Feeds directly into COPQ and the Top-5 Scrap Reason Codes metric \u2014 review together rather than in isolation. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "copq",
+      "top5_scrap_reason_cost",
+      "first_pass_yield"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "tooling_wear",
+      "material_variation"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 6",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {
+      "electronics": "High component cost drives PPM-level scrap targets rather than the broader percentages used elsewhere \u2014 a scrap rate that would be unremarkable in general manufacturing represents a much larger dollar loss per unit here.",
+      "automotive": "OEM quality agreements (Ford Q1, GM BIQS, etc.) push toward PPM-level tolerance; scrap tied to a safety-critical characteristic escalates to the 8D playbook rather than a routine scrap-reason review.",
+      "pharmaceutical": "A scrapped unit in a batch context often means the whole batch is destroyed under cGMP disposition rules, not a single-unit rework/scrap decision \u2014 check whether a scrap event should instead be read as a batch deviation (see the pharma batch-deviation playbook).",
+      "injection_molding_plastics": "Regrind economics matter here in a way most sectors don't track: some scrap can be reground and reused within material spec limits, so the cost impact isn't always 1:1 with the scrap unit count \u2014 check the material spec before assuming full loss.",
+      "consumer_products": "Cost-competitive category norms tolerate more scrap variance than regulated sectors \u2014 the Pareto/top-5 reason-code breakdown matters more here than the absolute rate."
+    }
+  },
+  {
+    "kpi_id": "copq",
+    "kpi_name": "Cost of Poor Quality (COPQ)",
+    "aliases": [
+      "Cost of Poor Quality"
+    ],
+    "catalog_metric_names": [
+      "COPQ"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Rework cost as a percentage of total manufacturing cost \u2014 KruxOn's specific implementation of the broader Cost of Quality concept.",
+    "formula": "KruxOn's actual formula: (rework_cost_usd / mfg_cost_usd) x 100 (branch 7). NOTE: this captures only internal rework cost, not the full ASQ Cost of Quality model (which also includes scrap cost, appraisal cost, and external failure cost) \u2014 narrower than the textbook definition, worth knowing before comparing to an external COPQ benchmark that uses the fuller definition.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "ASQ's Cost of Quality framework treats internal failure costs (of which rework is one component) as the cheaper lever to address first, since external failure costs compound with customer-trust impact. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "scrap_rate",
+      "first_pass_yield",
+      "customer_return_rate"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "incoming_material_quality",
+      "operator_error"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 7",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "ASQ Cost of Quality framework",
+        "source_type": "established_methodology",
+        "citation_or_url": "American Society for Quality \u2014 Cost of Quality body of knowledge",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {
+      "pharmaceutical": "A COPQ spike here is disproportionately driven by batch rejection/destruction rather than incremental rework \u2014 a single batch disposition decision can move this metric far more than a typical rework event would in general manufacturing.",
+      "automotive": "OEM chargebacks (PPM penalties, warranty cost recovery) sit alongside internal rework cost \u2014 this platform's COPQ formula captures internal rework only (see the formula note above), so treat this as a floor, not the full OEM-facing cost exposure, in this sector specifically.",
+      "electronics": "High component cost per unit means a modest rework-rate increase moves COPQ more than the same percentage would in a lower-unit-cost sector \u2014 check component cost trend alongside rework volume, not volume alone.",
+      "consumer_products": "Cost-competitive category norms tolerate a wider COPQ range than regulated sectors \u2014 compare against this product line's own trailing baseline rather than a cross-sector target."
+    }
+  },
+  {
+    "kpi_id": "manufacturing_cycle_time",
+    "kpi_name": "Manufacturing Cycle Time",
+    "aliases": [
+      "Cycle Time"
+    ],
+    "catalog_metric_names": [
+      "Cycle Time",
+      "Manufacturing Cycle Time"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Average elapsed time (in days) to complete one unit of production, start to finish.",
+    "formula": "KruxOn's actual formula: mean(cycle_time_days) (branch 8, 'cycle time' match).",
+    "unit": "days",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "Lean literature treats cycle time as one of the most direct levers on WIP and lead time (Little's Law: WIP = Throughput x Cycle Time) \u2014 a rising cycle time with flat throughput implies rising WIP even before WIP Valuation shows it. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "wip_valuation",
+      "schedule_attainment"
+    ],
+    "common_root_cause_tags": [
+      "line_balancing",
+      "unplanned_downtime",
+      "material_availability"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 8",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "schedule_attainment",
+    "kpi_name": "Schedule Attainment / Plan Adherence",
+    "aliases": [
+      "Plan Adherence",
+      "Production Adherence"
+    ],
+    "catalog_metric_names": [
+      "Schedule Attainment",
+      "Plan Adherence"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "The percentage of planned production actually completed within the scheduled period.",
+    "formula": "KruxOn's actual formula: (units_produced / planned_qty) x 100 (branch 9, 'attainment'/'adherence' match).",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "oee",
+      "changeover_time",
+      "manufacturing_cycle_time"
+    ],
+    "common_root_cause_tags": [
+      "unplanned_downtime",
+      "setup_sequencing",
+      "material_availability"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 9",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "conversion_cost",
+    "kpi_name": "Conversion Cost / Cost Per Unit",
+    "aliases": [
+      "Cost Per Unit"
+    ],
+    "catalog_metric_names": [
+      "Conversion Cost",
+      "Cost Per Unit"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Total manufacturing cost divided by units produced \u2014 the fully-loaded cost to convert raw material/WIP into a finished unit.",
+    "formula": "KruxOn's actual formula: mfg_cost_usd / units_produced (branch 10).",
+    "unit": "currency/unit",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "Moves with both efficiency (OEE, cycle time) and input cost changes \u2014 a rising conversion cost with flat OEE points at input/material cost, not process efficiency. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "oee",
+      "manufacturing_cycle_time"
+    ],
+    "common_root_cause_tags": [
+      "input_cost_change",
+      "process_variation",
+      "yield_loss"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 10",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "inventory_record_accuracy",
+    "kpi_name": "Inventory Record Accuracy (IRA)",
+    "aliases": [
+      "IRA",
+      "Record Accuracy"
+    ],
+    "catalog_metric_names": [
+      "Inventory Record Accuracy",
+      "IRA"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Percentage of inventory records that match a physical cycle count.",
+    "formula": "KruxOn's actual formula: (ira_match_count / ira_total_count) x 100 (branch 11).",
+    "unit": "%",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "A foundational data-integrity metric \u2014 low IRA undermines the reliability of every other inventory-dependent metric (WIP Valuation, Schedule Attainment) before those metrics themselves show a problem. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "wip_valuation",
+      "cycle_count_variance"
+    ],
+    "common_root_cause_tags": [
+      "transaction_discipline",
+      "system_integration_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 11",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "wip_valuation",
+    "kpi_name": "Work-in-Progress (WIP) Valuation",
+    "aliases": [
+      "WIP Valuation"
+    ],
+    "catalog_metric_names": [
+      "WIP Valuation"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Total value of work-in-progress inventory at a point in time.",
+    "formula": "KruxOn's actual formula: sum(wip_value_usd) (branch 12, 'wip'/'valuation' match).",
+    "unit": "currency",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "By Little's Law, WIP Valuation trending up while throughput is flat is a trailing confirmation of a cycle-time problem that Manufacturing Cycle Time would have shown earlier. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "manufacturing_cycle_time",
+      "inventory_record_accuracy"
+    ],
+    "common_root_cause_tags": [
+      "line_balancing",
+      "material_availability",
+      "batch_sizing"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 12",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "cycle_count_variance",
+    "kpi_name": "Daily Cycle Count Variance",
+    "aliases": [
+      "Cycle Count Variance"
+    ],
+    "catalog_metric_names": [
+      "Cycle Count Variance"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Sum of discrepancies found between physical cycle counts and system inventory records.",
+    "formula": "KruxOn's actual formula: sum(cycle_count_variance) (branch 13, requires both 'variance' AND 'count' in the metric name).",
+    "unit": "count",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "A rising trend here is the earliest available signal of a transaction-discipline problem, before it shows up as a drop in Inventory Record Accuracy.",
+    "related_kpi_ids": [
+      "inventory_record_accuracy"
+    ],
+    "common_root_cause_tags": [
+      "transaction_discipline",
+      "system_integration_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 13",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "oee",
+    "kpi_name": "Overall Equipment Effectiveness (OEE)",
+    "aliases": [
+      "OEE"
+    ],
+    "catalog_metric_names": [
+      "avg_oee",
+      "OEE"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "The product of Availability, Performance, and Quality \u2014 the standard composite measure of how effectively a piece of equipment or line is used relative to its full potential.",
+    "formula": "KruxOn's actual formula: mean(oee_pct) (branch 14) \u2014 NOTE: the platform stores and reads a single pre-calculated oee_pct column; it does not separately decompose Availability x Performance x Quality from the raw data today, so a chat/alert diagnosis that 'decomposes OEE into its three factors' (see the oee_below_target playbook below) requires those three components to exist as separate columns \u2014 confirm they're available before promising that decomposition to a client.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "A world-class OEE benchmark of roughly 85% is widely cited across TPM literature, originating from Seiichi Nakajima's Total Productive Maintenance framework. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "capacity_utilization",
+      "copq",
+      "changeover_time"
+    ],
+    "common_root_cause_tags": [
+      "unplanned_downtime",
+      "minor_stops",
+      "speed_loss",
+      "startup_defects"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 14",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "TPM literature (Nakajima)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Nakajima, S. \u2014 Introduction to TPM (widely cited framework)",
+        "license_note": "Public concept, no reproduction of text",
+        "figure_verified": true
+      },
+      {
+        "source_name": "APQC Open Standards Benchmarking \u2014 Manufacturing",
+        "source_type": "licensed_benchmark_db",
+        "citation_or_url": "https://www.apqc.org/resource-library/resource-collection/manufacturing-key-benchmarks",
+        "license_note": "Subscription required for exact percentile data",
+        "figure_verified": false
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {
+      "pharmaceutical": "Read a lower OEE than other sectors as normal, not alarming \u2014 validated cleaning/changeover (CIP/SIP) and batch record review legitimately consume scheduled time that other sectors would count as unplanned downtime; a below-85% OEE here is not automatically a TPM finding.",
+      "automotive": "IATF 16949 delivery-discipline expectations push this toward the high end of the TPM benchmark range; a sustained miss here has OEM delivery-schedule consequences beyond the internal efficiency question.",
+      "petroleum_chemical": "Continuous-process operations rarely changeover, so OEE runs higher here than in discrete manufacturing \u2014 treat a dip as a process-safety or reliability signal (see OSHA PSM playbook) before treating it as a generic TPM six-big-losses question.",
+      "electronics": "High product-mix/changeover frequency keeps OEE moderate rather than continuous-process-high even in a well-run line \u2014 compare against this sector's own trailing baseline more than a cross-sector 85% figure.",
+      "industrial_products": "A more modest target is appropriate given the typically diverse, often older equipment mix in industrial-products manufacturing versus a single-purpose high-volume line.",
+      "injection_molding_plastics": "Mold-change frequency and material-dependent cycle times mean OEE here tracks closer to the general discrete-manufacturing range than to continuous-process sectors."
+    }
+  },
+  {
+    "kpi_id": "total_production_yield",
+    "kpi_name": "Total Production Yield",
+    "aliases": [
+      "Units Produced",
+      "Production Yield"
+    ],
+    "catalog_metric_names": [
+      "Total Production Yield",
+      "Units Produced"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Total count of units produced over a period \u2014 a VOLUME metric.",
+    "formula": "KruxOn's actual formula: sum(units_produced) (branch 15, 'yield'/'units produced' match).",
+    "unit": "count (units)",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "A raw volume metric \u2014 only meaningful compared against planned_qty (see Schedule Attainment) or a prior-period baseline, not against an external benchmark on its own.",
+    "related_kpi_ids": [
+      "schedule_attainment",
+      "first_pass_yield"
+    ],
+    "common_root_cause_tags": [
+      "demand_variability",
+      "unplanned_downtime"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 15",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "NAMING CAUTION: despite the word 'yield', this is a raw production COUNT, not a yield PERCENTAGE. It is a distinct metric from 'First Pass Yield by Stage' (a separate catalog metric that IS a percentage). Do not let a chat answer or guidance conflate the two just because both contain 'yield'.",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "changeover_time",
+    "kpi_name": "Average Changeover Time",
+    "aliases": [
+      "Setup Time",
+      "Changeover Duration"
+    ],
+    "catalog_metric_names": [
+      "Average Changeover Time"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Average elapsed time (in minutes) for a tooling/mold/die/product changeover.",
+    "formula": "KruxOn's actual formula: mean(changeover_time_mins) (branch 16, 'changeover' match).",
+    "unit": "minutes",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "SMED (Single-Minute Exchange of Die) methodology's core insight is structural, not numeric: separate internal setup steps (machine stopped) from external setup steps (machine running), then move as many internal steps to external as possible before trying to shorten the internal steps themselves. APQC Open Standards Benchmarking (OSB) publishes sub-industry-segmented percentile data for this metric, including an Industrial Products / plastics-adjacent segment. The specific percentile figures are licensed content (apqc.org) and are NOT reproduced here \u2014 this record is a placeholder for where that data goes once KruxOn has an OSB subscription or a data-sharing agreement for this metric.",
+    "related_kpi_ids": [
+      "oee",
+      "schedule_attainment"
+    ],
+    "common_root_cause_tags": [
+      "setup_sequencing",
+      "tooling_availability",
+      "operator_training"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 16",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "SMED methodology (Shigeo Shingo)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Shingo, S. \u2014 A Revolution in Manufacturing: The SMED System",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {
+      "injection_molding_plastics": "Scientific/Decoupled Molding (see that sub-industry's playbook) treats changeover variation as a fill/pack/hold isolation problem, not just a SMED internal/external-step problem \u2014 both apply, but check phase isolation first.",
+      "pharmaceutical": "A changeover here is frequently a validated CIP/SIP cleaning cycle, not just a tooling swap \u2014 the cycle time is often regulatorily fixed, so SMED's speed-focused lever applies less than in general manufacturing; the reduction opportunity is more often in scheduling/sequencing around the fixed cleaning time.",
+      "automotive": "Model-mix complexity on a shared line makes changeover frequency itself a scheduling lever, not just changeover duration \u2014 check whether batching similar models reduces total changeover exposure before optimizing any single changeover's speed.",
+      "petroleum_chemical": "Changeovers (campaign changes) are rare and high-stakes here \u2014 a rising trend is unusual enough to warrant checking for a process-safety management-of-change record before assuming a routine setup-sequencing issue."
+    }
+  },
+  {
+    "kpi_id": "hourly_shift_output",
+    "kpi_name": "Hourly Shift Output %",
+    "aliases": [
+      "Shift Output"
+    ],
+    "catalog_metric_names": [
+      "Hourly Shift Output",
+      "Shift Output %"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Actual average hourly output expressed as a percentage of an expected hourly rate.",
+    "formula": "KruxOn's actual formula: (mean(hourly_output_units) / 64.0) x 100 (branch 17).",
+    "unit": "%",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "Treat this metric's absolute value with caution per the data-quality note below; the underlying hourly_output_units trend is more reliable than the percentage until the target is configurable per line.",
+    "related_kpi_ids": [
+      "oee",
+      "capacity_utilization"
+    ],
+    "common_root_cause_tags": [
+      "line_balancing",
+      "minor_stops"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 17",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "The '64.0' denominator is a hardcoded literal in the code, not a per-line or per-product configured target \u2014 this metric is only meaningful for a line/product whose actual target rate happens to be 64 units/hour. For any other line, this percentage is comparing actual output against the wrong target without saying so (Code Finding #20).",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "delayed_work_orders",
+    "kpi_name": "Delayed Work Orders",
+    "aliases": [
+      "Delayed WO"
+    ],
+    "catalog_metric_names": [
+      "Delayed Work Orders",
+      "Delayed WO"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Count of work orders that missed their scheduled completion date.",
+    "formula": "KruxOn's actual formula: sum(is_delayed_wo) (branch 18, a boolean/flag column summed as a count).",
+    "unit": "count",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "A direct, unambiguous count \u2014 review alongside Schedule Attainment and Changeover Time, since both are common upstream drivers of a work order slipping its date.",
+    "related_kpi_ids": [
+      "schedule_attainment",
+      "changeover_time"
+    ],
+    "common_root_cause_tags": [
+      "unplanned_downtime",
+      "setup_sequencing",
+      "material_availability"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 18",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "maintenance_alerts",
+    "kpi_name": "Predictive Maintenance Alerts",
+    "aliases": [
+      "Maintenance Alerts"
+    ],
+    "catalog_metric_names": [
+      "Predictive Maintenance Alerts",
+      "Maintenance Alert"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Count of predictive-maintenance alerts raised over a period.",
+    "formula": "KruxOn's actual formula: sum(maintenance_alert_count) (branch 19).",
+    "unit": "count",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "TPM treats a rising alert count as the earliest warning stage, before it becomes an unplanned breakdown (one of the six big losses under OEE's Availability factor) \u2014 the value of this metric is in catching the trend before OEE moves, not after.",
+    "related_kpi_ids": [
+      "oee",
+      "capa_closure_time"
+    ],
+    "common_root_cause_tags": [
+      "equipment_wear",
+      "maintenance_schedule_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_manufacturing.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_manufacturing.py, branch 19",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "TPM literature (Nakajima)",
+        "source_type": "established_methodology",
+        "citation_or_url": "Nakajima, S. \u2014 Introduction to TPM (widely cited framework)",
+        "license_note": "Public concept, no reproduction of text",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "capa_closure_rate",
+    "kpi_name": "CAPA Closure Rate",
+    "aliases": [
+      "Corrective Action Closure Rate"
+    ],
+    "catalog_metric_names": [
+      "CAPA Closure Rate & Time"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Percentage of raised Corrective and Preventive Actions (CAPAs) that have been closed, as distinct from CAPA Closure Time (how long closure takes).",
+    "formula": "(capa_closed_count / capa_total_count) x 100, computed in calc_quality.py. Previously only CAPA Closure Time existed; this is a new formula, not a fix.",
+    "unit": "%",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "ISO 9001 Clause 10.2 (Nonconformity and Corrective Action) is the structural basis for tracking CAPA closure as a quality-system health indicator.",
+    "related_kpi_ids": [
+      "capa_closure_time",
+      "major_audit_nonconformances"
+    ],
+    "common_root_cause_tags": [
+      "quality_system_backlog",
+      "resourcing_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, calculate()",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "major_audit_nonconformances",
+    "kpi_name": "Major Audit Non-Conformances",
+    "aliases": [
+      "Audit Non-Conformances",
+      "Audit Findings"
+    ],
+    "catalog_metric_names": [
+      "Major Audit Non-Conformances"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Count of critical findings raised during formal QA audits.",
+    "formula": "sum(capa_total_count), computed in calc_quality.py. Mapped to the same underlying column KruxOn.zip's Cube.js semantic layer already uses for its own audit_nonconformances measure (mfg_extended.yml) \u2014 kept consistent across both codebases rather than inventing a second definition. NOTE: this means Major Audit Non-Conformances and CAPA totals are currently the same underlying count; a real audit-management data source (separate from the CAPA log) would be a more precise input once one exists.",
+    "unit": "count",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "AIAG Core Tools (APQP/PPAP) treats audit non-conformance volume as a leading indicator of supplier/process quality-system maturity, particularly in automotive-adjacent manufacturing.",
+    "related_kpi_ids": [
+      "capa_closure_rate",
+      "capa_closure_time"
+    ],
+    "common_root_cause_tags": [
+      "quality_system_gap",
+      "process_documentation_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, calculate()",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "eol_defect_count",
+    "kpi_name": "End-of-Line Defect Count",
+    "aliases": [
+      "EOL Defect Count"
+    ],
+    "catalog_metric_names": [
+      "End-of-Line Defect Count"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Absolute count of defective units found at final end-of-line inspection, as distinct from the EOL Defect Rate percentage.",
+    "formula": "sum(eol_defect_units), computed in calc_quality.py. Previously this catalog metric collided with EOL Defect Rate under the same 'eol' keyword match in calc_manufacturing.py and had no distinct formula of its own.",
+    "unit": "count",
+    "leading_or_lagging": "lagging",
+    "benchmark_note": "",
+    "related_kpi_ids": [
+      "eol_defect_rate",
+      "first_pass_yield_by_stage"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "incoming_material_quality"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, calculate()",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "first_pass_yield_by_stage",
+    "kpi_name": "First Pass Yield (FPY) by Stage",
+    "aliases": [
+      "FPY",
+      "First Pass Yield"
+    ],
+    "catalog_metric_names": [
+      "First Pass Yield (FPY) by Stage"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Good units divided by total units processed, ideally measured separately at each production stage (e.g. Molding, Assembly, Packing).",
+    "formula": "APPROXIMATION, not the catalog's exact definition: (units_produced - scrap_units - eol_defect_units) / units_produced x 100, computed in calc_quality.py. mfg_data has no per-stage/operation column, so this is a run-level yield, not a true multi-stage FPY. A real stage-level FPY needs a stage/operation column added to the schema \u2014 an Epic 2 (Real Data Foundation) / connector-mapping decision, not something synthesized here. Do not present this as an exact match to the catalog definition without noting the approximation.",
+    "unit": "%",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "First Pass Yield is one of the most-cited Lean/Six Sigma quality leading indicators precisely because it's measured per-stage, catching a problem before it reaches end-of-line \u2014 this run-level approximation loses some of that early-detection value versus a true multi-stage measurement.",
+    "related_kpi_ids": [
+      "eol_defect_rate",
+      "eol_defect_count",
+      "copq"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "incoming_material_quality",
+      "operator_error"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, calculate()",
+        "license_note": "Internal code \u2014 approximation, explicitly flagged as such",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Lean/Six Sigma literature",
+        "source_type": "established_methodology",
+        "citation_or_url": "Widely published quality/process-improvement methodology",
+        "license_note": "Public concept",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "single_source",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "in_process_sampling_pass_rate",
+    "kpi_name": "In-Process Sampling Pass Rate",
+    "aliases": [
+      "Sampling Pass Rate"
+    ],
+    "catalog_metric_names": [
+      "In-Process Sampling Pass Rate"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Percentage of in-process QA samples that pass inspection, distinct from the end-of-line inspection First Pass Yield/EOL metrics measure.",
+    "formula": "(samples_passed / samples_inspected) x 100, computed in calc_quality.py. Requires the samples_inspected/samples_passed columns added to mfg_data alongside this module \u2014 without them this metric correctly reports 'Needs Formula' rather than a fabricated value.",
+    "unit": "%",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "",
+    "related_kpi_ids": [
+      "first_pass_yield_by_stage",
+      "control_limit_deviations"
+    ],
+    "common_root_cause_tags": [
+      "process_variation",
+      "measurement_error",
+      "sampling_plan_gap"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, calculate()",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  },
+  {
+    "kpi_id": "control_limit_deviations",
+    "kpi_name": "Control Limit Deviations",
+    "aliases": [
+      "Out of Tolerance (OOT) Alerts",
+      "OOT Count"
+    ],
+    "catalog_metric_names": [
+      "Control Limit Deviations"
+    ],
+    "applicable_sub_industries": [
+      "cross_industry",
+      "injection_molding_plastics",
+      "automotive",
+      "electronics"
+    ],
+    "definition": "Count of process measurements falling outside statistically-derived control limits (not fixed spec limits) \u2014 a signal that the process itself has shifted, independent of whether any unit actually failed a spec.",
+    "formula": "A REAL statistical process control (SPC) calculation, not a keyword placeholder: Individuals control limits via the Moving-Range method (center_line = mean(x), sigma_hat = mean(|x_i - x_i-1|) / 1.128, UCL/LCL = center_line +/- 3*sigma_hat), counting points outside [LCL, UCL]. Implemented in calc_quality.control_limits_i_mr() and calc_quality.spc_chart_data(). Monitors cycle_time_days by default \u2014 any numeric process variable in mfg_data can be substituted.",
+    "unit": "count",
+    "leading_or_lagging": "leading",
+    "benchmark_note": "This is the textbook Individuals/Moving-Range (I-MR) control chart method (Montgomery, Introduction to Statistical Quality Control) \u2014 the correct SPC method when measurements come one-per-run rather than in rational subgroups, which is what mfg_data provides.",
+    "related_kpi_ids": [
+      "in_process_sampling_pass_rate",
+      "first_pass_yield_by_stage"
+    ],
+    "common_root_cause_tags": [
+      "process_shift",
+      "equipment_drift",
+      "material_variation"
+    ],
+    "provenance": [
+      {
+        "source_name": "KruxOn calc_quality.py (internal, ground truth for this platform)",
+        "source_type": "internal_case_study",
+        "citation_or_url": "calculators/calc_quality.py, control_limits_i_mr()",
+        "license_note": "Internal code \u2014 this is the actual formula executed, not a general definition",
+        "figure_verified": true
+      },
+      {
+        "source_name": "Montgomery, Introduction to Statistical Quality Control",
+        "source_type": "established_methodology",
+        "citation_or_url": "Standard SQC/SPC textbook reference for I-MR control limit constants",
+        "license_note": "Public concept (fixed statistical constants), no reproduction of text",
+        "figure_verified": true
+      }
+    ],
+    "last_reviewed": null,
+    "confidence": "established",
+    "data_quality_note": "",
+    "sub_industry_notes": {}
+  }
+]

@@ -1,0 +1,305 @@
+[
+  {
+    "case_id": "TEMPLATE-0001",
+    "kpi_ids": [
+      "changeover_time"
+    ],
+    "sub_industry": "injection_molding_plastics",
+    "situation": "TEMPLATE EXAMPLE \u2014 replace with a real, generalized, client-anonymized case once one has gone through SME review.",
+    "diagnosis": "TEMPLATE EXAMPLE.",
+    "action_taken": "TEMPLATE EXAMPLE.",
+    "outcome": "TEMPLATE EXAMPLE \u2014 do not populate an outcome figure unless it has been independently verified, per the no-unvalidated-claims standard this roadmap already follows for client materials.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "internal_hypothesis",
+    "visibility": "internal",
+    "source_organization": "",
+    "source_url": ""
+  },
+  {
+    "case_id": "PUB-AUTO-001",
+    "kpi_ids": [
+      "copq",
+      "eol_defect_rate"
+    ],
+    "sub_industry": "automotive",
+    "situation": "A major automotive OEM's quality-escape rate and internal waste were high enough in the late 1990s to threaten customer satisfaction and warranty cost, prompting a company-wide Six Sigma program (\"Consumer-Driven Six Sigma\").",
+    "diagnosis": "DMAIC-based root-cause analysis was applied across manufacturing and engineering processes; one documented example at the Saarlouis plant found a defective solvent-recovery valve was driving excessive paint use and VOC emissions.",
+    "action_taken": "Replaced the failing valve with a stainless-steel design and adjusted the application process for certain paint steps; the wider program trained thousands of employees across roughly 10,000 improvement projects.",
+    "outcome": "Widely and consistently reported (across multiple independent secondary sources) figures include a defect rate near 1 per 14.8 vehicles, ~$1 billion saved 2000-2002, and $2.19 billion in cumulative waste eliminated over the following decade \u2014 but these are secondary-sourced historical figures, not an independently audited primary report.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Ford Motor Company \u2014 Consumer-Driven Six Sigma program (via SixSigma.us)",
+    "source_url": "https://www.6sigma.us/uncategorized/six-sigma-case-study-ford-motors/"
+  },
+  {
+    "case_id": "PUB-AUTO-002",
+    "kpi_ids": [
+      "scrap_rate",
+      "eol_defect_rate"
+    ],
+    "sub_industry": "automotive",
+    "situation": "An automotive car-parts supplier's die-casting and machining processes had a chronically high defect incidence rate undermining process capability.",
+    "diagnosis": "Researchers applied DMAIC with design of experiments and hypothesis testing to isolate the main defect causes across both die-casting and machining operations, published as a peer-reviewed case study.",
+    "action_taken": "Targeted corrective actions addressed the identified causal factors in both process steps.",
+    "outcome": "Defect incidence fell from a chronically high level to an acceptable, sustained one, with process sigma level rising from 3.4\u03c3 to 4\u03c3 (peer-reviewed, published result).",
+    "outcome_verified": true,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Cond\u00e9, G.C.P.; Oprime, P.C.; Pimenta, M.L.; Sordan, J.E.; Bueno, C.R. \u2014 International Journal of Quality & Reliability Management, Vol. 40 No. 9 (2023)",
+    "source_url": "https://www.emerald.com/insight/content/doi/10.1108/ijqrm-05-2022-0157/full/html"
+  },
+  {
+    "case_id": "PUB-ELEC-001",
+    "kpi_ids": [
+      "copq",
+      "scrap_rate"
+    ],
+    "sub_industry": "electronics",
+    "situation": "Quanta Computer, an electronics manufacturer of high-performance computing and telecommunications equipment, needed to strengthen workforce Lean competency to reduce waste and sustain continuous improvement.",
+    "diagnosis": "Tennessee MEP's assessment identified a structured-Lean-skills gap (5S, value stream mapping, standard work, structured problem-solving) rather than a single equipment or process root cause.",
+    "action_taken": "Tennessee MEP delivered a five-day on-site Lean Certificate Series combining classroom instruction, hands-on exercises, and real-world case-study analysis.",
+    "outcome": "NIST MEP reports $145,000 in new/retained sales, $150,000 in new investment, and $200,000 in cost savings attributable to the engagement \u2014 self-reported by the company to the government program, not independently audited.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 Tennessee MEP / Quanta Computer",
+    "source_url": "https://www.nist.gov/mep/successstories/2024/building-lean-culture"
+  },
+  {
+    "case_id": "PUB-ELEC-002",
+    "kpi_ids": [
+      "scrap_rate",
+      "copq"
+    ],
+    "sub_industry": "electronics",
+    "situation": "In the 1980s, Motorola's electronics/semiconductor manufacturing quality was falling behind Japanese competitors, with defect rates threatening its ability to compete.",
+    "diagnosis": "Motorola engineer Bill Smith and colleagues developed the Six Sigma statistical quality methodology to drive process variation down to a documented, targeted defect level (3.4 defects per million opportunities) rather than relying on ad hoc fixes.",
+    "action_taken": "Deployed Six Sigma training and DMAIC-style process discipline company-wide across electronics manufacturing operations, later publishing the methodology publicly.",
+    "outcome": "Widely-cited historical figures report more than $16 billion in cumulative savings and up to 90-100% defect reductions in targeted processes over the following decade \u2014 a well-corroborated but secondary-sourced historical claim, not an independently audited figure reviewed directly here.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Motorola Inc. \u2014 Six Sigma program history",
+    "source_url": "https://www.sixsigmaonline.org/six-sigma-history/"
+  },
+  {
+    "case_id": "PUB-IMP-001",
+    "kpi_ids": [
+      "scrap_rate",
+      "copq"
+    ],
+    "sub_industry": "injection_molding_plastics",
+    "situation": "Microban International, a North Carolina manufacturer of antimicrobial polymer/plastic pellet compounds, developed a new formulation that burned during processing instead of blending invisibly into customers' clear polymer products, leaving visible black flecks in finished parts.",
+    "diagnosis": "The defect traced to the compounding/formulation step, not a molding-parameter issue at the customer's press \u2014 isolating it required specialized compounding equipment Microban didn't have in-house.",
+    "action_taken": "Partnered with the Polymers Center of Excellence (PCE), part of North Carolina's MEP, using PCE's dryers, compounding extruders, and high-precision feeders to test and refine the formulation.",
+    "outcome": "Microban's director of materials engineering reported the refined material performed much better, and that for every dollar spent at PCE the company sees at least a tenfold return in new business generated \u2014 a self-reported ROI claim, not an independently audited figure.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 NC Polymers Center of Excellence / Microban International",
+    "source_url": "https://www.nist.gov/blogs/manufacturing-innovation-blog/production-problem-solved-one-pellet-time"
+  },
+  {
+    "case_id": "PUB-IMP-002",
+    "kpi_ids": [
+      "changeover_time",
+      "scrap_rate"
+    ],
+    "sub_industry": "injection_molding_plastics",
+    "situation": "A plastic manufacturing operation had long mold/tool/die changeover times constraining production capacity, documented as a published Six Sigma case study.",
+    "diagnosis": "Six Sigma tools were applied to the changeover process specifically, separating and measuring the distinct steps contributing to total changeover duration \u2014 the same internal/external setup distinction SMED and Scientific Molding both use.",
+    "action_taken": "Process changes targeting the highest-contributing changeover steps were implemented and measured against before/after run data.",
+    "outcome": "The published paper reports a reduction in mold/tool/die changeover time; the specific percentage sits in the original paper and was not independently confirmed here \u2014 not reproduced without that confirmation.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Kale, K. \u2014 \"Process Improvement in a Plastic Manufacturing Industry using Six Sigma Tools,\" indexed via the International Society of Six Sigma Professionals (ISSSP)",
+    "source_url": "https://isssp.org/plastics-manufacturing-and-lean-and-six-sigma-applications-isssp/"
+  },
+  {
+    "case_id": "PUB-PETCHEM-001",
+    "kpi_ids": [
+      "copq",
+      "capacity_utilization"
+    ],
+    "sub_industry": "petroleum_chemical",
+    "situation": "CJB Industries, a contract chemical manufacturer for agricultural and pest-control industries, had employees spending excessive time weekly manually processing non-standard printed batch sheets across 200+ diverse customers, limiting quality visibility and throughput.",
+    "diagnosis": "Georgia MEP's assessment identified manual batch-sheet processing and a paper-based QMS as the binding constraints on quality (price of non-conformance) and capacity, not a process-parameter issue on the manufacturing line itself.",
+    "action_taken": "Implemented dataPARC real-time process-data analytics, deployed a new QMS replacing the paper-based one, and partnered with an AI vendor to convert printed batch sheets into standardized digital workflows.",
+    "outcome": "NIST MEP reports a 51% reduction in price of non-conformance (PONC), a 20% increase in production capacity, and $30,000/month in preventive-maintenance savings against a $300,000 technology investment \u2014 self-reported to the government program, not independently audited.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 Georgia MEP / CJB Industries",
+    "source_url": "https://www.nist.gov/mep/successstories/2024/cjb-industries-chemical-manufacturer-enhances-efficiency-and-quality-ai"
+  },
+  {
+    "case_id": "PUB-PETCHEM-002",
+    "kpi_ids": [
+      "schedule_attainment",
+      "conversion_cost"
+    ],
+    "sub_industry": "petroleum_chemical",
+    "situation": "Isotec International, a chemical manufacturer serving automotive, taxidermy, and other industries, needed to strengthen staff/management communication to manage growth as order volume increased.",
+    "diagnosis": "Georgia MEP's Managing for Daily Improvement (MDI) assessment identified a daily-communication and KPI-visibility gap \u2014 raw-material issues and priority information weren't reaching the right people in time \u2014 rather than a capacity or equipment constraint.",
+    "action_taken": "Implemented MDI training: identifying critical metrics, developing KPIs, and running 30-minute daily GEMBA walks throughout the plant for real-time problem-solving.",
+    "outcome": "NIST MEP reports a 43% revenue increase, 90% increase in new customer acquisition, 50% reduction in approval time, and a 75% improvement in daily raw-material issue communication \u2014 self-reported to the government program, not independently audited.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 Georgia MEP / Isotec International",
+    "source_url": "https://www.nist.gov/mep/successstories/2022/chemical-manufacturer-balances-growth-through-open-communication"
+  },
+  {
+    "case_id": "PUB-PHARMA-001",
+    "kpi_ids": [
+      "manufacturing_cycle_time",
+      "wip_valuation"
+    ],
+    "sub_industry": "pharmaceutical",
+    "situation": "A pharmaceutical manufacturer's production flow carried excess work-in-process and long cycle times typical of a push-scheduled, batch-oriented operation.",
+    "diagnosis": "Researchers documented the operation's flow and applied Lean management principles to re-engineer production sequencing, published as a peer-reviewed case study of Lean adoption specifically in a regulated pharmaceutical environment.",
+    "action_taken": "Re-engineered the production flow around a pull-based scheduling system rather than the prior push-based approach.",
+    "outcome": "The published paper reports improvement across efficiency KPIs, work-in-process, and cycle time; the specific percentages sit behind the journal's access wall and were not independently confirmed here \u2014 not reproduced without that confirmation.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Nenni, M.E.; Giustiniano, L.; Pirolo, L. \u2014 published case study on Lean management in the pharmaceutical industry (2014)",
+    "source_url": "https://journals.sagepub.com/doi/10.5772/59027"
+  },
+  {
+    "case_id": "PUB-PHARMA-002",
+    "kpi_ids": [
+      "capa_closure_rate",
+      "capa_closure_time"
+    ],
+    "sub_industry": "pharmaceutical",
+    "situation": "A large multinational pharmaceutical organization had a significant backlog of open deviations and CAPAs, requiring a broader quality management system remediation effort.",
+    "diagnosis": "The backlog itself \u2014 not any single deviation's root cause \u2014 was identified as the primary quality-system risk, since a growing backlog delays closure on every open item and compounds audit exposure.",
+    "action_taken": "Engaged specialized QA staff augmentation for deviation/CAPA backlog remediation and quality-system corrective work, starting as a fixed-term engagement later extended for continuity.",
+    "outcome": "The publicly available material describes the engagement evolving into ongoing augmented QA leadership roles, but does not include specific quantified backlog-reduction figures \u2014 an honest gap in the source, not a magnitude claim omitted here.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "The FDA Group \u2014 pharmaceutical QA staff augmentation case study",
+    "source_url": "https://www.thefdagroup.com/case-study-deviation-backlog-reduction"
+  },
+  {
+    "case_id": "PUB-CONS-001",
+    "kpi_ids": [
+      "scrap_rate",
+      "eol_defect_rate"
+    ],
+    "sub_industry": "consumer_products",
+    "situation": "A home appliance manufacturer's aluminum casting department had a high leakage-type defect rate in aluminum components.",
+    "diagnosis": "A DMAIC Six Sigma study used design of experiments and regression analysis to identify aluminum molten-metal temperature as the key variable correlated with defect occurrence.",
+    "action_taken": "Adjusted the process to the optimized aluminum molten-metal temperature identified through the DOE/regression analysis.",
+    "outcome": "Published results report the aluminum defect rate fell from 10.49% to 6.1%, with the Six Sigma level improving from 2.8 to 3.06 \u2014 a peer-reviewed, published figure.",
+    "outcome_verified": true,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Ahmed, N.G.S.; Abohashima, H.S.; Aly, M.F. \u2014 Proceedings of the International Conference on Industrial Engineering and Operations Management, Washington DC (2018)",
+    "source_url": "https://www.researchgate.net/publication/328449811_Defect_Reduction_Using_Six_Sigma_Methodology_in_Home_Appliance_Company_A_Case_Study"
+  },
+  {
+    "case_id": "PUB-CONS-002",
+    "kpi_ids": [
+      "customer_return_rate",
+      "copq"
+    ],
+    "sub_industry": "consumer_products",
+    "situation": "Whirlpool's Duet washer/dryer product line needed a design-quality improvement process reflecting how customers actually evaluate quality, not only internal engineering specs.",
+    "diagnosis": "Whirlpool's Six Sigma team identified a gap between engineering-defined and customer-perceived quality metrics as the structural issue behind the design/quality disconnect.",
+    "action_taken": "Applied Six Sigma design-process discipline to develop new quality metrics aligned with customer evaluation criteria, integrated into the Duet design process.",
+    "outcome": "Reported as a notable Six Sigma design-for-quality case in consumer appliances in secondary Six Sigma industry sources; no specific defect-rate or return-rate figures were found in the sources reviewed \u2014 treat only the directional claim as reported, not any magnitude.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "Whirlpool Corporation \u2014 Six Sigma Duet product design case (as reported via Six Sigma industry secondary sources)",
+    "source_url": "https://www.slideshare.net/slideshow/case-study-of-whirlpool-quality-management/56421893"
+  },
+  {
+    "case_id": "PUB-INDPROD-001",
+    "kpi_ids": [
+      "capacity_utilization",
+      "maintenance_alerts"
+    ],
+    "sub_industry": "industrial_products",
+    "situation": "Keats Manufacturing Company, a custom metal stampings/wire-forms/assemblies manufacturer, had hydraulic punch presses with no system to measure machine availability, performance, or quality \u2014 making it impossible to accurately calculate production capacity or identify operational losses.",
+    "diagnosis": "TMAC (the regional MEP center) determined the root gap was measurement infrastructure itself \u2014 OEE couldn't be improved because it couldn't be reliably measured in the first place.",
+    "action_taken": "Designed and installed an embedded OEE-measurement system using Arduino microcontrollers with optical and electrical-current sensors to automatically collect cycle counts, availability data, and defect counts.",
+    "outcome": "Keats reports increased measurement accuracy and the ability to plan maintenance proactively; NIST MEP's own published summary explicitly states a dollar-savings figure \"has not been developed\" yet, describing savings only as \"inevitable\" \u2014 an honest gap in the source, not an outcome claimed here.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 TMAC / Keats Manufacturing Company",
+    "source_url": "https://www.nist.gov/mep/successstories/2023/keats-hydraulic-press-oee-system"
+  },
+  {
+    "case_id": "PUB-INDPROD-002",
+    "kpi_ids": [
+      "maintenance_alerts",
+      "delayed_work_orders"
+    ],
+    "sub_industry": "industrial_products",
+    "situation": "A mid-scale industrial manufacturing facility (anonymized by the publishing vendor) had frequent equipment breakdowns, inconsistent maintenance practices, and rising operational costs, running a time-based (not condition-based) maintenance program that ignored asset criticality.",
+    "diagnosis": "A risk-based asset-management consultancy assessment attributed the breakdown pattern to the maintenance strategy itself \u2014 treating all assets the same regardless of criticality or condition \u2014 rather than to any single equipment failure mode.",
+    "action_taken": "Implemented a structured ISO 55001-aligned asset management system: a verified asset register, criticality assessment, and risk-based/condition-based maintenance planning replacing the prior time-based schedule.",
+    "outcome": "Reported over one operating year: downtime reduced ~15% (62 to 43 hrs/month), preventive-maintenance compliance improved from 68% to 86%, and high-risk asset failures fell from 11 to 4 incidents \u2014 the client is anonymized by the vendor publishing the case study, so this cannot be independently cross-checked.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "4CPL \u2014 \"Risk-Based Asset Management with ISO 55001\" case study (anonymized client)",
+    "source_url": "https://www.4cpl.com/blog/risk-based-asset-management-with-iso-55001/"
+  },
+  {
+    "case_id": "PUB-CROSS-001",
+    "kpi_ids": [
+      "oee",
+      "conversion_cost"
+    ],
+    "sub_industry": "cross_industry",
+    "situation": "Across the MEP National Network broadly (not one manufacturer), state-designated MEP Centers work with small and mid-sized manufacturers across every sub-industry on Lean, quality, and process-improvement projects.",
+    "diagnosis": "Not applicable \u2014 this is a network-wide, government-reported impact statistic rather than a single-company root-cause case, included as an aggregate proof point that the Lean/TPM methodologies this platform's cross-industry BoK content already cites (TPM_SRC, LEAN_SRC above) are backed by measurable, government-tracked outcomes at scale.",
+    "action_taken": "Not applicable \u2014 aggregate figure across tens of thousands of individual MEP-assisted improvement engagements since 2000.",
+    "outcome": "NIST reports the MEP National Network has worked with over 77,000 manufacturers since 2000, resulting in $60.0 billion in new sales and $26.2 billion in cost savings; a separate NIST figure cites over 80,000 completed Lean manufacturing projects saving more than $18.8 billion. Government-published, network-wide aggregates \u2014 not a single audited case; directional evidence of scale, not an outcome to cite for any one client situation.",
+    "outcome_verified": false,
+    "reviewed_by": "",
+    "promoted_date": null,
+    "confidence": "single_source",
+    "visibility": "public",
+    "source_organization": "NIST Manufacturing Extension Partnership \u2014 National Network aggregate impact statistics",
+    "source_url": "https://www.nist.gov/mep/mep-national-network"
+  }
+]

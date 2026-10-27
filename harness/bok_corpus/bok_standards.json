@@ -1,0 +1,256 @@
+[
+  {
+    "standard_id": "AIAG-CORE-TOOLS",
+    "name": "AIAG Automotive Core Tools (APQP, PPAP, FMEA, MSA, SPC)",
+    "applicable_sub_industries": [
+      "automotive"
+    ],
+    "structural_summary": "Five linked methods used across the automotive supply chain to plan, validate, and control production quality: APQP (product/process quality planning), PPAP (part approval before production), FMEA (failure-mode risk assessment), MSA (measurement system validation), and SPC (ongoing statistical process control). Also referenced in aerospace, defense, and medical device supply chains per industry practice.",
+    "governs_kpi_ids": [
+      "copq",
+      "eol_defect_rate",
+      "capa_closure_time"
+    ],
+    "official_source_url": "https://www.aiag.org/expertise-areas/quality/quality-core-tools",
+    "license_note": "The five core-tool manuals are licensed AIAG publications; this is a structural summary only, not a reproduction."
+  },
+  {
+    "standard_id": "TPM-NAKAJIMA",
+    "name": "Total Productive Maintenance (TPM)",
+    "applicable_sub_industries": [
+      "cross_industry"
+    ],
+    "structural_summary": "A maintenance and continuous-improvement framework built around eliminating the 'six big losses' that reduce equipment effectiveness, and around OEE as its core composite metric.",
+    "governs_kpi_ids": [
+      "oee",
+      "changeover_time",
+      "maintenance_alerts"
+    ],
+    "official_source_url": "",
+    "license_note": "Widely published methodology; concepts are public, specific published texts are copyrighted works by their respective authors."
+  },
+  {
+    "standard_id": "ISO-9001",
+    "name": "ISO 9001 \u2014 Quality Management Systems",
+    "applicable_sub_industries": [
+      "cross_industry"
+    ],
+    "structural_summary": "The general-purpose international quality management standard. Clause 10.2 (Nonconformity and Corrective Action) is the structural basis for CAPA-style closure-time tracking used across most manufacturing quality systems, regardless of sub-industry.",
+    "governs_kpi_ids": [
+      "capa_closure_time",
+      "copq"
+    ],
+    "official_source_url": "",
+    "license_note": "Full standard text is a licensed ISO publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "ISA-95",
+    "name": "ISA-95 \u2014 Enterprise-Control System Integration",
+    "applicable_sub_industries": [
+      "cross_industry"
+    ],
+    "structural_summary": "An international standard for integrating enterprise systems (ERP) with control systems (MES/SCADA) \u2014 directly relevant to Epic 1's MES connector work, since it defines the standard data model most MES vendors align to.",
+    "governs_kpi_ids": [
+      "capacity_utilization",
+      "hourly_shift_output"
+    ],
+    "official_source_url": "",
+    "license_note": "Full standard text is a licensed ISA/IEC publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "FDA-CGMP-210-211",
+    "name": "FDA cGMP \u2014 21 CFR Parts 210 & 211 (Current Good Manufacturing Practice for Drugs)",
+    "applicable_sub_industries": [
+      "pharmaceutical"
+    ],
+    "structural_summary": "US FDA's binding manufacturing-quality regulation for pharmaceutical products. Governs batch production records, deviation investigation, and CAPA timeliness \u2014 the structural reason pharmaceutical CAPA/audit targets are tighter than general-manufacturing norms (a batch failure can mean destroying the whole batch, not reworking a unit).",
+    "governs_kpi_ids": [
+      "capa_closure_time",
+      "capa_closure_rate",
+      "major_audit_nonconformances",
+      "control_limit_deviations",
+      "first_pass_yield_by_stage"
+    ],
+    "official_source_url": "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-C/part-211",
+    "license_note": "Public US federal regulation (eCFR) \u2014 no license restriction, but this is a structural summary, not the regulation's full text."
+  },
+  {
+    "standard_id": "OSHA-PSM-API",
+    "name": "OSHA Process Safety Management (29 CFR 1910.119) + API Recommended Practices",
+    "applicable_sub_industries": [
+      "petroleum_chemical"
+    ],
+    "structural_summary": "OSHA's process-safety regulation for facilities handling highly hazardous chemicals, paired with API's recommended practices for refining/petrochemical operations. Governs incident investigation, mechanical-integrity audits, and management-of-change \u2014 the reason this sub-industry's audit and safety-incident targets carry as much weight as quality KPIs, and why continuous-process uptime (not changeover speed) drives the OEE benchmark.",
+    "governs_kpi_ids": [
+      "major_audit_nonconformances",
+      "capa_closure_time",
+      "oee"
+    ],
+    "official_source_url": "https://www.osha.gov/process-safety-management",
+    "license_note": "OSHA regulation is public domain; API Recommended Practices are licensed API publications \u2014 this is a structural summary only, not a reproduction."
+  },
+  {
+    "standard_id": "ISO-10377",
+    "name": "ISO 10377 \u2014 Consumer Product Safety: Guidelines for Suppliers",
+    "applicable_sub_industries": [
+      "consumer_products"
+    ],
+    "structural_summary": "ISO guidance for consumer-product suppliers on hazard identification, risk assessment, and post-market surveillance (recalls, complaint handling). The structural reason consumer-products Customer Return Rate tolerance is set higher than in B2B/regulated sectors \u2014 retail-channel returns are an expected cost of doing business here, not a quality-escape signal on their own; the standard's emphasis is on catching the pattern, not the individual return.",
+    "governs_kpi_ids": [
+      "customer_return_rate",
+      "copq"
+    ],
+    "official_source_url": "",
+    "license_note": "Full standard text is a licensed ISO publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "ISO-55000",
+    "name": "ISO 55000 \u2014 Asset Management (Overview, Principles, Terminology)",
+    "applicable_sub_industries": [
+      "industrial_products"
+    ],
+    "structural_summary": "The international standard for managing physical assets over their lifecycle \u2014 directly relevant to industrial-products manufacturers' emphasis on planned vs. corrective maintenance ratios and asset uptime, where equipment is typically higher-cost and longer-lived than in high-volume consumer manufacturing.",
+    "governs_kpi_ids": [
+      "maintenance_alerts",
+      "delayed_work_orders"
+    ],
+    "official_source_url": "",
+    "license_note": "Full standard text is a licensed ISO publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "IPC-A-610",
+    "name": "IPC-A-610 \u2014 Acceptability of Electronic Assemblies",
+    "applicable_sub_industries": [
+      "electronics"
+    ],
+    "structural_summary": "The electronics-manufacturing industry's standard defining acceptance criteria (Class 1/2/3) for soldering, assembly, and defect classification on populated boards. The structural reason electronics scrap-rate and end-of-line defect-count targets are set in PPM-level terms rather than the broader percentages used elsewhere \u2014 component cost and defect classification granularity are both far finer-grained in this sector.",
+    "governs_kpi_ids": [
+      "eol_defect_rate",
+      "eol_defect_count",
+      "scrap_rate"
+    ],
+    "official_source_url": "",
+    "license_note": "Full standard (including acceptance-criteria photos) is a licensed IPC publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "SCIENTIFIC-MOLDING",
+    "name": "Scientific Molding / Decoupled Molding (RJG Inc. Methodology)",
+    "applicable_sub_industries": [
+      "injection_molding_plastics"
+    ],
+    "structural_summary": "A widely-adopted injection-molding process methodology that separates the fill, pack, and hold phases of the molding cycle (using cavity-pressure sensors) so each can be optimized and controlled independently, rather than treating a mold's process settings as one interdependent block. The structural reason this platform's changeover-time and post-changeover scrap/COPQ guidance for this sub-industry emphasizes isolating one process variable at a time rather than a broad multi-parameter adjustment.",
+    "governs_kpi_ids": [
+      "changeover_time",
+      "scrap_rate",
+      "copq",
+      "oee"
+    ],
+    "official_source_url": "",
+    "license_note": "RJG Inc.'s specific training curriculum and certification materials are proprietary; this is a structural summary of the publicly-described methodology principles only, not a reproduction of licensed training content."
+  },
+  {
+    "standard_id": "IATF-16949",
+    "name": "IATF 16949 \u2014 Automotive Quality Management System Requirements",
+    "applicable_sub_industries": [
+      "automotive"
+    ],
+    "structural_summary": "The automotive-specific QMS standard, built on ISO 9001's structure but adding automotive-sector requirements: PPM-level defect tracking, OEM-specific customer requirements (Ford Q1, GM BIQS, Stellantis, etc.), risk-based thinking applied to product safety and regulatory compliance, and mandatory use of the AIAG Core Tools. The structural reason automotive CAPA/8D closure and Cpk thresholds are stricter than the generic ISO 9001 baseline this platform also cites for this sub-industry.",
+    "governs_kpi_ids": [
+      "copq",
+      "eol_defect_rate",
+      "capa_closure_time",
+      "capa_closure_rate"
+    ],
+    "official_source_url": "https://www.iatfglobaloversight.org/",
+    "license_note": "Full standard text is a licensed IATF publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "J-STD-001",
+    "name": "IPC J-STD-001 \u2014 Requirements for Soldered Electrical and Electronic Assemblies",
+    "applicable_sub_industries": [
+      "electronics"
+    ],
+    "structural_summary": "The companion standard to IPC-A-610: where IPC-A-610 defines what an ACCEPTABLE finished assembly looks like, J-STD-001 defines the soldering PROCESS and materials requirements (flux, alloy, thermal profile qualification) that are supposed to produce that result. The structural reason a reflow-profile-drift root cause (see this sub-industry's solder-defect playbook) is a process-qualification question, not just an inspection-criteria question.",
+    "governs_kpi_ids": [
+      "eol_defect_rate",
+      "eol_defect_count",
+      "scrap_rate"
+    ],
+    "official_source_url": "https://www.ipc.org/",
+    "license_note": "Full standard is a licensed IPC publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "ASTM-D3641",
+    "name": "ASTM D3641 \u2014 Standard Practice for Injection Molding Test Specimens of Thermoplastic Molding and Extrusion Materials",
+    "applicable_sub_industries": [
+      "injection_molding_plastics"
+    ],
+    "structural_summary": "A materials-testing practice standard defining how thermoplastic resin specimens should be molded for property testing/qualification \u2014 relevant as the structural basis for verifying an incoming resin lot actually matches the material spec a process was originally qualified against, the check called for in this sub-industry's changeover-variation playbook.",
+    "governs_kpi_ids": [
+      "scrap_rate",
+      "copq",
+      "control_limit_deviations"
+    ],
+    "official_source_url": "https://www.astm.org/d3641-21.html",
+    "license_note": "Full standard text is a licensed ASTM publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "API-RP-754",
+    "name": "API RP 754 \u2014 Process Safety Performance Indicators for the Refining and Petrochemical Industries",
+    "applicable_sub_industries": [
+      "petroleum_chemical"
+    ],
+    "structural_summary": "Defines a four-tier pyramid of process-safety indicators (Tier 1-2 = actual loss-of-containment events, Tier 3-4 = near-misses and leading operating-discipline indicators) \u2014 the structural reason this sub-industry's audit/maintenance-alert guidance distinguishes a leading indicator from a lagging one rather than treating all findings on one severity scale (see this sub-industry's leading-vs-lagging playbook).",
+    "governs_kpi_ids": [
+      "major_audit_nonconformances",
+      "maintenance_alerts",
+      "capa_closure_time"
+    ],
+    "official_source_url": "https://www.api.org/",
+    "license_note": "Full recommended practice is a licensed API publication; this is a structural summary only."
+  },
+  {
+    "standard_id": "ICH-Q7",
+    "name": "ICH Q7 \u2014 Good Manufacturing Practice Guide for Active Pharmaceutical Ingredients",
+    "applicable_sub_industries": [
+      "pharmaceutical"
+    ],
+    "structural_summary": "The internationally-harmonized GMP guideline specifically for API (drug substance) manufacturing, complementing 21 CFR 211's finished-dose focus. Governs laboratory controls and out-of-specification (OOS) result handling \u2014 the structural basis for this sub-industry's OOS investigation playbook, which is a distinct process from a general in-process deviation investigation.",
+    "governs_kpi_ids": [
+      "control_limit_deviations",
+      "first_pass_yield_by_stage",
+      "capa_closure_rate"
+    ],
+    "official_source_url": "https://www.ich.org/page/quality-guidelines",
+    "license_note": "Published by ICH; widely available without a paywall, but treat as a structural summary, not the guideline's full text."
+  },
+  {
+    "standard_id": "CPSC-16-CFR",
+    "name": "CPSC Regulations \u2014 16 CFR (Consumer Product Safety)",
+    "applicable_sub_industries": [
+      "consumer_products"
+    ],
+    "structural_summary": "US federal consumer-product-safety regulations (recall authority, reporting requirements under the Consumer Product Safety Act, traceability labeling under 16 CFR Part 1130) \u2014 the binding regulatory layer underneath the voluntary ISO 10377 guidance this platform already cites for this sub-industry; ISO 10377 tells you how to run post-market surveillance well, 16 CFR is what makes reporting a genuine hazard pattern mandatory, not optional.",
+    "governs_kpi_ids": [
+      "customer_return_rate",
+      "copq"
+    ],
+    "official_source_url": "https://www.ecfr.gov/current/title-16/chapter-II",
+    "license_note": "Public US federal regulation (eCFR) \u2014 no license restriction, structural summary only."
+  },
+  {
+    "standard_id": "ISO-55001",
+    "name": "ISO 55001 \u2014 Asset Management: Management Systems Requirements",
+    "applicable_sub_industries": [
+      "industrial_products"
+    ],
+    "structural_summary": "Where ISO 55000 (already cited for this sub-industry) is the overview/terminology standard, ISO 55001 is the certifiable REQUIREMENTS standard \u2014 it specifies what an asset-management system must actually do (risk-based maintenance planning, performance evaluation, continual improvement), which is the structural basis for treating a rising corrective-vs-planned maintenance ratio as a system-conformance gap, not just a scheduling inconvenience.",
+    "governs_kpi_ids": [
+      "maintenance_alerts",
+      "delayed_work_orders",
+      "capacity_utilization"
+    ],
+    "official_source_url": "https://www.iso.org/standard/55089.html",
+    "license_note": "Full standard text is a licensed ISO publication; this is a structural summary only."
+  }
+]
