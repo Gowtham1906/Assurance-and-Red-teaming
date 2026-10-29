@@ -1,46 +1,46 @@
 # Cheat Sheet 3 — MITRE ATLAS
 
-**One-pager for Capability 4.** Adversarial-ML attack taxonomy; we pin a version in every red-team case.
-**Source:** https://atlas.mitre.org
-**Verification status:** ⚠️ **UNVERIFIED counts.** Plan §3 reports *one secondary source* claims **v2026.09 (15 Sep 2026), 16 tactics, 120 techniques**. The site and version MUST be checked and the exact version pinned.
-**Second reader:** Gowtham · **Date:** 2026-10-22
+**One-pager for Capability 4.** Adversarial-AI attack taxonomy; every red-team case pins an ATLAS version.
+**Official sources:** https://atlas.mitre.org · data: https://github.com/mitre-atlas/atlas-data
+**Verification status:** ✅ **Verified 2026-10-29** from MITRE's published data file (`dist/ATLAS.yaml`) via `harness/probe_atlas.py`.
+**Pinned version:** **ATLAS release v2026.10** (published 2026-10-28), data schema version 5.6.0.
+**Second reader:** Gowtham · **Date:** 2026-10-29
 
 ---
 
 ## What ATLAS is
 
-ATLAS = **A**dversarial **T**hreat **L**andscape for **A**rtificial-**I**ntelligence **S**ystems.
-It is MITRE ATT&CK's structure applied to AI/ML: a matrix of **tactics**
-(the attacker's goal at a stage) and **techniques** (how they achieve it).
-Each technique has an ID like `AML.T0080`.
+ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) applies
+MITRE ATT&CK's structure to AI: **tactics** (the attacker's goal at a stage) and
+**techniques** (how they achieve it), each with a stable ID like `AML.T0051`.
 
-## Structure
+## Size of the pinned version
 
-- **Tactics** = columns (e.g., Reconnaissance, Initial Access, ML Attack Staging, Exfiltration, Impact).
-- **Techniques** = cells under each tactic (the concrete methods).
-- Techniques carry stable IDs; always cite **ID + ATLAS version**.
+| | Count (v2026.10) |
+|---|---|
+| Tactics | 16 |
+| Techniques | 101 |
+| Sub-techniques | 69 |
 
-## Agent-relevant techniques we'll map to (provisional IDs from plan §3)
+The plan quoted "v2026.09, 16 tactics, 120 techniques" from one secondary source.
+That version was superseded on 28 Oct 2026, and "120" matched neither the
+technique count (101) nor the total with sub-techniques (170).
 
-| Technique ID | Name (provisional) | Maps to our cases |
-|--------------|--------------------|--------------------|
-| `AML.T0080` | Agent Context Poisoning | Indirect injection, memory poisoning (ASI06) |
-| `AML.T0086` | Exfiltration via Tool Invocation | Data exfiltration via agent tools |
-| `AML.T0101` | Data Destruction via Agent Tools | Unsafe state-changing action |
+## Techniques we map to (all IDs confirmed present in v2026.10)
 
----
+| Technique ID | Name | Our cases / checks |
+|---|---|---|
+| `AML.T0051` | LLM Prompt Injection | direct + indirect injection; D11, D08 refuse_injection |
+| `AML.T0054` | LLM Jailbreak | jailbreak cases |
+| `AML.T0057` | LLM Data Leakage | PII / restricted-doc leakage; D02, forbidden_evidence |
+| `AML.T0080` | AI Agent Context Poisoning | memory / context poisoning (ASI06) |
+| `AML.T0086` | Exfiltration via AI Agent Tool Invocation | agent exfiltration; D05 |
+| `AML.T0101` | Data Destruction via AI Agent Tool Invocation | unsafe destructive tool use; D05 forbidden sequences |
 
 ## How we use it
 
-- Every red-team case records: **ATLAS version** + **technique ID(s)**.
-- ATLAS sits alongside OWASP (what-category) as the **how-attack** mapping.
-- Refresh cases after each ATLAS release (plan §9.3).
+- Every red-team case records **`atlas_version: v2026.10`** plus technique IDs.
+- Re-run `python -m harness.probe_atlas` before each release of the case library;
+  if the tag changes, review mappings and bump the pin.
 
-## Watch-outs
-
-- **Pin the version.** Technique IDs and counts change between releases;
-  an unpinned citation is not auditable.
-- Counts (16/120) and the three technique IDs above are **unverified** (plan §16).
-  Action: open atlas.mitre.org, confirm current version, correct this sheet.
-
-**Claim provenance:** version/counts/IDs all from plan §3 single-secondary-source note, flagged unverified in §16.
+**Claim provenance:** all counts, names and IDs read programmatically from MITRE's `ATLAS.yaml` at release v2026.10.

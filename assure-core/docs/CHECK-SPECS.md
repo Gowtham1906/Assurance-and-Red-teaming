@@ -51,15 +51,15 @@
 | D02 | LLM02 | — | — |
 | D03 | LLM02, LLM07 | — | — |
 | D04 | LLM09, LLM08 | — | — |
-| D05 | LLM06 | ASI02, ASI05 | AML.T0086, AML.T0101 (unverified) |
+| D05 | LLM06 | ASI02, ASI05 | AML.T0086, AML.T0101 (ATLAS v2026.10) |
 | D06 | LLM10 | — | — |
 | D07 | LLM01 (multilingual) | — | — |
 | D08 | — (jailbreak/over-block) | — | — |
 | D09 | — (regression) | — | — |
 | D10 | LLM08, LLM04 | — | — |
-| D11 | LLM01 | ASI01, ASI06 | AML.T0080 (unverified) |
+| D11 | LLM01 | ASI01, ASI06 | AML.T0051, AML.T0080 (ATLAS v2026.10) |
 
-> ATLAS IDs are provisional (cheat sheet 3) — pin the version before use.
+> ATLAS IDs verified against release v2026.10 (cheat sheet 3).
 
 ---
 
