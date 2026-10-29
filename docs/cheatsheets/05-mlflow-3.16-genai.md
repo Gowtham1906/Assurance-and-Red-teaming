@@ -1,51 +1,44 @@
 # Cheat Sheet 5 — MLflow 3.16 GenAI Evaluation
 
-**One-pager for Capability 4.** MLflow is our **system of record**: traces, datasets, runs, prompt registry, UI.
-**Source:** https://github.com/mlflow/mlflow · docs at https://mlflow.org/docs/latest/
-**Verification status:** Version **verified**: mlflow **3.16.1 (16 Sep 2026), Apache-2.0** (plan §4/§5). API names below are ⚠️ **from training knowledge — re-check the 3.16 docs** (plan §5/§16).
-**Second reader:** Gowtham · **Date:** 2026-10-22
+**One-pager for Capability 4.** MLflow is our system of record: traces, datasets, runs, UI.
+**Source:** https://github.com/mlflow/mlflow · docs https://mlflow.org/docs/latest/
+**Verification status:** ✅ **Verified 2026-10-29 against the installed package `mlflow==3.16.1`** (attribute checks, `inspect.signature`, `mlflow server --help`) and by running it: `harness/evaluate_native.py` executes `mlflow.genai.evaluate` with our D-check scorers.
+**Second reader:** Gowtham · **Date:** 2026-10-29
 
 ---
 
-## What we use it for
+## API we use (all present in 3.16.1)
 
-| Feature | Role in our harness |
-|---------|---------------------|
-| **Tracking server + UI** | One place to see runs, metrics, traces |
-| **Traces** (OpenTelemetry-compatible) | Every eval/agent run emits a trace |
-| **Datasets** | Register golden sets with a content hash |
-| **Prompt registry** | Versioned prompts |
-| **Scorers / judges** | Wrap our deterministic checks + LLM judges |
-| **Human feedback** | Assessments attached to traces |
+| Symbol | Verified signature / behaviour |
+|---|---|
+| `mlflow.genai.evaluate(data, scorers, predict_fn=None, model_id=None)` | runs the evaluation; `data[i]["inputs"]` **must be a dict**, and its keys are passed as keyword args to `predict_fn` (we hit this error and fixed it) |
+| `@mlflow.genai.scorer(name=..., aggregations=..., pass_if=...)` | scorer functions receive a subset of `inputs`, `outputs`, `expectations`, `trace`; returning `None` skips the case |
+| `mlflow.genai.make_judge` | present (custom LLM judges) |
+| `mlflow.genai.create_dataset` | present (registered evaluation datasets) |
+| `mlflow.genai.scorers` built-ins | `Safety`, `RelevanceToQuery`, `Correctness`, `RetrievalGroundedness`, `RetrievalRelevance`, `RetrievalSufficiency`, `Guidelines` all present |
+| `mlflow.start_span`, `MlflowClient.search_traces(locations=[...])` | tracing; `experiment_ids=` is deprecated in favour of `locations=` |
 
-## Key API surface (⚠️ UNVERIFIED — pin and re-check in 3.16 docs)
+> Design rule: `assure-core` has no MLflow dependency. `harness/mlflow_adapter.py` wraps the checks as scorers.
 
-| Symbol | Purpose | Note |
-|--------|---------|------|
-| `mlflow.genai.evaluate(data, predict_fn, scorers)` | Entry point to run an eval | Confirm signature in 3.16 |
-| `mlflow.genai.scorers` | Built-in judges: Safety, RelevanceToQuery, Correctness, RetrievalGroundedness, RetrievalRelevance, RetrievalSufficiency, Guidelines | **Names changed 3.0→3.x** — import by name, keep upgrade test |
-| `make_judge` | Build a custom judge | From ~3.4; confirm |
-| `@scorer` decorator | Wrap a plain-Python check as a scorer | Our D01–D11 adapt here |
+## Server flags we use (present in `mlflow server --help`)
 
-> **Design rule (plan §5):** `assure-core` has **no MLflow dependency**. The
-> MLflow *adapter* wraps our checks via `@scorer`; checks also run in plain pytest.
+`--backend-store-uri`, `--artifacts-destination`, `--serve-artifacts`,
+`--allowed-hosts`, `--cors-allowed-origins`, `--app-name`.
+The 3.16 server log says its security middleware defaults to localhost-only;
+`--allowed-hosts` and `--cors-allowed-origins` must be set before exposing it.
 
----
+## Secure self-hosting (dev server, W1-3)
 
-## Secure self-hosting (plan §5) — dev server (W1-3)
-
-| Layer | Setting |
-|-------|---------|
-| Server | `mlflow server` behind a **TLS reverse proxy + SSO**; never exposed directly |
-| Auth | Built-in basic-auth is **experimental** — prefer the proxy; review allowed-hosts/CORS |
-| Backend store | **PostgreSQL** (not SQLite) |
-| Artifact store | Blob storage with **proxied artifact access** (clients never hold storage creds) |
-| Hardening | Private network; restrict loading pickled models; judge API keys in a secret store |
+| Layer | Our setting |
+|---|---|
+| Server | ports bound to `127.0.0.1` only |
+| Backend | PostgreSQL 16.4 (no host port published) |
+| Artifacts | local volume with `--serve-artifacts` (MinIO left Docker Hub in Sep 2026) |
+| Shared deployment | still needs a TLS reverse proxy + SSO; built-in basic auth is not relied on |
 
 ## Watch-outs
 
-- **API churn across 3.x** (plan §15): pin `mlflow==3.16.1`, add an upgrade test.
-- Open-source server has **no enterprise gating** (Databricks-managed MLflow is a separate product).
-- Everything in the API table is **unverified from docs** (plan §16) — verify before building the adapter in Week 3.
+- Pin `mlflow==3.16.1`; API names changed across 3.x.
+- The OSS server has no enterprise gating; our gate lives in `assure_core.gate`.
 
-**Claim provenance:** version + licence verified (plan §4). API names from training knowledge, flagged unverified (plan §5, §16). Action: read 3.16 GenAI docs, confirm each symbol, flip to Verified.
+**Claim provenance:** every symbol and flag above was checked on the installed 3.16.1 package on 2026-10-29.
