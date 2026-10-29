@@ -69,16 +69,16 @@ def record_baseline(metrics_path: str, dataset_hash: str) -> None:
           f"dataset_hash={dataset_hash[:12]}).")
 
 
-def gate(metrics_path: str) -> None:
+def gate(metrics_path: str, target: str | None = None) -> None:
     metrics = _load_metrics(metrics_path)
     policy = _load_policy()
     baseline_points = None
     if Path(BASELINE_PATH).exists():
         baseline_points = json.loads(Path(BASELINE_PATH).read_text(encoding="utf-8"))["points"]
 
-    result = evaluate_gate(metrics, policy, baseline=baseline_points)
+    result = evaluate_gate(metrics, policy, baseline=baseline_points, target=target)
 
-    print(f"\nGATE DECISION: {result.decision}\n" + "-" * 50)
+    print(f"\nGATE DECISION ({target or 'all targets'}): {result.decision}\n" + "-" * 50)
     for o in result.outcomes:
         mark = {"pass": "OK ", "review": "REV", "fail": "XXX"}[o.verdict]
         base = f" base={o.baseline_point:.2f}" if o.baseline_point is not None else ""
@@ -95,7 +95,7 @@ def main(argv: list[str]) -> None:
     if len(argv) >= 3 and argv[0] == "record-baseline":
         record_baseline(argv[1], argv[2])
     elif len(argv) >= 2 and argv[0] == "gate":
-        gate(argv[1])
+        gate(argv[1], argv[2] if len(argv) >= 3 else None)
     else:
         print(__doc__)
         sys.exit(2)

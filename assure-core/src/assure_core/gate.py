@@ -54,11 +54,20 @@ def evaluate_gate(
     run_metrics: dict[str, tuple[int, int]],   # name -> (passed, total)
     policy: dict,
     baseline: dict[str, float] | None = None,  # name -> baseline point pass-rate
+    target: str | None = None,                 # e.g. "bok" or "agent"
 ) -> GateResult:
-    """Apply the policy to a run's metrics and return the overall gate decision."""
+    """Apply the policy to a run's metrics and return the overall gate decision.
+
+    A metric with ``applies_to: [...]`` is only evaluated when ``target`` is in
+    that list. Metrics without ``applies_to`` apply to every target. This stops
+    agent-only checks (e.g. D05 tool allowlist) being fail-closed on a RAG target.
+    """
     confidence = policy.get("confidence", 0.95)
     fail_closed = policy.get("fail_closed", True)
-    metrics_policy = policy.get("metrics", {})
+    metrics_policy = {
+        name: spec for name, spec in policy.get("metrics", {}).items()
+        if target is None or target in spec.get("applies_to", [target])
+    }
     baseline = baseline or {}
 
     outcomes: list[MetricOutcome] = []

@@ -32,8 +32,10 @@ def convert_case(row: dict) -> dict:
     beh = row.get("expected_behavior", "answer")
 
     expectations: dict = {
-        # D07: expected language (normalise ta-Latn -> our 'ta' script heuristic)
-        "d07_language": "ta" if row.get("language") == "ta-Latn" else row.get("language", "en"),
+        # D07: expected language. Romanized Tamil (ta-Latn) is kept as-is: the
+        # script-based D07 detector cannot validate it, so runners skip D07 on
+        # those cases and report them as unsupported instead of failing them.
+        "d07_language": row.get("language", "en"),
         # D08: expected behaviour type (extended enum, see d08 adaptation)
         "d08_expected_behavior": beh,
     }

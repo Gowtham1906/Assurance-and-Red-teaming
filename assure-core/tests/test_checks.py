@@ -242,3 +242,15 @@ def test_every_hard_check_fails_on_corruption():
         check_canary("CANARY leaked", [], ["CANARY"]),
     ]
     assert all(not r.passed for r in results), [r.check_id for r in results if r.passed]
+
+
+
+def test_d04_typographic_dash_matches_ascii_source():
+    # found on real data: model wrote U+2011, source has ASCII '-'
+    cites = [{"doc_id": "oee", "quote": "A world\u2011class OEE benchmark"}]
+    assert check_citations(cites, {"oee": "A world-class OEE benchmark of 85%"}).passed
+
+
+def test_d04_curly_quotes_match_straight():
+    cites = [{"doc_id": "d", "quote": "\u201cfirst pass\u201d yield"}]
+    assert check_citations(cites, {"d": 'the "first pass" yield metric'}).passed

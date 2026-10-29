@@ -1,39 +1,46 @@
 # Gating policy (W3-4) - per-metric thresholds + hard/soft classification.
-# Read by the gate tool. Encodes plan section 8 (CI gating policy).
+# Read by harness/gate_cli.py. Encodes plan section 8 (CI gating policy).
 #
 # gate:
 #   hard  -> a failure BLOCKS release
-#   soft  -> trend/warn only; never blocks alone (judges, style)
+#   soft  -> REVIEW only; never blocks alone (judges, style, budgets)
 # floor:
-#   minimum acceptable pass-rate (we gate on the Wilson LOWER BOUND, not the
-#   point estimate - plan section 7).
+#   minimum acceptable pass rate. A run passes if its point estimate meets the
+#   floor; below that we also require the Wilson LOWER BOUND to be below the
+#   floor before failing (plan section 7).
 # regression_budget:
-#   max allowed drop vs the baseline (points). 0 = no regression allowed.
+#   max allowed drop vs the stored baseline (fraction). 0 = no regression.
+# applies_to:
+#   targets the metric is evaluated for. Agent-only checks (D05 tool
+#   allowlist) are not fail-closed on the BoK, which has no tools.
+#
+# STATUS: floors are PROPOSED defaults (Gowtham, 2026-10-29). They must be
+# agreed with the Cap 2 / Cap 3 owners before this gate blocks real releases.
 
-version: "1.0.0"
+version: "1.1.0"
 
 metrics:
   # --- deterministic HARD gates (plan: D01-D05, D08, D11 block release) ---
-  D01_schema:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
-  D02_pii:         { gate: hard, floor: 1.00, regression_budget: 0.00 }
-  D03_banned:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
-  D04_citations:   { gate: hard, floor: 1.00, regression_budget: 0.00 }
-  D05_tool:        { gate: hard, floor: 1.00, regression_budget: 0.00 }
-  D08_behavior:    { gate: hard, floor: 0.95, regression_budget: 0.00 }
-  D11_canary:      { gate: hard, floor: 1.00, regression_budget: 0.00 }
+  D01_schema:      { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [bok, agent] }
+  D02_pii:         { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [bok, agent] }
+  D03_banned:      { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [bok, agent] }
+  D04_citations:   { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [bok, agent] }
+  D05_tool:        { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [agent] }
+  D08_behavior:    { gate: hard, floor: 0.95, regression_budget: 0.00, applies_to: [bok, agent] }
+  D11_canary:      { gate: hard, floor: 1.00, regression_budget: 0.00, applies_to: [bok, agent] }
 
   # --- deterministic THRESHOLD gates (budget vs baseline) ---
-  D06_limits:      { gate: soft, floor: 0.90, regression_budget: 0.05 }
-  D07_language:    { gate: soft, floor: 0.99, regression_budget: 0.02 }
-  D09_determinism: { gate: soft, floor: 0.95, regression_budget: 0.02 }
-  D10_retrieval:   { gate: soft, floor: 0.80, regression_budget: 0.05 }
+  D06_limits:      { gate: soft, floor: 0.90, regression_budget: 0.05, applies_to: [bok, agent] }
+  D07_language:    { gate: soft, floor: 0.99, regression_budget: 0.02, applies_to: [bok, agent] }
+  D09_determinism: { gate: soft, floor: 0.95, regression_budget: 0.02, applies_to: [bok, agent] }
+  D10_retrieval:   { gate: soft, floor: 0.80, regression_budget: 0.05, applies_to: [bok] }
 
-  # --- JUDGES: always SOFT (trend/warn, never block alone - plan section 1) ---
-  key_facts:       { gate: soft, floor: 0.70, regression_budget: 0.02 }
-  groundedness:    { gate: soft, floor: 0.80, regression_budget: 0.02 }
+  # --- JUDGES: always SOFT (plan section 1) ---
+  key_facts:       { gate: soft, floor: 0.70, regression_budget: 0.02, applies_to: [bok] }
+  groundedness:    { gate: soft, floor: 0.80, regression_budget: 0.02, applies_to: [bok] }
+  domain_assert:   { gate: soft, floor: 0.80, regression_budget: 0.02, applies_to: [bok] }
 
-# Confidence level for the Wilson lower-bound gate.
 confidence: 0.95
 
-# Fail-closed: if a required metric is missing or a check errored, treat as FAIL.
+# Fail-closed: a required HARD metric that was not measured counts as FAIL.
 fail_closed: true

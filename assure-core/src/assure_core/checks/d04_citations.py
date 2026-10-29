@@ -10,14 +10,27 @@ Spec (plan §6):
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections.abc import Mapping, Sequence
 from typing import Any
 
 from assure_core.result import CheckResult, failed_result, passed_result
 
+_DASHES = re.compile(r"[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]")
+_SQUOTES = re.compile(r"[\u2018\u2019\u201a\u201b]")
+_DQUOTES = re.compile(r"[\u201c\u201d\u201e\u201f]")
+
 
 def _normalise(text: str) -> str:
-    """Lowercase + collapse whitespace for robust substring matching."""
+    """NFKC + unify dash/quote variants + lowercase + collapse whitespace.
+
+    Models often emit typographic characters (e.g. U+2011 non-breaking hyphen)
+    where the source has ASCII; those must not count as a fabricated quote.
+    """
+    text = unicodedata.normalize("NFKC", text)
+    text = _DASHES.sub("-", text)
+    text = _SQUOTES.sub("'", text)
+    text = _DQUOTES.sub('"', text)
     return re.sub(r"\s+", " ", text).strip().lower()
 
 

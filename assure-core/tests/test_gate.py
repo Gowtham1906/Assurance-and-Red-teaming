@@ -70,3 +70,18 @@ def test_genuine_shortfall_fails_on_lower_bound():
               "metrics": {"D02_pii": {"gate": "hard", "floor": 0.90, "regression_budget": 0.0}}}
     r = evaluate_gate(metrics, policy)
     assert r.decision == "FAIL"
+
+
+
+def test_agent_only_metric_not_failclosed_for_bok():
+    # D05 applies to agents only; a BoK run without D05 must not fail-closed on it.
+    policy = {"confidence": 0.95, "fail_closed": True, "metrics": {
+        "D02_pii": {"gate": "hard", "floor": 1.0, "regression_budget": 0.0,
+                    "applies_to": ["bok", "agent"]},
+        "D05_tool": {"gate": "hard", "floor": 1.0, "regression_budget": 0.0,
+                     "applies_to": ["agent"]},
+    }}
+    metrics = {"D02_pii": (50, 50)}
+    assert evaluate_gate(metrics, policy, target="bok").decision == "PASS"
+    # the same run gated as an agent IS missing D05 -> fail-closed
+    assert evaluate_gate(metrics, policy, target="agent").decision == "FAIL"

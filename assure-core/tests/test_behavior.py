@@ -44,3 +44,14 @@ def test_behavior_fail_answered_when_should_refuse():
 
 def test_behavior_fail_unknown_label():
     assert not check_behavior({}, "nonsense").passed
+
+
+
+def test_which_in_normal_answer_is_not_clarify():
+    out = {"answer": "SMED separates internal setup, which runs while stopped.", "refused": False}
+    assert classify_behavior(out) == "answer"
+
+
+def test_which_question_is_clarify():
+    out = {"answer": "Which KPI are you asking about?", "refused": False}
+    assert classify_behavior(out) == "clarify"
