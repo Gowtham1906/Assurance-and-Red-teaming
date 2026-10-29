@@ -121,3 +121,35 @@ def test_bootstrap_length_mismatch():
 def test_bootstrap_empty():
     with pytest.raises(ValueError):
         paired_bootstrap([], [])
+
+
+
+# ---------------- Cohen's kappa ----------------
+
+from assure_core.stats import cohen_kappa  # noqa: E402
+
+
+def test_kappa_perfect_agreement():
+    assert cohen_kappa([1, 0, 1, 0], [1, 0, 1, 0]) == pytest.approx(1.0)
+
+
+def test_kappa_chance_agreement_is_zero():
+    # each rater 50/50, observed agreement 0.5 == expected 0.5 -> kappa 0
+    assert cohen_kappa([1, 1, 0, 0], [1, 0, 1, 0]) == pytest.approx(0.0)
+
+
+def test_kappa_known_textbook_value():
+    # 2x2 table: a=20 both yes, b=5 A yes/B no, c=10 A no/B yes, d=15 both no
+    # p_o = 35/50 = 0.70; p_e = (25*30 + 25*20)/2500 = 0.50; kappa = 0.40
+    a = [1] * 20 + [1] * 5 + [0] * 10 + [0] * 15
+    b = [1] * 20 + [0] * 5 + [1] * 10 + [0] * 15
+    assert cohen_kappa(a, b) == pytest.approx(0.40)
+
+
+def test_kappa_total_disagreement_negative():
+    assert cohen_kappa([1, 0, 1, 0], [0, 1, 0, 1]) == pytest.approx(-1.0)
+
+
+def test_kappa_length_mismatch():
+    with pytest.raises(ValueError):
+        cohen_kappa([1], [1, 0])

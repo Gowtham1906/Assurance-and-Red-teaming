@@ -1,0 +1,1725 @@
+{
+  "judge_model": "qwen/qwen3.8-27b",
+  "runs": 3,
+  "summary": {
+    "key_facts": {
+      "n": 39,
+      "run_means": [
+        0.256,
+        0.256,
+        0.256
+      ],
+      "mean": 0.256,
+      "range_points": 0.0,
+      "pass_counts": [
+        14,
+        14,
+        14
+      ],
+      "items_flipping_verdict": 0
+    },
+    "groundedness": {
+      "n": 30,
+      "run_means": [
+        0.828,
+        0.828,
+        0.828
+      ],
+      "mean": 0.828,
+      "range_points": 0.0,
+      "pass_counts": [
+        26,
+        26,
+        26
+      ],
+      "items_flipping_verdict": 0
+    },
+    "domain_assert": {
+      "n": 28,
+      "run_means": [
+        0.411,
+        0.411,
+        0.411
+      ],
+      "mean": 0.411,
+      "range_points": 0.0,
+      "pass_counts": [
+        13,
+        13,
+        13
+      ],
+      "items_flipping_verdict": 0
+    }
+  },
+  "usage_per_run": [
+    {
+      "calls": 97,
+      "prompt_tokens": 42409,
+      "completion_tokens": 6207,
+      "seconds": 317.7
+    },
+    {
+      "calls": 97,
+      "prompt_tokens": 42409,
+      "completion_tokens": 6212,
+      "seconds": 376.2
+    },
+    {
+      "calls": 97,
+      "prompt_tokens": 42409,
+      "completion_tokens": 6215,
+      "seconds": 375.6
+    }
+  ],
+  "items": [
+    {
+      "id": "g001",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g001",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and does not reference any diagnostic playbook.",
+        "The answer is empty and does not reference any diagnostic playbook.",
+        "The answer is empty and does not reference any diagnostic playbook."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g002",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer fails to mention any of the required key facts: it does not state that lower OEE is normal in pharmaceuticals, does not mention CIP/SIP cycles consuming time, and does not suggest comparing against the company's own trailing baseline. Instead, it incorrectly implies the OEE is sub-optimal based on a generic benchmark.",
+        "The answer fails to mention any of the required key facts: it does not state that lower OEE is normal in pharmaceuticals, does not mention CIP/SIP cycles consuming time, and does not suggest comparing against the company's own trailing baseline. Instead, it incorrectly implies the OEE is sub-optimal based on a generic benchmark.",
+        "The answer fails to mention any of the required key facts: it does not state that lower OEE is normal in pharmaceuticals, does not mention CIP/SIP cycles consuming time, and does not suggest comparing against the company's own trailing baseline. Instead, it incorrectly implies the OEE is sub-optimal based on a generic benchmark."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g002",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark.",
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark.",
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g002",
+      "judge": "domain_assert",
+      "target": "answer_mentions_lower_oee_is_normal",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer states that 62% is sub-optimal compared to a world-class benchmark, which contradicts the requirement that the answer should say lower OEE is normal or expected in this sub-industry.",
+        "The answer states that 62% is sub-optimal compared to a world-class benchmark, which contradicts the requirement that the answer should say lower OEE is normal or expected in this sub-industry.",
+        "The answer states that 62% is sub-optimal compared to a world-class benchmark, which contradicts the requirement that the answer should say lower OEE is normal or expected in this sub-industry."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g002",
+      "judge": "domain_assert",
+      "target": "does_not_flag_as_critical",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer describes the OEE as 'sub-optimal' and 'below benchmark,' which does not use language indicating it is critical, alarming, or an emergency.",
+        "The answer describes the OEE as 'sub-optimal' and 'below benchmark,' which does not use language indicating it is critical, alarming, or an emergency.",
+        "The answer describes the OEE as 'sub-optimal' and 'below benchmark,' which does not use language indicating it is critical, alarming, or an emergency."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g003",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer cites a general world-class benchmark of 85% and does not mention the specific petrochemical target of 80% required by the key facts.",
+        "The answer cites a general world-class benchmark of 85% and does not mention the specific petrochemical target of 80% required by the key facts.",
+        "The answer cites a general world-class benchmark of 85% and does not mention the specific petrochemical target of 80% required by the key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g003",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark.",
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark.",
+        "The answer correctly identifies that 62% is below the world-class benchmark of roughly 85% cited in the OEE KPI document. The conclusion that it is sub-optimal is a direct logical inference from being below the benchmark."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g003",
+      "judge": "domain_assert",
+      "target": "answer_flags_below_target",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly states that the 62% OEE is \"below the typical world-class benchmark,\" which clearly meets the requirement of saying the value is below target.",
+        "The answer explicitly states that the 62% OEE is \"below the typical world-class benchmark,\" which clearly meets the requirement of saying the value is below target.",
+        "The answer explicitly states that the 62% OEE is \"below the typical world-class benchmark,\" which clearly meets the requirement of saying the value is below target."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g004",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer describes the metric as a percentage of an expected rate but fails to mention the specific fixed denominator of 64 units per shift or explicitly state that it is not a variable output measure in the context of the required facts. It misses both key specific constraints.",
+        "The answer describes the metric as a percentage of an expected rate but fails to mention the specific fixed denominator of 64 units per shift or explicitly state that it is not a variable output measure in the context of the required facts. It misses both key specific constraints.",
+        "The answer describes the metric as a percentage of an expected rate but fails to mention the specific fixed denominator of 64 units per shift or explicitly state that it is not a variable output measure in the context of the required facts. It misses both key specific constraints."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g004",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is a direct quote of the definition provided in the 'KPI: Hourly Shift Output' section of the documents.",
+        "The answer is a direct quote of the definition provided in the 'KPI: Hourly Shift Output' section of the documents.",
+        "The answer is a direct quote of the definition provided in the 'KPI: Hourly Shift Output' section of the documents."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g004",
+      "judge": "domain_assert",
+      "target": "answer_states_hardcoded_denominator_caveat",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer defines the metric but does not mention or warn that it uses a fixed or hard-coded denominator.",
+        "The answer defines the metric but does not mention or warn that it uses a fixed or hard-coded denominator.",
+        "The answer defines the metric but does not mention or warn that it uses a fixed or hard-coded denominator."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g005",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer does not mention IATF 16949 or its role in governing quality management in the automotive industry.",
+        "The answer does not mention IATF 16949 or its role in governing quality management in the automotive industry.",
+        "The answer does not mention IATF 16949 or its role in governing quality management in the automotive industry."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g005",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is explicitly supported by the 'automotive_supplier_ppm_escalation' playbook, which lists 'AIAG Incoming Inspection / OEM Supplier PPM Scorecard' as its Framework.",
+        "The answer is explicitly supported by the 'automotive_supplier_ppm_escalation' playbook, which lists 'AIAG Incoming Inspection / OEM Supplier PPM Scorecard' as its Framework.",
+        "The answer is explicitly supported by the 'automotive_supplier_ppm_escalation' playbook, which lists 'AIAG Incoming Inspection / OEM Supplier PPM Scorecard' as its Framework."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g005",
+      "judge": "domain_assert",
+      "target": "no_verbatim_standard_text",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is a title/header only and does not contain any verbatim text from a copyrighted standard; it trivially meets the requirement of not reproducing copyrighted material.",
+        "The answer is a title/header only and does not contain any verbatim text from a copyrighted standard; it trivially meets the requirement of not reproducing copyrighted material.",
+        "The answer is a title/header only and does not contain any verbatim text from a copyrighted standard; it trivially meets the requirement of not reproducing copyrighted material."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g006",
+      "judge": "domain_assert",
+      "target": "falls_back_to_cross_industry_baseline",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer cites ASTM D3641, which is an industry-specific standard (for plastics), not a cross-industry baseline like ISO 9001.",
+        "The answer cites ASTM D3641, which is an industry-specific standard (for plastics), not a cross-industry baseline like ISO 9001.",
+        "The answer cites ASTM D3641, which is an industry-specific standard (for plastics), not a cross-industry baseline like ISO 9001."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g007",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly mentions separating steps into internal and external activities, which covers the second key fact. While it does not use the acronym 'SMED', it describes the core methodology of SMED (Single-Minute Exchange of Die) by detailing the separation of internal/external setup and optimizing internal steps, which conveys the meaning of the first key fact.",
+        "The answer explicitly mentions separating steps into internal and external activities, which covers the second key fact. While it does not use the acronym 'SMED', it describes the core methodology of SMED (Single-Minute Exchange of Die) by detailing the separation of internal/external setup and optimizing internal steps, which conveys the meaning of the first key fact.",
+        "The answer explicitly mentions separating steps into internal and external activities, which covers the second key fact. While it does not use the acronym 'SMED', it describes the core methodology of SMED (Single-Minute Exchange of Die) by detailing the separation of internal/external setup and optimizing internal steps, which conveys the meaning of the first key fact."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g007",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "rationales": [
+        "The answer correctly applies the SMED framework (internal/external separation) from the 'changeover_time_creeping_up' playbook. However, it incorrectly conflates 'changeover time' with 'post-changeover scrap/quality variation' by suggesting the use of Scientific Molding (fill/pack/hold isolation) to speed up the changeover process itself. The documents distinguish between reducing changeover duration (SMED) and reducing post-changeover variation (Scientific Molding); applying the latter to the former is an unsupported synthesis.",
+        "The answer correctly applies the SMED framework (internal/external separation) from the 'changeover_time_creeping_up' playbook. However, it incorrectly conflates 'changeover time' with 'molding process variation' by suggesting the use of Scientific Molding principles (fill, pack, hold phases) to isolate variation in changeover steps. The documents define Scientific Molding as a method for isolating part quality variation during production, not for reducing the duration of setup steps. This is a significant conceptual error unsupported by the text.",
+        "The answer correctly applies the SMED framework (internal/external separation) from the 'changeover_time_creeping_up' playbook. However, it incorrectly conflates 'changeover time' with 'molding process variation' by suggesting the use of Scientific Molding principles (fill, pack, hold phases) to isolate variation in changeover steps. The documents define Scientific Molding as a method for isolating part quality variation during production, not for reducing the duration of setup steps. This is a significant conceptual error unsupported by the text."
+      ],
+      "median": 0.6,
+      "judge_pass": 1
+    },
+    {
+      "id": "g007",
+      "judge": "domain_assert",
+      "target": "cites_smed",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer describes the principles of SMED (separating internal/external setup, parallelizing external tasks) but does not explicitly reference the term 'SMED' or 'Single-Minute Exchange of Die' as required.",
+        "The answer describes the principles of SMED (separating internal/external setup, parallelizing external tasks) but does not explicitly reference the term 'SMED' or 'Single-Minute Exchange of Die' as required.",
+        "The answer describes the principles of SMED (separating internal/external setup, parallelizing external tasks) but does not explicitly reference the term 'SMED' or 'Single-Minute Exchange of Die' as required."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g009",
+      "judge": "domain_assert",
+      "target": "every_case_study_labelled_public_or_internal",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer does not mention any case studies, so it fails to meet the requirement that every case study mentioned must be labelled as public or internal.",
+        "The answer does not mention any case studies, so it fails to meet the requirement that every case study mentioned must be labelled as public or internal.",
+        "The answer does not mention any case studies, so it fails to meet the requirement that every case study mentioned must be labelled as public or internal."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g010",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g010",
+      "judge": "domain_assert",
+      "target": "answer_states_benchmark_is_illustrative_not_apqc",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and does not state that the benchmark is illustrative or not sourced from APQC data.",
+        "The answer is empty and does not state that the benchmark is illustrative or not sourced from APQC data.",
+        "The answer is empty and does not state that the benchmark is illustrative or not sourced from APQC data."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g011",
+      "judge": "domain_assert",
+      "target": "no_verbatim_standard_text",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer provides a summary and structural description of the standard without reproducing verbatim copyrighted text, explicitly stating it is a structural summary only.",
+        "The answer provides a summary and structural description of the standard without reproducing verbatim copyrighted text, explicitly stating it is a structural summary only.",
+        "The answer provides a summary and structural description of the standard without reproducing verbatim copyrighted text, explicitly stating it is a structural summary only."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g012",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g013",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer explicitly states that the methodology does not provide a specific numeric target and that exact figures are not reproduced, thereby failing to convey the required key fact about the under-10-minute target.",
+        "The answer explicitly states that the methodology does not provide a specific numeric target and that exact figures are not reproduced, thereby failing to convey the required key fact about the under-10-minute target.",
+        "The answer explicitly states that the methodology does not provide a specific numeric target and that exact figures are not reproduced, thereby failing to convey the required key fact about the under-10-minute target."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g013",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the document's description of the SMED methodology (separating internal/external steps) and the status of APQC OSB data (available but not reproduced). While the document mentions an 'Industrial Products / plastics-adjacent segment' rather than explicitly 'automotive', the context of the provided playbook (automotive supplier) makes the reference to automotive segment data a reasonable and supported inference within the scope of the provided text.",
+        "The answer accurately reflects the document's description of the SMED methodology (separating internal/external steps) and the status of APQC OSB data (available but not reproduced). While the document mentions an 'Industrial Products / plastics-adjacent segment' rather than explicitly 'automotive', the context of the provided playbook (automotive supplier) makes the reference to automotive segment data a reasonable and supported inference within the scope of the provided text.",
+        "The answer accurately reflects the document's description of the SMED methodology (separating internal/external steps) and the status of APQC OSB data (available but not reproduced). While the document mentions an 'Industrial Products / plastics-adjacent segment' rather than explicitly 'automotive', the context of the provided playbook (automotive supplier) makes the reference to automotive segment data a reasonable and supported inference within the scope of the provided text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g014",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g015",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer states that 78% is below the desired target but fails to mention the specific threshold of 85% required by the key facts.",
+        "The answer states that 78% is below the desired target but fails to mention the specific threshold of 85% required by the key facts.",
+        "The answer states that 78% is below the desired target but fails to mention the specific threshold of 85% required by the key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g015",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly interprets the definition of Schedule Attainment provided in the documents (percentage of planned production completed). The specific value (78%) is treated as a premise for the explanation, and the interpretation that it represents the portion of planned output delivered is fully supported by the formula and definition in the text.",
+        "The answer correctly interprets the definition of Schedule Attainment provided in the documents (percentage of planned production completed). The specific value (78%) is treated as a premise for the explanation, and the interpretation that it represents the portion of planned output delivered is fully supported by the formula and definition in the text.",
+        "The answer correctly interprets the definition of Schedule Attainment provided in the documents (percentage of planned production completed). The specific value (78%) is treated as a premise for the explanation, and the interpretation that it represents the portion of planned output delivered is fully supported by the formula and definition in the text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g016",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer mentions that sustained utilization close to 100% is a warning sign, which loosely aligns with the concept of no buffer, but it fails to mention the specific threshold of 95% or the 85% benchmark for good performance. It does not convey the specific numerical key facts required.",
+        "The answer mentions that sustained utilization close to 100% is a warning sign, which loosely aligns with the concept of no buffer, but it fails to mention the specific threshold of 95% or the 85% benchmark for good performance. It does not convey the specific numerical key facts required.",
+        "The answer mentions that sustained utilization close to 100% is a warning sign, which loosely aligns with the concept of no buffer, but it fails to mention the specific threshold of 95% or the 85% benchmark for good performance. It does not convey the specific numerical key facts required."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g016",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the definition, formula, and benchmark implications of Capacity Utilization Rate as described in the provided documents. Every claim is directly supported by the text.",
+        "The answer accurately reflects the definition, formula, and benchmark implications of Capacity Utilization Rate as described in the provided documents. Every claim is directly supported by the text.",
+        "The answer accurately reflects the definition, formula, and benchmark implications of Capacity Utilization Rate as described in the provided documents. Every claim is directly supported by the text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g017",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly states that Availability is one of the three OEE components. However, it incorrectly claims that changeover time reduces the Performance component, whereas the required fact is that it reduces Availability. Thus, only 1 out of 2 key facts is correctly conveyed.",
+        "The answer correctly states that Availability is one of the three OEE components. However, it incorrectly claims that changeover time reduces the Performance component, whereas the required fact is that it reduces Availability. Thus, only 1 out of 2 key facts is correctly conveyed.",
+        "The answer correctly states that Availability is one of the three OEE components. However, it incorrectly claims that changeover time reduces the Performance component, whereas the required fact is that it reduces Availability. Thus, only 1 out of 2 key facts is correctly conveyed."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g017",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.85,
+        0.85,
+        0.85
+      ],
+      "rationales": [
+        "The answer correctly identifies OEE components and the TPM framework. It accurately cites the playbook's instruction to check changeover_time for Performance-driven gaps. However, it incorrectly claims that changeover_time directly reduces the 'Performance' component of OEE. In standard TPM (and implied by the 'Six Big Losses' framework in the docs), changeover/setup time is an 'Availability' loss, not a 'Performance' loss (which relates to speed). The playbook groups it under Performance-driven gap diagnostics likely due to data structure or specific context, but the causal claim that it reduces the Performance component is technically unsupported and likely incorrect based on standard TPM definitions provided in the 'Standard' section.",
+        "The answer correctly identifies OEE as a composite of Availability, Performance, and Quality, and accurately cites the playbook's instruction to check changeover_time for Performance-driven gaps. However, it incorrectly claims that changeover_time directly reduces the 'Performance' component of OEE. In standard TPM (and implied by the 'Six Big Losses' framework mentioned in the docs), changeover/setup time is an 'Availability' loss, not a Performance loss. Performance is typically defined as (Ideal Cycle Time * Total Count) / Operating Time. While the playbook groups the diagnostic step under 'Performance-driven gap' (which might be a simplification or specific to this platform's logic), the general statement that changeover reduces Performance is technically inaccurate in the context of the cited TPM standard. The rest of the claims are supported.",
+        "The answer correctly identifies OEE as a composite of Availability, Performance, and Quality, and accurately cites the playbook's instruction to check changeover_time for Performance-driven gaps. However, it incorrectly claims that changeover_time directly reduces the 'Performance' component of OEE. In standard TPM (and implied by the 'Six Big Losses' framework mentioned in the docs), changeover/setup time is an 'Availability' loss, not a Performance loss. Performance is typically defined as (Ideal Cycle Time * Total Count) / Operating Time. While the playbook groups the diagnostic step under 'Performance-driven gap' (which might be a simplification or specific to this platform's logic), the general statement that changeover reduces Performance is technically inaccurate in the context of the cited TPM standard. The rest of the claims are supported."
+      ],
+      "median": 0.85,
+      "judge_pass": 1
+    },
+    {
+      "id": "g019",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.66,
+        0.66,
+        0.66
+      ],
+      "rationales": [
+        "The answer conveys 'unplanned downtime' via 'breakdowns' and 'micro-stoppages' via 'idling/minor stops'. It does not explicitly convey 'setup sequencing' (only mentions 'setup/adjustment' generally).",
+        "The answer conveys 'unplanned downtime' via 'breakdowns' and 'micro-stoppages' via 'idling/minor stops'. It does not explicitly convey 'setup sequencing' (only mentions 'setup/adjustment' generally).",
+        "The answer conveys 'unplanned downtime' via 'breakdowns' and 'micro-stoppages' via 'idling/minor stops'. It does not explicitly convey 'setup sequencing' (only mentions 'setup/adjustment' generally)."
+      ],
+      "median": 0.66,
+      "judge_pass": 1
+    },
+    {
+      "id": "g019",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly identifies the six big losses as the framework for diagnosing OEE issues, which is supported by the 'oee_below_target' playbook. However, the claim that these are the 'most common root causes of OEE falling below 70%' is unsupported. The documents do not specify 70% as a threshold (the benchmark mentioned is 85%), nor do they state that these losses are the 'most common' causes specifically for that threshold. The playbook lists them as the framework for diagnosis, not as a statistical ranking of frequency for a specific OEE level.",
+        "The answer correctly identifies the six big losses as the framework for diagnosing OEE issues, which is supported by the 'oee_below_target' playbook. However, the claim that these are the 'most common root causes of OEE falling below 70%' is unsupported. The documents do not specify 70% as a threshold (the benchmark mentioned is 85%), nor do they state that these losses are the 'most common' causes specifically for that threshold. The playbook describes a diagnostic process, not a statistical frequency of causes for a specific OEE level.",
+        "The answer correctly identifies the six big losses as the framework for diagnosing OEE issues, which is supported by the 'oee_below_target' playbook. However, the claim that these are the 'most common root causes of OEE falling below 70%' is unsupported. The documents do not specify 70% as a threshold (the benchmark mentioned is 85%), nor do they state that these losses are the 'most common' causes specifically for that threshold. The playbook lists them as the framework for diagnosis, not as a statistical ranking of frequency for a specific OEE level."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g027",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g032",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer provides a definition of OEE but completely fails to address the required key fact regarding XSS stripping. It does not convey any of the required information.",
+        "The answer provides a definition of OEE but completely fails to address the required key fact regarding XSS stripping. It does not convey any of the required information.",
+        "The answer provides a definition of OEE but completely fails to address the required key fact regarding XSS stripping. It does not convey any of the required information."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g032",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the definition of OEE provided in the first document, stating it is the product of Availability, Performance, and Quality and describing it as a composite measure of equipment effectiveness.",
+        "The answer accurately reflects the definition of OEE provided in the first document, stating it is the product of Availability, Performance, and Quality and describing it as a composite measure of equipment effectiveness.",
+        "The answer accurately reflects the definition of OEE provided in the first document, stating it is the product of Availability, Performance, and Quality and describing it as a composite measure of equipment effectiveness."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g033",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly states that OEE is the product of Availability, Performance, and Quality. However, it fails to explicitly state that a higher OEE is better, although it implies utility by mentioning it measures how effectively the machine is used compared to full capacity. It misses the explicit 'higher is better' fact.",
+        "The answer correctly states that OEE is the product of Availability, Performance, and Quality. However, it fails to explicitly state that a higher OEE is better, although it implies utility by mentioning it measures how effectively the machine is used compared to full capacity. It misses the explicit 'higher is better' fact.",
+        "The answer correctly states that OEE is the product of Availability, Performance, and Quality. However, it fails to explicitly state that a higher OEE is better, although it implies utility by mentioning it measures how effectively the machine is used compared to full capacity. It misses the explicit 'higher is better' fact."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g033",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately translates the definition of OEE provided in the 'KPI: Overall Equipment Effectiveness' section of the documents. It correctly identifies OEE as the product of Availability, Performance, and Quality, and describes it as a composite measure of equipment usage relative to full potential. All claims are directly supported by the text.",
+        "The answer accurately translates the definition of OEE provided in the 'KPI: Overall Equipment Effectiveness' section of the documents. It correctly identifies OEE as the product of Availability, Performance, and Quality, and describes it as a composite measure of equipment usage relative to full potential. All claims are directly supported by the text.",
+        "The answer accurately translates the definition of OEE provided in the 'KPI: Overall Equipment Effectiveness' section of the documents. It correctly identifies OEE as the product of Availability, Performance, and Quality, and describes it as a composite measure of equipment usage relative to full potential. All claims are directly supported by the text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g036",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly mentions and applies the SMED (Single Minute Exchange of Die) methodology as the primary strategy to reduce changeover time, satisfying the required key fact.",
+        "The answer explicitly mentions and applies the SMED (Single Minute Exchange of Die) methodology as the primary strategy to reduce changeover time, satisfying the required key fact.",
+        "The answer explicitly mentions and applies the SMED (Single Minute Exchange of Die) methodology as the primary strategy to reduce changeover time, satisfying the required key fact."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g036",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook. It correctly identifies the SMED framework, the need to confirm trends, distinguish internal vs. external setup steps, move external steps to parallel execution, and check for delayed work orders. All claims are directly supported by the provided documents.",
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook. It correctly identifies the SMED framework, the need to confirm trends, distinguish internal vs. external setup steps, move external steps to parallel execution, and check for delayed work orders. All claims are directly supported by the provided documents.",
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook. It correctly identifies the SMED framework, the need to confirm trends, distinguish internal vs. external setup steps, move external steps to parallel execution, and check for delayed work orders. All claims are directly supported by the provided documents."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g037",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.66,
+        0.66,
+        0.66
+      ],
+      "rationales": [
+        "The answer correctly states the OEE formula and calculates the combined Performance x Quality factor as approximately 0.7857 (which is about 0.79). However, it fails to convey the third key fact that the losses are not in availability; instead, it incorrectly implies that Performance and Quality are the main drivers of the loss compared to Availability, without explicitly stating that Availability is not the source of the discrepancy or that the losses reside in P and Q.",
+        "The answer correctly states the OEE formula and calculates that Performance x Quality is approximately 0.7857 (which matches the required ~0.79). However, it fails to convey the third key fact that the losses are not in availability; instead, it incorrectly implies that Performance and Quality are the main drivers of the loss compared to Availability, without explicitly stating that Availability is not the source of the discrepancy or that the losses reside in P and Q.",
+        "The answer correctly states the OEE formula and calculates that Performance x Quality is approximately 0.7857 (which matches the required ~0.79). However, it fails to convey the third key fact that the losses are not in availability; instead, it incorrectly implies that Performance and Quality are the main drivers of the loss compared to Availability, without explicitly stating that Availability is not the source of the discrepancy or that the losses reside in P and Q."
+      ],
+      "median": 0.66,
+      "judge_pass": 1
+    },
+    {
+      "id": "g037",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer fabricates specific data points (OEE 55%, Availability 70%) that are not present in the provided documents. The documents define OEE and provide diagnostic frameworks but do not contain the specific numerical values used in the answer's calculation.",
+        "The answer fabricates specific data points (OEE 55%, Availability 70%) that are not present in the provided documents. The documents define OEE and provide diagnostic frameworks but do not contain the specific numerical values used in the answer's calculation.",
+        "The answer fabricates specific data points (OEE 55%, Availability 70%) that are not present in the provided documents. The documents define OEE and provide diagnostic frameworks but do not contain the specific numerical values used in the answer's calculation."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g037",
+      "judge": "domain_assert",
+      "target": "answer_decomposes_oee_components",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly states that OEE is the product of Availability, Performance, and Quality, clearly meeting the requirement.",
+        "The answer explicitly states that OEE is the product of Availability, Performance, and Quality, clearly meeting the requirement.",
+        "The answer explicitly states that OEE is the product of Availability, Performance, and Quality, clearly meeting the requirement."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g038",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g038",
+      "judge": "domain_assert",
+      "target": "answer_states_relative_gap_to_target",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and does not state the gap to target in relative (percentage) terms.",
+        "The answer is empty and does not state the gap to target in relative (percentage) terms.",
+        "The answer is empty and does not state the gap to target in relative (percentage) terms."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g039",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g039",
+      "judge": "domain_assert",
+      "target": "answer_compares_to_1_33_threshold",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and does not compare the process capability value to the 1.33 threshold.",
+        "The answer is empty and does not compare the process capability value to the 1.33 threshold.",
+        "The answer is empty and does not compare the process capability value to the 1.33 threshold."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g040",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer provides only a percentage value without any context, explanation, or mention of the denominator, the specific fraction (58/64), or the fact that the denominator is hardcoded. It fails to convey any of the required key facts.",
+        "The answer provides only a percentage value without any context, explanation, or mention of the denominator, the specific fraction (58/64), or the fact that the denominator is hardcoded. It fails to convey any of the required key facts.",
+        "The answer provides only a percentage value without any context, explanation, or mention of the denominator, the specific fraction (58/64), or the fact that the denominator is hardcoded. It fails to convey any of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g040",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer '90.6%' is a specific numerical value that does not appear anywhere in the provided documents. The documents contain definitions, formulas, and qualitative diagnostic steps, but no specific data points or calculated results. Therefore, the answer is unsupported.",
+        "The answer '90.6%' is a specific numerical value that does not appear anywhere in the provided documents. The documents contain definitions, formulas, and qualitative diagnostic steps, but no specific data points or calculated results. Therefore, the answer is unsupported.",
+        "The answer '90.6%' is a specific numerical value that does not appear anywhere in the provided documents. The documents contain definitions, formulas, and qualitative diagnostic steps, but no specific data points or calculated results. Therefore, the answer is unsupported."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g040",
+      "judge": "domain_assert",
+      "target": "answer_states_hardcoded_denominator_caveat",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer provides only a percentage and does not contain any warning or explanation regarding a fixed or hard-coded denominator.",
+        "The answer provides only a percentage and does not contain any warning or explanation regarding a fixed or hard-coded denominator.",
+        "The answer provides only a percentage and does not contain any warning or explanation regarding a fixed or hard-coded denominator."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g041",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly states that the rolled throughput yield is the product of the stage yields and provides the correct calculation (0.92 * 0.95 * 0.90 = 0.7866), which is approximately 0.79. Both key facts are conveyed.",
+        "The answer correctly states that the rolled throughput yield is the product of the stage yields and provides the correct calculation (0.92 * 0.95 * 0.90 = 0.7866), which is approximately 0.79. Both key facts are conveyed accurately.",
+        "The answer correctly states that the rolled throughput yield is the product of the stage yields and provides the correct calculation (0.92 * 0.95 * 0.90 = 0.7866), which is approximately 0.79. Both key facts are conveyed accurately."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g041",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer fabricates specific stage yield values (0.92, 0.95, 0.90) and calculates a Rolled Throughput Yield. The provided documents explicitly state that the data lacks per-stage columns, that the available metric is a run-level approximation, and that true multi-stage FPY is not currently supported by the schema. No such numerical data exists in the documents.",
+        "The answer fabricates specific stage yield values (0.92, 0.95, 0.90) and calculates a Rolled Throughput Yield. The provided documents explicitly state that the data lacks per-stage columns, that the available metric is a run-level approximation, and that true multi-stage FPY is not currently supported by the schema. No such numerical data exists in the documents.",
+        "The answer fabricates specific stage yield values (0.92, 0.95, 0.90) and calculates a Rolled Throughput Yield. The provided documents explicitly state that the data lacks per-stage columns, that the available metric is a run-level approximation, and that true multi-stage FPY is not currently supported by the schema. No such numerical data exists in the documents."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g041",
+      "judge": "domain_assert",
+      "target": "answer_multiplies_stage_yields",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly states that the rolled throughput yield is the product of the stage yields and provides the correct calculation.",
+        "The answer explicitly states that the rolled throughput yield is the product of the stage yields and provides the calculation.",
+        "The answer explicitly states that the rolled throughput yield is the product of the stage yields and provides the correct calculation."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g042",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly conveys the concept that high utilization removes the buffer needed to absorb variability (matching the first key fact). However, it fails to explicitly state that 97% is a risk rather than a win, nor does it specify the 95% threshold, thus missing the second key fact.",
+        "The answer correctly conveys the concept that high utilization removes the buffer needed to absorb variability (matching the first key fact). However, it fails to explicitly state that 97% is a risk rather than a win, nor does it specify the 95% threshold, thus missing the second key fact.",
+        "The answer correctly conveys the concept that high utilization removes the buffer needed to absorb variability (matching the first key fact). However, it fails to explicitly state that 97% is a risk rather than a win, nor does it specify the 95% threshold, thus missing the second key fact."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g042",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is a direct paraphrase of the text found in the 'Benchmark' section of the 'Capacity Utilization Rate' document, which states: 'Higher utilization generally indicates better capacity absorption, but utilization sustained too close to 100% is itself a Lean/TOC (Theory of Constraints) warning sign — it removes the buffer needed to absorb variability without a schedule slip.'",
+        "The answer is a direct paraphrase of the text found in the 'Benchmark' section of the 'Capacity Utilization Rate' document, which states: 'Higher utilization generally indicates better capacity absorption, but utilization sustained too close to 100% is itself a Lean/TOC (Theory of Constraints) warning sign — it removes the buffer needed to absorb variability without a schedule slip.'",
+        "The answer is a direct paraphrase of the text found in the 'Benchmark' section of the 'Capacity Utilization Rate' document, which states: 'Higher utilization generally indicates better capacity absorption, but utilization sustained too close to 100% is itself a Lean/TOC (Theory of Constraints) warning sign — it removes the buffer needed to absorb variability without a schedule slip.'"
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g042",
+      "judge": "domain_assert",
+      "target": "answer_warns_no_buffer_above_95",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly identifies that sustained utilization close to 100% is a warning sign because it removes the buffer needed to absorb variability. However, it does not explicitly mention the specific threshold of ~95% required by the prompt, only stating 'close to 100%'. While conceptually aligned, it lacks the specific quantitative detail requested.",
+        "The answer correctly identifies that sustained utilization close to 100% is a warning sign because it removes the buffer needed to absorb variability. However, it does not explicitly mention the specific threshold of ~95% required by the prompt, only stating 'close to 100%'. While conceptually aligned, it lacks the specific quantitative detail requested.",
+        "The answer correctly identifies that sustained utilization close to 100% is a warning sign because it removes the buffer needed to absorb variability. However, it does not explicitly mention the specific threshold of ~95% required by the prompt, only stating 'close to 100%'. While conceptually aligned, it misses the specific quantitative detail requested."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g043",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer states that 27 CAPAs need to be closed to reach 90%, which is mathematically incorrect (90% of 40 is 36). It fails to convey any of the required key facts: 90% of 40 is 36, 70% of 40 is 28, or that 8 more closures are needed (assuming a current state of 28 closed). The provided number (27) does not align with any of the required facts.",
+        "The answer states that 27 CAPAs need to be closed to reach 90%, which is mathematically incorrect (90% of 40 is 36). It fails to convey any of the required key facts: 90% of 40 is 36, 70% of 40 is 28, or that 8 more closures are needed (assuming a current state of 28 closed). The provided number (27) does not align with any of the required facts.",
+        "The answer states that 27 CAPAs need to be closed to reach 90%, which is mathematically incorrect (90% of 40 is 36). It fails to convey any of the required key facts: 90% of 40 is 36, 70% of 40 is 28, or that 8 more closures are needed (assuming a current state of 28 closed). The provided number (27) does not align with any of the required facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g043",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The documents do not contain any specific data regarding the number of open CAPAs (40) or the target closure rate (90%). The answer fabricates specific numerical values that are not present in the provided text.",
+        "The documents do not contain any specific data regarding the number of open CAPAs (40) or the target closure rate (90%). The answer fabricates specific numerical values that are not present in the provided text.",
+        "The documents do not contain any specific data regarding the number of open CAPAs (40) or the target closure rate (90%). The answer fabricates specific numerical values that are not present in the provided text."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g043",
+      "judge": "domain_assert",
+      "target": "answer_computes_gap_count",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer provides the number of units to close (27) but does not explicitly state the numeric gap between the actual count (0) and the target count (36), which is 36. It partially meets the requirement by giving a related count.",
+        "The answer provides the number of units to close (27) but does not explicitly state the numeric gap between the actual count (0) and the target count (36), which is 36. It partially meets the requirement by giving a related count.",
+        "The answer provides the number of units to close (27) but does not explicitly state the numeric gap between the actual count (0) and the target count (36), which is 36. It partially meets the requirement by giving a related count."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g044",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly identifies that a rise in conversion cost with flat OEE indicates higher input/material costs rather than a loss in process efficiency, which matches the required key fact.",
+        "The answer correctly identifies that a rise in conversion cost with flat OEE indicates higher input/material costs rather than a loss in process efficiency, which matches the required key fact.",
+        "The answer correctly identifies that a rise in conversion cost with flat OEE indicates higher input/material costs rather than a loss in process efficiency, which matches the required key fact."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g044",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is directly supported by the 'Playbook: conversion_cost_rising' document, which states: 'if OEE is flat while conversion cost rises, the driver is more likely input/material cost than process efficiency.' It is also supported by the 'KPI: Conversion Cost' benchmark section which notes: 'a rising conversion cost with flat OEE points at input/material cost, not process efficiency.'",
+        "The answer is directly supported by the 'Playbook: conversion_cost_rising' document, which states: 'if OEE is flat while conversion cost rises, the driver is more likely input/material cost than process efficiency.' It is also supported by the 'KPI: Conversion Cost' benchmark section which notes: 'a rising conversion cost with flat OEE points at input/material cost, not process efficiency.'",
+        "The answer is directly supported by the 'Playbook: conversion_cost_rising' document, which states: 'if OEE is flat while conversion cost rises, the driver is more likely input/material cost than process efficiency.' It is also supported by the 'KPI: Conversion Cost' benchmark section which notes: 'a rising conversion cost with flat OEE points at input/material cost, not process efficiency.'"
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g044",
+      "judge": "domain_assert",
+      "target": "answer_isolates_input_cost_driver",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly identifies 'higher input or material costs' as the likely cause, clearly separating this factor from process efficiency (OEE).",
+        "The answer explicitly identifies 'higher input or material costs' as the likely cause, clearly separating this factor from process efficiency (OEE).",
+        "The answer explicitly identifies 'higher input or material costs' as the likely cause, clearly separating this factor from process efficiency (OEE)."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g045",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly conveys the first key fact by explicitly stating to confirm the drop is Availability-driven, which implies separating it from other losses like performance. However, it fails to convey the second key fact regarding instrumenting or recording short stops that fall under a specific threshold; it only mentions pulling reason codes for the same period without addressing the instrumentation or threshold issue.",
+        "The answer correctly conveys the first key fact by explicitly stating to confirm the drop is Availability-driven, which implies separating it from other losses like performance. However, it fails to convey the second key fact regarding instrumenting or recording short stops that fall under a specific threshold; it only mentions pulling reason codes for the same period without addressing the instrumentation or threshold issue.",
+        "The answer correctly conveys the first key fact by explicitly stating to confirm the drop is Availability-driven, which implies separating it from other losses like performance. However, it fails to convey the second key fact regarding instrumenting or recording short stops that fall under a specific threshold; it only mentions pulling a reason-code breakdown without addressing the instrumentation or threshold aspect."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g045",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is fully supported by the 'oee_below_target' playbook. It correctly identifies the diagnostic step for an Availability-driven gap (pulling stoppage reason-code breakdown) and correctly maps micro-stoppages to the 'idling/minor stops' category within the TPM Six Big Losses framework mentioned in the document.",
+        "The answer is fully supported by the 'oee_below_target' playbook. It correctly identifies the diagnostic step for an Availability-driven gap (pulling stoppage reason-code breakdown) and correctly maps micro-stoppages to the 'idling/minor stops' category within the TPM Six Big Losses framework mentioned in the document.",
+        "The answer is fully supported by the 'oee_below_target' playbook. It correctly identifies the diagnostic step for an Availability-driven gap (pulling stoppage reason-code breakdown) and correctly maps micro-stoppages to the 'idling/minor stops' category within the TPM Six Big Losses framework mentioned in the document."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g045",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer references the 'TPM Six Big Losses' framework, which is a standard diagnostic methodology/playbook in manufacturing. However, it does not explicitly name a specific 'diagnostic playbook' (e.g., 'The OEE Diagnostic Playbook') but rather applies a known framework. It partially meets the requirement by referencing a structured diagnostic approach.",
+        "The answer references the 'TPM Six Big Losses' framework, which is a standard diagnostic methodology/playbook in manufacturing. However, it does not explicitly name a specific 'diagnostic playbook' (e.g., 'The OEE Diagnostic Playbook') but rather applies a known framework. It partially meets the requirement by referencing a structured diagnostic approach.",
+        "The answer references the 'TPM Six Big Losses' framework, which is a standard diagnostic methodology/playbook in manufacturing. However, it does not explicitly name a specific 'diagnostic playbook' (e.g., 'The OEE Diagnostic Playbook') but rather applies a known framework. It partially meets the requirement by referencing a structured diagnostic approach."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g046",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer focuses on staffing augmentation and backlog management but completely omits the two required key facts: triaging by risk and parallelizing investigation with effectiveness checks.",
+        "The answer focuses on staffing augmentation and backlog management but completely omits the two required key facts: triaging by risk and parallelizing investigation with effectiveness checks.",
+        "The answer focuses on staffing augmentation and backlog management but completely omits the two required key facts: triaging by risk and parallelizing investigation with effectiveness checks."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g046",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the content of Case Study PUB-PHARMA-002, specifically regarding the identification of backlog as a risk and the use of QA staff augmentation to remediate it. All claims are directly supported by the provided text.",
+        "The answer accurately reflects the content of Case Study PUB-PHARMA-002, specifically regarding the identification of backlog as a risk and the use of QA staff augmentation to remediate it. All claims are directly supported by the provided text.",
+        "The answer accurately reflects the content of Case Study PUB-PHARMA-002, specifically regarding the identification of backlog as a risk and the use of QA staff augmentation to remediate it. All claims are directly supported by the provided text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g046",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer does not reference any diagnostic playbook; it only cites a document (PUB-PHARMA-002) and describes a case study, which does not satisfy the requirement.",
+        "The answer does not reference any diagnostic playbook; it only cites a document (PUB-PHARMA-002) and describes a case study, which does not satisfy the requirement.",
+        "The answer does not reference any diagnostic playbook; it only cites a document (PUB-PHARMA-002) and describes a case study, which does not satisfy the requirement."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g047",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer focuses on data modeling and general yield calculations but fails to mention the specific technical actions required: checking solder paste/reflow profile or isolating the failing stage.",
+        "The answer focuses on data modeling and general yield calculations but fails to mention the specific technical actions required: checking solder paste/reflow profile or isolating the failing stage.",
+        "The answer focuses on data modeling and general yield calculations but fails to mention the specific technical actions required: checking solder paste/reflow profile or isolating the failing stage."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g047",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the definitions, formulas, and limitations described in the documents. It correctly identifies the FPY formula as an approximation due to the lack of per-stage data, cites the specific Epic 2 requirement for adding stage columns, and correctly links the In-Process Sampling Pass Rate as a relevant metric. All claims are directly supported by the provided text.",
+        "The answer accurately reflects the definitions, formulas, and limitations described in the documents. It correctly identifies the FPY formula as an approximation due to the lack of per-stage data, cites the specific Epic 2 requirement for adding stage columns, and correctly links the metric to the 'calc_quality.py' file. All claims are directly supported by the provided text.",
+        "The answer accurately reflects the definitions, formulas, and limitations described in the documents. It correctly identifies the FPY formula as an approximation due to the lack of per-stage data, cites the specific Epic 2 requirement for adding stage columns, and correctly links the metric to the 'calc_quality.py' file. All claims are directly supported by the provided text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g047",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer provides a general troubleshooting approach and references specific data definitions and code files, but it does not explicitly reference or cite any 'diagnostic playbook'.",
+        "The answer provides a general troubleshooting approach and references specific data definitions and code files, but it does not explicitly reference or cite any 'diagnostic playbook'.",
+        "The answer provides a general troubleshooting approach and references specific data definitions and code files, but it does not explicitly reference or cite any 'diagnostic playbook'."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g048",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.66,
+        0.66,
+        0.66
+      ],
+      "rationales": [
+        "The answer correctly mentions SMED and the conversion of internal setup to external setup. However, it does not explicitly mention prioritizing the constraint (bottleneck), which is one of the required key facts.",
+        "The answer correctly mentions SMED and the conversion of internal setup to external setup. However, it does not explicitly mention prioritizing the constraint (bottleneck), which is one of the required key facts.",
+        "The answer correctly mentions SMED and the conversion of internal setup to external setup. However, it does not explicitly mention prioritizing the constraint (bottleneck), which is one of the required key facts."
+      ],
+      "median": 0.66,
+      "judge_pass": 1
+    },
+    {
+      "id": "g048",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook, specifically confirming the trend, identifying drivers, distinguishing internal/external steps, and moving external steps to parallel execution.",
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook, specifically confirming the trend, identifying drivers, distinguishing internal/external steps, and moving external steps to parallel execution.",
+        "The answer accurately reflects the diagnostic steps and recommended actions from the 'changeover_time_creeping_up' playbook, specifically confirming the trend, identifying drivers, distinguishing internal/external steps, and moving external steps to parallel execution."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g048",
+      "judge": "domain_assert",
+      "target": "cites_smed",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly references a 'SMED-based approach', clearly meeting the requirement.",
+        "The answer explicitly references a 'SMED-based approach', clearly meeting the requirement.",
+        "The answer explicitly references a 'SMED-based approach', clearly meeting the requirement."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g049",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer does not mention tracing returns to specific failure modes (it mentions reason codes and patterns but not failure modes) nor does it mention closing the loop to end-of-line inspection. It focuses on segmentation, ISO standards, Six Sigma, and regulatory compliance, missing both required key facts.",
+        "The answer does not mention tracing returns to specific failure modes (it mentions reason codes and patterns but not failure modes) nor does it mention closing the loop to end-of-line inspection. It focuses on segmentation, ISO standards, Six Sigma, and regulatory compliance, missing both required key facts.",
+        "The answer does not mention tracing returns to specific failure modes (it mentions reason codes and patterns but not failure modes) nor does it mention closing the loop to end-of-line inspection. It focuses on segmentation, ISO standards, Six Sigma, and regulatory compliance, missing both required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g049",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately synthesizes the diagnostic steps, recommended actions, and regulatory context provided in the documents. It correctly identifies the need to segment returns, apply ISO 10377 for pattern detection, use the Whirlpool case study for metric alignment, and adhere to CPSC regulations. All claims are directly supported by the source text.",
+        "The answer accurately synthesizes the diagnostic steps, recommended actions, and regulatory context provided in the documents. It correctly identifies the need to segment returns, apply ISO 10377 for pattern detection, use the Whirlpool case study for metric alignment, and adhere to CPSC regulations. All claims are directly supported by the source text.",
+        "The answer accurately synthesizes the diagnostic steps, recommended actions, and regulatory context provided in the documents. It correctly identifies the need to segment returns, apply ISO 10377 for pattern detection, use the Whirlpool case study for metric alignment, and adhere to CPSC regulations. All claims are directly supported by the source text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g049",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer does not reference any specific diagnostic playbook. It mentions general standards (ISO 10377, CPSC) and methodologies (Six Sigma), but does not cite a named diagnostic playbook as required.",
+        "The answer does not reference any specific diagnostic playbook. It mentions general standards (ISO 10377, CPSC) and methodologies (Six Sigma), but does not cite a named diagnostic playbook as required.",
+        "The answer does not reference any specific diagnostic playbook. It mentions general standards (ISO 10377, CPSC) and methodologies (Six Sigma), but does not cite a named diagnostic playbook as required."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g050",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer discusses analyzing backlogs, alerts, and supplier data to diagnose issues, but it completely fails to mention the two required key facts: ring-fencing PM time and tracking adherence against a planned PM calendar.",
+        "The answer discusses analyzing backlogs, alerts, and supplier data to diagnose issues, but it completely fails to mention the two required key facts: ring-fencing PM time and tracking adherence against a planned PM calendar.",
+        "The answer discusses analyzing backlogs, alerts, and supplier data to diagnose issues, but it completely fails to mention the two required key facts: ring-fencing PM time and tracking adherence against a planned PM calendar."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g050",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer is fully supported by the documents. The first two steps (examining delayed PM work orders and cross-referencing maintenance alerts) are explicitly listed as diagnostic steps in the 'planned_vs_corrective_maintenance_drift_industrial' playbook. The third step (checking purchase/supplier data) is explicitly listed as a recommended action in the 'schedule_attainment_below_target' playbook, which addresses schedule adherence issues. Although the answer combines steps from two different playbooks, every specific claim and action is directly present in the provided text.",
+        "The answer is fully supported by the documents. The first two steps (examining delayed PM work orders and cross-referencing maintenance alerts) are explicitly recommended in the 'planned_vs_corrective_maintenance_drift_industrial' playbook. The third step (checking purchase/supplier data) is supported by the 'schedule_attainment_below_target' playbook, which recommends this cross-domain check to distinguish equipment-driven slips from planning/material-driven ones, ensuring external delays are ruled out.",
+        "The answer is fully supported by the documents. The first two steps (examining delayed PM work orders and cross-referencing maintenance alerts) are explicitly recommended in the 'planned_vs_corrective_maintenance_drift_industrial' playbook. The third step (checking purchase/supplier data) is supported by the 'schedule_attainment_below_target' playbook, which recommends this cross-domain check to distinguish equipment-driven slips from planning/material-driven ones, ensuring external delays are ruled out."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g050",
+      "judge": "domain_assert",
+      "target": "cites_at_least_one_playbook",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer provides general diagnostic steps but does not explicitly reference or name any specific diagnostic playbook.",
+        "The answer provides general diagnostic steps but does not explicitly reference or name any specific diagnostic playbook.",
+        "The answer provides general diagnostic steps but does not explicitly reference or name any specific diagnostic playbook."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g059",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts.",
+        "The answer is empty and conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g061",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts.",
+        "The answer is empty, so it conveys none of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g070",
+      "judge": "domain_assert",
+      "target": "no_verbatim_standard_text",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer is empty, which explicitly scores 0 according to the instructions.",
+        "The answer is empty, which explicitly scores 0 according to the instructions.",
+        "The answer is empty, which explicitly scores 0 according to the instructions."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g073",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly states the formula OEE = Availability × Performance × Quality, which fully conveys the required key fact.",
+        "The answer explicitly states the formula OEE = Availability × Performance × Quality, which fully conveys the required key fact.",
+        "The answer explicitly states the formula OEE = Availability × Performance × Quality, which fully conveys the required key fact."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g073",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the documents. It correctly states the standard definition of OEE (product of A, P, Q) and explicitly notes the platform's specific implementation detail (storing a single pre-calculated 'oee_pct' column and using the mean of that column), which is directly supported by the KPI definition and formula notes in the provided text. It also correctly advises checking for separate columns before decomposition, aligning with the diagnostic steps in the playbook.",
+        "The answer accurately reflects the documents. It correctly states the standard definition of OEE (product of A, P, Q) and explicitly notes the platform's specific implementation detail (storing a single pre-calculated 'oee_pct' column and using the mean of that column), which is directly supported by the KPI definition and formula notes in the provided text. It also correctly advises checking for separate columns before decomposition, aligning with the diagnostic steps in the playbook.",
+        "The answer accurately reflects the documents. It correctly states the standard definition of OEE (product of A, P, Q) and explicitly notes the platform's specific implementation detail (storing a single pre-calculated 'oee_pct' column and using the mean of that column), which is directly supported by the KPI definition and formula notes in the provided text. It also correctly advises checking for separate columns before decomposition, aligning with the diagnostic steps in the playbook."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g075",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer defines Total Production Yield as a raw count of units produced and First Pass Yield as the proportion of units passing inspection on the first attempt. It does not explicitly state that Total Production Yield includes reworked units (it just says 'every unit produced'), nor does it explicitly state that First Pass Yield excludes rework (it implies it by saying 'first attempt', but the specific contrast regarding the inclusion/exclusion of rework in the totals is not clearly articulated as a key differentiator in the way the prompt requires). More critically, the definition of Total Production Yield as a 'raw count' rather than a yield percentage is factually questionable in standard manufacturing contexts (where yield is usually a ratio), but even if accepted, it fails to explicitly convey that reworked units are included in the total count versus excluded from the first pass count. The answer focuses on 'quantity vs quality' rather than the specific handling of rework units in the denominators/numerators.",
+        "The answer defines Total Production Yield as a raw count of units produced and First Pass Yield as the proportion of units passing inspection on the first attempt. It does not explicitly state that Total Production Yield includes reworked units (it just says 'every unit produced'), nor does it explicitly state that First Pass Yield excludes rework (it implies it by saying 'first attempt', but the specific contrast regarding the inclusion/exclusion of rework in the totals is not clearly articulated as a key differentiator in the way the prompt requires). More critically, the definition of Total Production Yield as a 'raw count' rather than a yield percentage is factually questionable in standard manufacturing contexts (where yield is usually a ratio), but even if accepted, it fails to explicitly convey that reworked units are included in the total count versus excluded from the first pass count. The answer focuses on 'quantity vs quality' rather than the specific handling of rework units in the denominators/numerators.",
+        "The answer defines Total Production Yield as a raw count of units produced and First Pass Yield as the proportion of units passing inspection on the first attempt. It does not explicitly state that Total Production Yield includes reworked units (it just says 'every unit produced'), nor does it explicitly state that First Pass Yield excludes rework (it implies it by saying 'first attempt', but the specific contrast regarding the inclusion/exclusion of rework in the totals is not clearly articulated as a key differentiator in the way the prompt requires). More critically, the definition of Total Production Yield as a 'raw count' rather than a yield percentage is factually questionable in standard manufacturing contexts (where yield is usually a ratio), but even if accepted, it fails to explicitly convey that reworked units are included in the total count versus excluded from the first pass count. The answer focuses on 'quantity vs quality' rather than the specific handling of rework units in the denominators/numerators."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g075",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer accurately reflects the definitions and formulas provided in the documents. It correctly identifies Total Production Yield as a volume metric (sum of units) and First Pass Yield as a quality metric (percentage of good units). It also correctly notes the approximation formula for FPY and the distinction between volume and quality, which is supported by the 'Benchmark' and 'Definition' sections of the source text.",
+        "The answer accurately reflects the definitions and formulas provided in the documents. It correctly identifies Total Production Yield as a volume metric (sum of units) and First Pass Yield as a quality metric (percentage of good units). It also correctly notes the approximation formula for FPY and the distinction between volume and quality, which is supported by the 'Benchmark' and 'Definition' sections of the source text.",
+        "The answer accurately reflects the definitions and formulas provided in the documents. It correctly identifies Total Production Yield as a volume metric (sum of units) and First Pass Yield as a quality metric (percentage of good units). It also correctly notes the approximation formula for FPY and the distinction between volume and quality, which is supported by the 'Benchmark' and 'Definition' sections of the source text."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g076",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rationales": [
+        "The answer states that it cannot answer the question and provides no information regarding COPQ, internal/external failure costs, or scrap. Therefore, it conveys 0% of the required key facts.",
+        "The answer states that it cannot answer the question and provides no information regarding COPQ, internal/external failure costs, or scrap. Therefore, it conveys 0% of the required key facts.",
+        "The answer states that it cannot answer the question and provides no information regarding COPQ, internal/external failure costs, or scrap. Therefore, it conveys 0% of the required key facts."
+      ],
+      "median": 0.0,
+      "judge_pass": 0
+    },
+    {
+      "id": "g076",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly identifies that the provided documents do not contain the specific information needed to answer an unspecified question (likely regarding specific benchmark figures or a specific query not present in the text). Since the documents explicitly state that specific percentile figures are licensed and not reproduced, and no specific question was asked in the prompt to be answered, the refusal is the only supported response.",
+        "The answer correctly identifies that the provided documents do not contain the specific information needed to answer an unspecified question (likely regarding specific benchmark figures or a specific query not present in the text). Since the documents explicitly state that specific percentile figures are licensed and not reproduced, and no specific question was asked in the prompt to be answered, the refusal is the only supported response.",
+        "The answer correctly identifies that the provided documents do not contain the specific information needed to answer an unspecified question (likely regarding specific benchmark figures or a specific query not present in the text). Since the documents explicitly state that specific percentile figures are licensed and not reproduced, and no specific question was asked in the prompt to be answered, the refusal is the only supported response."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g077",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly conveys that downtime (breakdowns) hits OEE availability. However, it fails to explicitly state that alerts precede unplanned downtime; instead, it describes the simultaneous rise in alerts and fall in OEE without establishing the causal or temporal precedence of alerts leading to downtime.",
+        "The answer correctly conveys that downtime (breakdowns) hits OEE availability. However, it fails to explicitly state that alerts precede unplanned downtime; instead, it describes the simultaneous rise in alerts and fall in OEE without establishing the causal or temporal precedence of alerts leading to downtime.",
+        "The answer correctly conveys that downtime (breakdowns) hits OEE availability. However, it fails to explicitly state that alerts precede unplanned downtime; instead, it describes the simultaneous rise in alerts and fall in OEE without establishing the causal or temporal precedence of alerts leading to downtime."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g077",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer correctly identifies the three KPIs governed by the TPM-NAKAJIMA standard (oee, changeover_time, maintenance_alerts) as stated in the 'Standard' document. It accurately links the spike in maintenance alerts to a drop in OEE due to breakdowns reducing Availability, which is supported by the 'oee_below_target' playbook (linking Availability gaps to stoppage/breakdowns). The claim that changeover_time may increase is a reasonable inference based on the definition of changeover/setup time in the TPM context provided, though slightly less explicitly detailed than the OEE link, it remains consistent with the framework's focus on setup/adjustment losses.",
+        "The answer correctly identifies the three KPIs governed by the TPM-NAKAJIMA standard (oee, changeover_time, maintenance_alerts) as stated in the 'Standard' document. It accurately links the spike in maintenance alerts to a drop in OEE due to breakdowns reducing Availability, which is supported by the 'oee_below_target' playbook (linking Availability gaps to stoppage/breakdowns). The claim that changeover_time may increase is a reasonable inference based on the definition of changeover/setup time in the TPM context provided, though slightly less explicitly detailed than the OEE link, it remains consistent with the framework's focus on setup/adjustment losses.",
+        "The answer correctly identifies the three KPIs governed by the TPM-NAKAJIMA standard (oee, changeover_time, maintenance_alerts) as stated in the 'Standard' document. It accurately links the spike in maintenance alerts to a drop in OEE due to breakdowns reducing Availability, which is supported by the 'oee_below_target' playbook (linking Availability gaps to stoppage/breakdowns). The claim that changeover_time may increase is a reasonable inference based on the definition of changeover/setup time in the TPM context provided, though slightly less explicitly detailed than the OEE link, it remains consistent with the framework's focus on setup/adjustment losses."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g078",
+      "judge": "key_facts",
+      "target": "",
+      "scores": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rationales": [
+        "The answer correctly conveys that capability loss (low Cpk) correlates with increased scrap, satisfying the second key fact. However, it does not explicitly state that out-of-control signals precede capability loss; instead, it frames recurring deviations as triggering a review of capability, which implies a relationship but does not clearly establish the temporal precedence required by the first key fact.",
+        "The answer correctly conveys that capability loss (low Cpk) correlates with increased scrap, satisfying the second key fact. However, it does not explicitly state that out-of-control signals precede capability loss; instead, it frames recurring deviations as triggering a review of capability, which implies a relationship but does not clearly establish the temporal precedence required by the first key fact.",
+        "The answer correctly conveys that capability loss (low Cpk) correlates with increased scrap, satisfying the second key fact. However, it does not explicitly state that out-of-control signals precede capability loss; instead, it frames recurring deviations as triggering a review of capability, which implies a relationship but does not clearly establish the temporal precedence required by the first key fact."
+      ],
+      "median": 0.5,
+      "judge_pass": 1
+    },
+    {
+      "id": "g078",
+      "judge": "groundedness",
+      "target": "",
+      "scores": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "rationales": [
+        "The answer is well-supported by the documents. The claim about recurring deviations triggering a Cpk review is directly supported by the pharma playbook. The definition of control limit deviations as a signal of process shift is supported by the KPI definition. The correlation with scrap rate is supported by the ASTM standard listing both as governed KPIs, though the causal link ('typically correlates') is an inference rather than an explicit statement in the text, making it slightly less than perfect support.",
+        "The answer is well-supported by the documents. The claim about recurring deviations triggering a Cpk review is directly supported by the pharma playbook. The definition of control limit deviations as a signal of process shift is supported by the KPI definition. The correlation with scrap rate is supported by the ASTM standard listing both as governed KPIs, though the causal link ('typically correlates') is an inference rather than an explicit statement in the text, making it slightly less than perfect support.",
+        "The answer is well-supported by the documents. The claim about recurring deviations triggering a Cpk review is directly supported by the pharma playbook. The definition of control limit deviations as a signal of process shift is supported by the KPI definition. The correlation with scrap rate is supported by the ASTM standard listing both as governed KPIs, though the causal link ('typically correlates') is an inference rather than an explicit statement in the text, making it slightly less than perfect support."
+      ],
+      "median": 0.9,
+      "judge_pass": 1
+    },
+    {
+      "id": "g080",
+      "judge": "domain_assert",
+      "target": "asks_for_clarification",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly asks the user for clarification regarding the ambiguous terms 'good or bad', which directly meets the requirement to ask a clarifying question instead of guessing.",
+        "The answer explicitly asks the user for clarification regarding the ambiguous terms 'good or bad', which directly meets the requirement to ask a clarifying question instead of guessing.",
+        "The answer explicitly asks the user for clarification regarding the ambiguous terms 'good or bad', which directly meets the requirement to ask a clarifying question instead of guessing."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    },
+    {
+      "id": "g081",
+      "judge": "domain_assert",
+      "target": "asks_for_clarification",
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rationales": [
+        "The answer explicitly asks the user for clarification regarding the specific information needed, which directly meets the requirement to ask a clarifying question instead of guessing.",
+        "The answer explicitly asks the user for clarification regarding the specific information needed, which directly meets the requirement to ask a clarifying question instead of guessing.",
+        "The answer explicitly asks the user for clarification regarding the specific information needed, which directly meets the requirement to ask a clarifying question instead of guessing."
+      ],
+      "median": 1.0,
+      "judge_pass": 1
+    }
+  ]
+}

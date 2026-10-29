@@ -81,3 +81,48 @@ def generate(prompt: str, system: str | None = None, temperature: float = 0.0) -
 
 def model_name() -> str:
     return _resolve()[1]
+
+
+def judge_model_name() -> str:
+    """Judge model (plan section 7: use a DIFFERENT model family from the system
+    under test). Override with JUDGE_MODEL in .env."""
+    return os.getenv("JUDGE_MODEL", "qwen/qwen3.8-27b")
+
+
+def generate_with_usage(prompt: str, system: str | None = None, model: str | None = None,
+                        temperature: float = 0.0) -> tuple[str, dict]:
+    """Like generate(), but for an explicit model and returning token usage.
+
+    Returns (text, {"prompt_tokens", "completion_tokens"}). Same retry policy.
+    """
+    import re as _re
+    import time as _time
+    from openai import APIConnectionError, APIError, RateLimitError
+
+    key, default_model, base_url = _resolve()
+    kwargs = {"api_key": key}
+    if base_url:
+        kwargs["base_url"] = base_url
+    client = OpenAI(**kwargs)
+    messages = ([{"role": "system", "content": system}] if system else []) + \
+               [{"role": "user", "content": prompt}]
+    for attempt in range(6):
+        try:
+            resp = client.chat.completions.create(
+                model=model or default_model, messages=messages,
+                temperature=temperature, timeout=60,
+            )
+            u = resp.usage
+            usage = {"prompt_tokens": getattr(u, "prompt_tokens", 0) or 0,
+                     "completion_tokens": getattr(u, "completion_tokens", 0) or 0}
+            return resp.choices[0].message.content or "", usage
+        except RateLimitError as exc:
+            m = _re.search(r"try again in ([\d.]+)s", str(exc))
+            if attempt == 5:
+                raise
+            _time.sleep(float(m.group(1)) + 0.5 if m else 2.0 * (attempt + 1))
+        except (APIConnectionError, APIError):
+            if attempt == 5:
+                raise
+            _time.sleep(2.0 * (attempt + 1))
+    return "", {"prompt_tokens": 0, "completion_tokens": 0}

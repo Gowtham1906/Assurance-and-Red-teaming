@@ -118,6 +118,27 @@ def paired_bootstrap(
     return (mean_diff, low, high)
 
 
+def cohen_kappa(rater_a: Sequence, rater_b: Sequence) -> float:
+    """Cohen's kappa for two raters over the same items (any hashable labels).
+
+    kappa = (p_o - p_e) / (1 - p_e). Returns 1.0 when both raters give the same
+    single label to every item (p_e == 1). Used for judge calibration: the plan
+    uses kappa >= 0.6 between judge and human consensus as a working threshold.
+    """
+    if len(rater_a) != len(rater_b):
+        raise ValueError("raters must label the same number of items")
+    n = len(rater_a)
+    if n == 0:
+        raise ValueError("need at least one item")
+    p_o = sum(1 for a, b in zip(rater_a, rater_b) if a == b) / n
+    labels = set(rater_a) | set(rater_b)
+    p_e = sum((list(rater_a).count(lab) / n) * (list(rater_b).count(lab) / n)
+              for lab in labels)
+    if p_e == 1.0:
+        return 1.0
+    return (p_o - p_e) / (1.0 - p_e)
+
+
 def _inv_norm_cdf(p: float) -> float:
     """Inverse standard-normal CDF (Acklam's algorithm). Used only for odd confidences."""
     if not 0.0 < p < 1.0:
@@ -145,4 +166,4 @@ def _inv_norm_cdf(p: float) -> float:
             ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)
 
 
-__all__ = ["wilson_interval", "mcnemar_exact", "paired_bootstrap"]
+__all__ = ["wilson_interval", "mcnemar_exact", "paired_bootstrap", "cohen_kappa"]

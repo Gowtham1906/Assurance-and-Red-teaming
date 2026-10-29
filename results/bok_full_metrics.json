@@ -38,5 +38,17 @@
   "D09_determinism": [
     7,
     10
+  ],
+  "key_facts": [
+    14,
+    39
+  ],
+  "groundedness": [
+    26,
+    30
+  ],
+  "domain_assert": [
+    13,
+    28
   ]
 }
