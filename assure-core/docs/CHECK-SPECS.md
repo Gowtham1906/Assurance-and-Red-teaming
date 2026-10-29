@@ -52,7 +52,7 @@
 | D03 | LLM02, LLM07 | — | — |
 | D04 | LLM09, LLM08 | — | — |
 | D05 | LLM06 | ASI02, ASI05 | AML.T0086, AML.T0101 (unverified) |
-| D06 | LLM10 | ASI08 | — |
+| D06 | LLM10 | — | — |
 | D07 | LLM01 (multilingual) | — | — |
 | D08 | — (jailbreak/over-block) | — | — |
 | D09 | — (regression) | — | — |

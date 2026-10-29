@@ -1,46 +1,49 @@
 # Cheat Sheet 2 — OWASP Top 10 for Agentic Applications 2026 (ASI01–ASI10)
 
 **One-pager for Capability 4.** Taxonomy for agent (tool-using) targets.
-**Source:** https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
-**Verification status:** ⚠️ **UNVERIFIED.** Plan §3 notes the ASI names come from *secondary summaries* that are "consistent across sources" but the **PDF must be read** before these are quoted. Treat IDs below as provisional.
-**Second reader:** Gowtham · **Date:** 2026-10-22
+**Official source:** https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/ (published 9 Dec 2025; full text in the downloadable PDF)
+**Verification status:** ✅ **Names verified 2026-10-29.** Publication date and title confirmed on the official OWASP page. The ten names were taken from Giskard's summary (https://www.giskard.ai/knowledge/owasp-top-10-for-agentic-application-2026) and match AppSentinels and Modulos. The official PDF itself was not read; re-check wording against it before quoting in a customer contract.
+**Second reader:** Gowtham · **Date:** 2026-10-29
 
 ---
 
 ## Why a separate list
 
-The standard LLM Top 10 covers single-shot text risks. **Agents** add: memory,
-planning, multi-step tool calls, and interaction with other agents. The Agentic
-list targets those agent-specific failure modes.
+The LLM Top 10 covers single-turn text risks. Agents add planning, tool calls,
+memory, identity and talking to other agents. This list covers those.
 
-## Provisional risks (CONFIRM AGAINST PDF)
+## The ten risks
 
-The official list is **ASI01–ASI10**. Only the IDs our red-team cases actually
-use are shown below (plan §9). The remaining IDs will be added **with their real
-names from the official PDF** when needed — we don't list empty placeholders.
-
-| ID | Theme (provisional) | Plain meaning | Our relevant checks |
-|----|--------------------|----------------|---------------------|
-| **ASI01** | Agent prompt/goal manipulation | Injected instructions redirect the agent's goal | D11 canary, D05 tool allowlist |
-| **ASI02** | Tool misuse / excessive agency | Agent calls tools it shouldn't, or with bad args | D05 allowlist + arg schema |
-| **ASI03** | Identity / permission abuse | Agent acts across users/scopes it shouldn't | RAG permission + cross-user cases |
-| **ASI05** | Unsafe autonomous action | State-changing action without proper confirmation | D05, confirmation-step cases |
-| **ASI06** | Memory / context poisoning | Poisoned context or memory steers later steps | D11, indirect-injection cases |
-| **ASI08** | Resource / cost exhaustion | Agent loops or over-consumes | D06 limits |
-
-> Shows the six ASI IDs referenced by the plan's §9 case table. The full
-> ASI01–ASI10 names must be taken from the official OWASP Agentic PDF before use.
+| ID | Name | Plain meaning | Our relevant checks |
+|----|------|---------------|---------------------|
+| **ASI01** | Agent Goal Hijack | Injected content (documents, email, web) redirects the agent's goal | D11 canary, D05 allowlist |
+| **ASI02** | Tool Misuse and Exploitation | Legitimate tools used unsafely (wrong tool, over-privileged, exfiltration via tool) | D05 allowlist + argument schema |
+| **ASI03** | Identity and Privilege Abuse | Agent acts with privileges or credentials it should not use (confused deputy) | permission / cross-user cases |
+| **ASI04** | Agentic Supply Chain Vulnerabilities | Compromised tools, MCP servers or templates loaded at runtime | licence register, tool pinning |
+| **ASI05** | Unexpected Code Execution (RCE) | Agent generates and runs code or shell commands that cause harm | sandbox + D05 forbidden sequences |
+| **ASI06** | Memory & Context Poisoning | Poisoned memory or RAG data biases later decisions | D11, D10, corpus-poisoning cases |
+| **ASI07** | Insecure Inter-Agent Communication | Messages between agents spoofed, intercepted or replayed | not covered yet |
+| **ASI08** | Cascading Failures | One faulty agent's output propagates through others | not covered yet |
+| **ASI09** | Human-Agent Trust Exploitation | Agent persuades a human into a harmful approval | judge rubric (future) |
+| **ASI10** | Rogue Agents | Agent drifts from its purpose (reward hacking, self-replication) | not covered yet |
 
 ---
 
+## Corrections to earlier drafts and to the October plan
+
+The first draft of this sheet and the plan's §9 case table used two wrong mappings:
+
+| Plan / old draft said | Correct |
+|---|---|
+| ASI05 = unsafe autonomous / state-changing action | ASI05 = **Unexpected Code Execution**. Unsafe state-changing tool use is **ASI02** (and ASI03 when privilege is involved) |
+| ASI08 = resource / cost exhaustion | ASI08 = **Cascading Failures**. Cost exhaustion stays under **LLM10** only |
+
+Action for November: update the §9 allocation table (row 10 → ASI02/ASI03/ASI05; row 11 → LLM10 only).
+
 ## How we use it
 
-- Agent-target cases (plan §9 rows 2, 5, 6, 10) carry ASI IDs **in addition to** LLM IDs.
-- Pair with **MITRE ATLAS** agent techniques (cheat sheet 3): AML.T0080 context poisoning, AML.T0086 exfiltration via tool invocation.
+- Agent cases carry ASI IDs in addition to LLM IDs.
+- Pair with MITRE ATLAS agent techniques (cheat sheet 3).
+- ASI07, ASI08 and ASI10 need multi-agent setups; none exist in Capability 3 yet.
 
-## Watch-outs
-
-- **Do not quote ASI names to customers** until the PDF is read and this sheet
-  is updated to "Verified." (plan §16 lists this as unverified.)
-
-**Claim provenance:** all content provisional, from plan §3/§16 secondary-source note. Action: read the official OWASP Agentic PDF, correct the table, flip status to Verified.
+**Claim provenance:** title and date from the official OWASP page; names and descriptions from the Giskard summary, consistent with two other independent summaries.

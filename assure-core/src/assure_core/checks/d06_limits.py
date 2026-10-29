@@ -3,7 +3,7 @@
 Spec (plan §6):
     Implementation : read from trace spans; p95 and hard maximum.
     Pass criterion : p95 within budget; max within cap.
-    OWASP          : LLM10 · ASI08.
+    OWASP          : LLM10 (ASI08 is Cascading Failures, not cost - see cheat sheet 2).
 """
 
 from __future__ import annotations
